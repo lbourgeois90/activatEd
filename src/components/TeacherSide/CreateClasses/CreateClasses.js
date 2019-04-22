@@ -16,7 +16,7 @@ class CreateClasses extends Component {
     newClass: {
       class_name : '',
       class_period: '',
-      teacher_id: '',
+      teacher_id: this.props.reduxState.teacher.first_name,
     }
   }
 
@@ -43,7 +43,7 @@ class CreateClasses extends Component {
     
     this.setState({
         newProfile: {
-            ...this.state.newProfile,
+            ...this.state.newClass,
             [propertyName]: event.target.value,
         }
     });
@@ -54,7 +54,7 @@ class CreateClasses extends Component {
 
 
   render() {
-    console.log(this.state.newProfile);
+    console.log(this.state.newClass);
     const {classes} = this.props;
     return (
       <section>

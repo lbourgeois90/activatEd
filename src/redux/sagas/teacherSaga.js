@@ -2,13 +2,15 @@ import { put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 
 function* getTeacherSaga(action) {
-    console.log('in addProfileSaga');
+    console.log('in getTeacherSaga');
     try{
-        yield axios.post('/teacher', action.payload);
+        const response = yield axios.get('/teacher');
+        console.log('Response is', response);
+        yield put({type:'SET_TEACHER', payload: response.data});
     }
     catch (error) {
-        console.log('ERROR IN POST', error);
-        alert(`Sorry! Unable to add profile. Try again later.`)
+        console.log('ERROR IN GET', error);
+        alert(`Sorry! Unable to get teacher data. Try again later.`)
     }
 }
 
