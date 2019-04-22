@@ -7,7 +7,8 @@ import {
 } from 'react-router-dom';
 
 import {connect} from 'react-redux';
-
+import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
+import theme from './theme';
 import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
 
@@ -16,18 +17,18 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
-import AddStudents from '../AddStudents/AddStudents';
-import CreateActivator from '../CreateActivator';
-import ClassActivatorData from '../ClassActivatorData/ClassActivatorData';
-import CreateClasses from '../CreateClasses/CreateClasses';
-import CreateProfile from '../CreateProfile/CreateProfile';
-import CreateUsernameAndPassword from '../CreateUsernameAndPassword/CreateUsernameAndPassword';
-import StudentActivator from '../StudentActivator/StudentActivator';
-import StudentLogin from '../StudentLogin/StudentLogin';
-import Submission from '../Submission/Submission';
-import TeacherLogin from '../TeacherLogin/TeacherLogin';
-import WelcomePage from '../WelcomePage/WelcomePage';
-import LoginSelector from '../LoginSelector';
+import AddStudents from '../TeacherSide/AddStudents/AddStudents';
+import CreateActivator from '../TeacherSide/CreateActivator/CreateActivator';
+import ClassActivatorData from '../TeacherSide/ClassActivatorData/ClassActivatorData';
+import CreateClasses from '../TeacherSide/CreateClasses/CreateClasses';
+import CreateProfile from '../TeacherSide/CreateProfile/CreateProfile';
+import CreateUsernameAndPassword from '../TeacherSide/CreateUsernameAndPassword/CreateUsernameAndPassword';
+import StudentActivator from '../StudentSide/StudentActivator/StudentActivator';
+import StudentLogin from '../StudentSide/StudentLogin/StudentLogin';
+import Submission from '../StudentSide/Submission/Submission';
+import TeacherLogin from '../TeacherSide/TeacherLogin/TeacherLogin';
+import WelcomePage from '../TeacherSide/WelcomePage/WelcomePage';
+import LoginSelector from '../LoginSelector/LoginSelector';
 
 import './App.css';
 
@@ -38,9 +39,9 @@ class App extends Component {
 
   render() {
     return (
+      <MuiThemeProvider theme={theme}>
       <Router>
         <div>
-          <Nav />
           <Switch>
             {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
             <Redirect exact from="/" to="/home" />
@@ -48,7 +49,7 @@ class App extends Component {
             This is a route anyone can see, no login necessary */}
             <Route
               exact
-              path="/loginselector"
+              path="/home"
               component={LoginSelector}
             />
                <Route
@@ -85,29 +86,29 @@ class App extends Component {
             Visiting localhost:3000/home will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the 'Login' or 'Register' page.
             Even though it seems like they are different pages, the user is always on localhost:3000/home */}
-            <ProtectedRoute
+            <Route
               exact
               path="/welcome"
               component={WelcomePage}
             />
             {/* This works the same as the other protected route, except that if the user is logged in,
             they will see the info page instead. */}
-            <ProtectedRoute
+            <Route
               exact
               path="/createactivator"
               component={CreateActivator}
             />
-            <ProtectedRoute
+            <Route
               exact
               path="/classdata"
               component={ClassActivatorData}
             />
-            <ProtectedRoute
+            <Route
               exact
               path="/studentactivator"
               component={StudentActivator}
             />
-              <ProtectedRoute
+              <Route
               exact
               path="/submission"
               component={Submission}
@@ -115,9 +116,9 @@ class App extends Component {
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
           </Switch>
-          <Footer />
         </div>
       </Router>
+      </MuiThemeProvider>
   )}
 }
 
