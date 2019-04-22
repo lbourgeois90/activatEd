@@ -1,4 +1,5 @@
-const teacherReducer = (state = [], action) => {
+
+const teacherReducer = (state = {}, action) => {
     switch (action.type) {
       case 'SET_TEACHER':
         return action.payload;

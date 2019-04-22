@@ -12,13 +12,16 @@ import Stepper from 'react-stepper-horizontal';
 
 class CreateClasses extends Component {
 
+
   state= {
     newClass: {
       class_name : '',
       class_period: '',
-      teacher_id: this.props.reduxState.teacher.first_name,
+      // teacher_id: this.props.reduxState.teacher[0].id,
     }
   }
+
+
 
   componentDidMount(){
     this.props.dispatch({type:'GET_TEACHER'});
@@ -27,8 +30,8 @@ class CreateClasses extends Component {
   handleSubmit = event => {
     event.preventDefault();
     console.log('in handleSubmit');
-    this.props.dispatch({type:'ADD_CLASS', payload: this.state.newClass});
-    this.props.history.push('/addstudents');
+    // this.props.dispatch({type:'ADD_CLASS', payload: this.state.newClass});
+    // this.props.history.push('/addstudents');
   }
 
   addAnotherClass = event => {
@@ -42,7 +45,7 @@ class CreateClasses extends Component {
     return(event) =>{
     
     this.setState({
-        newProfile: {
+        newClass: {
             ...this.state.newClass,
             [propertyName]: event.target.value,
         }
@@ -61,7 +64,6 @@ class CreateClasses extends Component {
         <Stepper steps={ [{title: 'Create Username and Password'}, {title: 'Create Profile'}, {title: 'Create Classes'}, {title: 'Add Students'}] } activeStep={ 2 } activeColor= '#814fff' defaultBarColor= '#814fff' activeTitleColor= '#814fff' defaultTitleColor= '#814fff' circleFontColor='#0B172A' className="stepper" completeColor="#ffbe5c" completeTitleColor="#463940" />
      
         <Typography variant="h4" className={classes.createClasses}>Create Classes</Typography>
-
         <form className={classes.form}>
           <FormControl className={classes.formControl}>
               <TextField label="Class Name" variant="outlined" color="primary"
@@ -85,6 +87,7 @@ class CreateClasses extends Component {
               <IconButton color="primary" onClick={this.handleSubmit} size="large">Create Class and Submit</IconButton>
           </FormControl>
         </form>
+
       </section>
     );
   }
