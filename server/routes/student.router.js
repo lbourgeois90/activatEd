@@ -7,6 +7,24 @@ const userStrategy = require('../strategies/user.strategy');
 const router = express.Router();
 
 
+router.get('/', (req, res) => {
+    console.log('in SERVER STUDENT GET');
+    console.log(req.user.id);
+    let user_id = req.user.id;
+    pool.query(`SELECT "students"."date_added", "students"."first_name", "students"."last_name", "classes"."class_period", 
+                "classes"."class_name" FROM "students" JOIN "classes" ON "classes"."id" = "students"."class_id" JOIN "teachers" 
+                ON "teachers"."id" = "classes"."teacher_id" JOIN "user" ON "user"."id" = "teachers"."user_id" WHERE "teachers"."user_id" = ${user_id} 
+                GROUP BY "students"."date_added", "students"."first_name", "students"."last_name", "classes"."class_period", 
+                "classes"."class_name" ORDER BY "students"."date_added" DESC LIMIT 10;`)
+    .then((result) => {
+        res.send(result.rows);
+    })
+    .catch((error) =>{
+        console.log(`Error getting students!`, error);
+        res.sendStatus(500);
+    })
+})
+
 
 router.post('/', async (req, res) => {
     const client = await pool.connect();
