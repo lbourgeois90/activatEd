@@ -12,12 +12,13 @@ import Stepper from 'react-stepper-horizontal';
 
 class CreateClasses extends Component {
 
+  teacherReducerStuff = this.props.reduxState.teacher.id;
 
   state= {
     newClass: {
       class_name : '',
       class_period: '',
-      // teacher_id: this.props.reduxState.teacher[0].id,
+      teacher_id: '',
     }
   }
 
@@ -39,6 +40,13 @@ class CreateClasses extends Component {
     console.log('in handleSubmit');
     this.props.dispatch({type:'ADD_CLASS', payload: this.state.newClass});
     alert(`Class Has Been Added!`);
+    this.setState({
+      newClass: {
+        class_name : '',
+        class_period: '',
+        teacher_id: '',
+      }
+    })
   }
 
   handleChange = propertyName => {
@@ -48,6 +56,7 @@ class CreateClasses extends Component {
         newClass: {
             ...this.state.newClass,
             [propertyName]: event.target.value,
+            teacher_id: this.props.reduxState.teacher.id,
         }
     });
   }
@@ -62,7 +71,6 @@ class CreateClasses extends Component {
     return (
       <section>
         <Stepper steps={ [{title: 'Create Username and Password'}, {title: 'Create Profile'}, {title: 'Create Classes'}, {title: 'Add Students'}] } activeStep={ 2 } activeColor= '#814fff' defaultBarColor= '#814fff' activeTitleColor= '#814fff' defaultTitleColor= '#814fff' circleFontColor='#0B172A' className="stepper" completeColor="#ffbe5c" completeTitleColor="#463940" />
-     
         <Typography variant="h4" className={classes.createClasses}>Create Classes</Typography>
         <form className={classes.form}>
           <FormControl className={classes.formControl}>
