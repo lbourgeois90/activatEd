@@ -6,6 +6,7 @@ import Stepper from 'react-stepper-horizontal';
 import TextField from '@material-ui/core/TextField'
 import {withStyles} from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
+import IconButton from '@material-ui/core/IconButton'
 import Select from '@material-ui/core/Select';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import FormControl from '@material-ui/core/FormControl'
@@ -31,11 +32,12 @@ class AddStudents extends Component {
   state= {
     newStudent: {
       date_added: '',
-      student_id: '',
+      username: '',
       first_name: '',
       last_name: '',
       class_id: '',
       password: '',
+      permissions: '',
     },
     labelWidth: 0,
   }
@@ -52,32 +54,38 @@ class AddStudents extends Component {
   handleSubmit = event => {
     event.preventDefault();
     console.log('in handleSubmit');
-    this.props.dispatch({type:'ADD_CLASS', payload: this.state.newClass});
+    this.props.dispatch({type:'ADD_CLASS', payload: this.state.newStudent});
     this.props.history.push('/addstudents');
   }
 
-  addAnotherClass = event => {
-    // event.preventDefault();
-    // console.log('in handleSubmit');
-    // this.props.dispatch({type:'ADD_CLASS', payload: this.state.newClass});
-    // alert(`Class Has Been Added!`);
-    // this.setState({
-    //   newClass: {
-    //     class_name : '',
-    //     class_period: '',
-    //     teacher_id: '',
-    //   }
-    // })
-  }
+  addAnotherStudent = event => {
+    event.preventDefault();
+    console.log('in addAnotherStudent');
+    this.props.dispatch({type:'ADD_STUDENT', payload: this.state.newStudent});
+    alert(`Student Has Been Added!`);
+    this.setState({
+      date_added: '',
+      username: '',
+      first_name: '',
+      last_name: '',
+      class_id: '',
+      password: '',
+      permissions: '',
+      student_id: '',
+  })
+}
 
   handleChange = propertyName => {
     return(event) =>{
     
     this.setState({
-        newClass: {
-            ...this.state.newClass,
+        newStudent: {
+            ...this.state.newStudent,
             [propertyName]: event.target.value,
-            teacher_id: this.props.reduxState.teacher.id,
+            date_added: moment().format('YYYY-MM-DD'),
+            permissions: 'student',
+            student_id: this.state.newStudent.username,
+
         }
     });
   }
@@ -87,7 +95,7 @@ class AddStudents extends Component {
 
 
   render() {
-    // console.log(this.state.newClass);
+    console.log(this.state.newStudent);
     const {classes} = this.props;
     return (
       <section>
@@ -120,9 +128,9 @@ class AddStudents extends Component {
           <br/>
           <FormControl className={classes.formControl}>
               <TextField label="Student ID" variant="outlined" color="primary"
-              value={this.state.newStudent.student_id}
+              value={this.state.newStudent.username}
               helperText="Required Field"
-              onChange={this.handleChange('student_id')}
+              onChange={this.handleChange('username')}
               ></TextField>
           </FormControl>
           <FormControl className={classes.formControl}>
@@ -148,11 +156,13 @@ class AddStudents extends Component {
               ></TextField>
           </FormControl>
           <br/>
-
-
-
-
-
+          <FormControl className={classes.formControl}>
+              <IconButton color="primary" onClick={this.addAnotherStudent} size="large">Add Another Student</IconButton>
+          </FormControl>
+          <br/>
+          <FormControl className={classes.formControl}>
+              <IconButton color="primary" onClick={this.handleSubmit} size="large">Add Student and Submit</IconButton>
+          </FormControl>
         </form>
 
 
