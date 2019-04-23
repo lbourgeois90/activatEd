@@ -46,6 +46,7 @@ class AddStudents extends Component {
 
   componentDidMount(){
     this.props.dispatch({type:'GET_CLASS'});
+    this.props.dispatch({type:'GET_STUDENT'})
     this.setState({
       labelWidth: ReactDOM.findDOMNode(this.InputLabelRef).offsetWidth,
     });

@@ -12,8 +12,26 @@ function* addStudentSaga(action) {
     }
 }
 
+
+function* getStudentSaga(action) {
+    console.log('in getStudentSaga');
+    try{
+        const response = yield axios.get('/student');
+        console.log('Response is', response);
+        yield put({type:'SET_STUDENT', payload: response.data});
+    }
+    catch (error) {
+        console.log('ERROR IN GET', error);
+        alert(`Sorry! Unable to get student data. Try again later.`)
+    }
+}
+
+
+
+
 function* studentSaga() {
   yield takeLatest('ADD_STUDENT', addStudentSaga);
+  yield takeLatest ('GET_STUDENT', getStudentSaga)
 }
 
 export default studentSaga;
