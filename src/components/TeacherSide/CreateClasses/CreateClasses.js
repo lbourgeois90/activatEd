@@ -31,8 +31,8 @@ class CreateClasses extends Component {
   handleSubmit = event => {
     event.preventDefault();
     console.log('in handleSubmit');
-    // this.props.dispatch({type:'ADD_CLASS', payload: this.state.newClass});
-    // this.props.history.push('/addstudents');
+    this.props.dispatch({type:'ADD_CLASS', payload: this.state.newClass});
+    this.props.history.push('/addstudents');
   }
 
   addAnotherClass = event => {

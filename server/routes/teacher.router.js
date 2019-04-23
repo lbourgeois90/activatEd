@@ -7,7 +7,7 @@ router.get('/', (req, res) => {
     console.log('in SERVER TEACHER GET');
     console.log(req.user.id);
     let user_id = req.user.id;
-    pool.query(`SELECT "teachers"."id", "teachers"."first_name" FROM "teachers" JOIN "user" ON "user"."id" = "teachers"."user_id" WHERE "teachers"."user_id" = ${user_id} GROUP BY "teachers"."id", "teachers"."first_name";`)
+    pool.query(`SELECT "teachers"."id", "teachers"."first_name", "teachers"."school_district" FROM "teachers" JOIN "user" ON "user"."id" = "teachers"."user_id" WHERE "teachers"."user_id" = ${user_id} GROUP BY "teachers"."id", "teachers"."first_name";`)
     .then((result) => {
         res.send(result.rows[0]);
     })
