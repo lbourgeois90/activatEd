@@ -5,6 +5,7 @@ function* addStudentSaga(action) {
     console.log('in addStudentSaga');
     try{
         yield axios.post('/student', action.payload);
+        yield put({type: 'GET_STUDENT'});
     }
     catch (error) {
         console.log('ERROR IN POST STUDENT', error);
@@ -27,11 +28,26 @@ function* getStudentSaga(action) {
 }
 
 
+function* deleteStudentSaga(action) {
+    console.log('in deleteStudentSaga');
+    try{
+        yield axios.delete('/student', action.payload);
+    }
+    catch (error) {
+        console.log('ERROR IN DELETE STUDENT', error);
+        alert(`Sorry! Unable to delete student. Try again later.`)
+    }
+}
+
+
+
+
 
 
 function* studentSaga() {
   yield takeLatest('ADD_STUDENT', addStudentSaga);
-  yield takeLatest ('GET_STUDENT', getStudentSaga)
+  yield takeLatest ('GET_STUDENT', getStudentSaga);
+  yield takeLatest ('DELETE_STUDENT', deleteStudentSaga);
 }
 
 export default studentSaga;

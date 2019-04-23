@@ -14,13 +14,15 @@ import FormControl from '@material-ui/core/FormControl'
 import Typography from '@material-ui/core/Typography';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-// import Table from '@material-ui/core/Table';
-// import TableBody from '@material-ui/core/TableBody';
-// import TableCell from '@material-ui/core/TableCell';
-// import TableHead from '@material-ui/core/TableHead';
-// import TableRow from '@material-ui/core/TableRow';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
 // import swal from '@sweetalert/with-react'
 import FormHelperText from '@material-ui/core/FormHelperText';
+import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
+import AddStudentsTable from './AddStudentsTable';
 
 var moment = require('moment');
 
@@ -92,7 +94,13 @@ class AddStudents extends Component {
   }
 }
 
-
+handleDelete = (event) => {
+  event.preventDefault();
+  console.log('in handleDelete');
+  let studentId = event.currentTarget.value;
+  console.log('Student Id is:', studentId);
+  this.props.dispatch({type:'DELETE_STUDENT', payload: studentId});
+}
 
 
   render() {
@@ -165,31 +173,34 @@ class AddStudents extends Component {
               <IconButton color="primary" onClick={this.handleSubmit} size="large">Add Student and Submit</IconButton>
           </FormControl>
         </form>
-
-
-        {/* <form className={classes.form}>
-          <FormControl className={classes.formControl}>
-              <TextField label="Class Name" variant="outlined" color="primary"
-              value={this.state.newClass.class_name}
-              helperText="Required Field"
-              onChange={this.handleChange('class_name')}
-              ></TextField>
-          </FormControl>
-          <br/>
-          <FormControl className={classes.formControl}>
-              <TextField label="Class Period" variant="outlined" color="primary"
-              value={this.state.newClass.class_period}
-              helperText="Required Field"
-              onChange={this.handleChange('class_period')}
-              ></TextField>
-          </FormControl>
-          <FormControl className={classes.formControl}>
-              <IconButton color="primary" onClick={this.addAnotherClass} size="large">Add Another Class</IconButton>
-          </FormControl>
-          <FormControl className={classes.formControl}>
-              <IconButton color="primary" onClick={this.handleSubmit} size="large">Create Class and Submit</IconButton>
-          </FormControl>
-        </form> */}
+        <AddStudentsTable/>
+        {/* <Table className={classes.table}>
+          <TableHead >
+              <TableRow>
+                <TableCell className={classes.tableFontHeader}>Date Added</TableCell>
+                <TableCell className={classes.tableFontHeader}>Student First Name</TableCell>
+                <TableCell className={classes.tableFontHeader}>Student Last Name</TableCell>
+                <TableCell className={classes.tableFontHeader}>Class Name</TableCell>
+                <TableCell className={classes.tableFontHeader}>Class Period</TableCell>
+                <TableCell className={classes.tableFontHeader}>Delete Student</TableCell>
+              </TableRow>
+          </TableHead>
+          <TableBody>
+            {this.props.reduxState.student.map( (student) =>
+                <TableRow key={student.id} hover={true} className={classes.tableRowHover}>
+                      <TableCell className={classes.tableFontHeader}>{moment(student.date_added).format('YYYY-MM-DD')}</TableCell>
+                      <TableCell className={classes.tableFontHeader}>{student.first_name}</TableCell>
+                      <TableCell className={classes.tableFontHeader}>{student.last_name}</TableCell>
+                      <TableCell className={classes.tableFontHeader}>{student.class_name}</TableCell>
+                      <TableCell className={classes.tableFontHeader}>{student.class_period}</TableCell>
+                      <TableCell className={classes.tableFontHeader}><IconButton aria-label="Delete" onClick={this.handleDelete} value={student.id}>
+                        <DeleteOutlinedIcon/>
+                        </IconButton>
+                    </TableCell>
+                </TableRow>
+            )}
+          </TableBody>
+      </Table>              */}
 
       </section>
     );
@@ -209,6 +220,36 @@ const styles = theme => ({
   addStudents:{
     textAlign: 'center',
   },
+  table:{
+    width: '90%',
+    margin: '0 auto',
+    marginBottom: '50px',
+    marginTop: '100px',
+   },
+   
+   tableFont:{
+     fontSize: '22px',
+     color: '#ff65af',
+   },
+   tableFontHeader:{
+     fontSize: '22px',
+     color: '#ff65af',
+   },
+   tableFontCenter:{
+     fontSize: '22px',
+     textAlign: '#ff65af',
+     color: '#ff65af',
+   },
+   tableFontHeaderCenter:{
+     fontSize: '22px',
+     textAlign: 'center',
+     color: '#ff65af' 
+   },
+   tableRowHover: {
+     '&:hover': {
+       backgroundColor: 'primary',
+     },
+   },
   })
 
 

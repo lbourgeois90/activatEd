@@ -1,9 +1,10 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
 
-router.post('/', (req, res) => {
+router.post('/', rejectUnauthenticated, (req, res) => {
     const newClass = req.body;
     console.log(newClass);
     const sqlText = `INSERT INTO "classes" ("class_name", "class_period", "teacher_id") VALUES ($1, $2, $3);`;
@@ -20,7 +21,7 @@ router.post('/', (req, res) => {
         });
 });
 
-router.get('/', (req, res) => {
+router.get('/', rejectUnauthenticated, (req, res) => {
     console.log('in SERVER CLASSES GET');
     console.log(req.user.id);
     let user_id = req.user.id;
