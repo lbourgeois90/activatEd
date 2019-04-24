@@ -139,6 +139,7 @@ handleDelete = (event) => {
                     id="class_id"
                     />}
                     >
+                    <MenuItem disabled>Select a Class</MenuItem>
                     {this.props.reduxState.classes.map( classes =>
                     <MenuItem value={classes.class_id} key={classes.class_id}>{classes.class_period}</MenuItem>
                     )}

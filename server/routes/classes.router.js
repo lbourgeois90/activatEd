@@ -25,7 +25,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     console.log('in SERVER CLASSES GET');
     console.log(req.user.id);
     let user_id = req.user.id;
-    pool.query(`SELECT "classes"."id" AS "class_id", "classes"."class_name", "classes"."class_period", "classes"."teacher_id" FROM "classes" JOIN "teachers" ON "teachers"."id" = "classes"."teacher_id" JOIN "user" on "user"."id" = "teachers"."user_id" WHERE "user"."id" = ${user_id};`)
+    pool.query(`SELECT "classes"."id" AS "class_id", "classes"."class_name", "classes"."class_period", "classes"."teacher_id" FROM "classes" JOIN "teachers" ON "teachers"."id" = "classes"."teacher_id" JOIN "user" on "user"."id" = "teachers"."user_id" WHERE "user"."id" = ${user_id} ORDER BY "classes"."class_period" ASC;`)
     .then((result) => {
         console.log(result.rows);
         res.send(result.rows);
