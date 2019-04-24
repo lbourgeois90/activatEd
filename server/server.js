@@ -14,6 +14,7 @@ const profileRouter = require('./routes/profile.router');
 const teacherRouter = require('./routes/teacher.router');
 const classesRouter = require('./routes/classes.router');
 const studentRouter =  require('./routes/student.router');
+const activatorRouter = require('./routes/activator.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -32,6 +33,7 @@ app.use('/profile', profileRouter);
 app.use('/teacher', teacherRouter);
 app.use('/classes', classesRouter);
 app.use('/student', studentRouter);
+app.use('/activator', activatorRouter)
 
 // Serve static files
 app.use(express.static('build'));

@@ -10,9 +10,11 @@ import MenuIcon from '@material-ui/icons/Menu';
 import {withStyles} from '@material-ui/core/styles'
 import LogOutButton from '../../LogOutButton/LogOutButton';
 import IconButton from '@material-ui/core/IconButton';
-import NoteAdd from '@material-ui/icons/NoteAdd';
+import NoteAddOutlined from '@material-ui/icons/NoteAddOutlined';
+import InsertChartOutlined from '@material-ui/icons/InsertChartOutlined'
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+import PersonOutlined from '@material-ui/icons/PersonOutlined'
 
 
 
@@ -40,6 +42,7 @@ class NavBar extends Component {
 
   handleClose = () => {
     this.setState({ anchorEl: null });
+    // this.props.push(`/${event.target.value`)
   };
 
   render() {
@@ -48,10 +51,9 @@ class NavBar extends Component {
     const open = Boolean(anchorEl);
 
     return (
-      <section>
          <AppBar position="static">
             <Toolbar>
-            <IconButton
+                <IconButton
                   aria-owns={open ? 'menu-appbar' : undefined}
                   aria-haspopup="true"
                   onClick={this.handleMenu}
@@ -73,24 +75,21 @@ class NavBar extends Component {
                   open={open}
                   onClose={this.handleClose}
                 >
-                {/* {this.props.reduxState.} */}
-                  {/* <MenuItem onClick={this.handleClose}>Profile</MenuItem>
-                  <MenuItem onClick={this.handleClose}>My account</MenuItem> */}
+                
+                    <MenuItem onClick={this.handleClose}><NoteAddOutlined/>Create Activator</MenuItem>
+                    <MenuItem onClick={this.handleClose}><InsertChartOutlined/>View Class Data</MenuItem>
+                    <MenuItem onClick={this.handleClose}><PersonOutlined/>User Profile</MenuItem>
+                    
+                    
                 </Menu>
 
 
 
-
-                <Button><NoteAdd/>Create Activator</Button>
+                {/* <Button><NoteAdd/>Create Activator</Button> */}
 
                 <LogOutButton/>
             </Toolbar>
         </AppBar>
-        <Paper>
-         <h1>Welcome {this.props.reduxState.teacher.first_name}</h1>
-        </Paper>
-
-      </section>
     );
   }
 }

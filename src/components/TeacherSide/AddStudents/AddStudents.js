@@ -115,7 +115,7 @@ handleDelete = (event) => {
 
 
   render() {
-    console.log(this.state.newStudent);
+    // console.log(this.state.newStudent);
     const {classes} = this.props;
     return (
       <section>

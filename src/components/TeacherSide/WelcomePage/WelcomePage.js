@@ -25,6 +25,7 @@ class WelcomePage extends Component {
     return (
       <section>
         <NavBar/>
+        
 
       </section>
     );
