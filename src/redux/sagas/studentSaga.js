@@ -30,12 +30,27 @@ function* getStudentSaga(action) {
 
 function* deleteStudentSaga(action) {
     console.log('in deleteStudentSaga');
+    console.log(action.payload)
     try{
-        yield axios.delete('/student', action.payload);
+        yield axios.delete(`/student/${action.payload}`, action.payload);
+        yield put({type:'GET_STUDENT'})
     }
     catch (error) {
         console.log('ERROR IN DELETE STUDENT', error);
         alert(`Sorry! Unable to delete student. Try again later.`)
+    }
+}
+
+function* updateStudentSaga(action) {
+    console.log('in updateStudentSaga');
+    console.log(action.payload)
+    try{
+        yield axios.put(`/student/${action.payload.id}`, action.payload);
+        yield put({type:'GET_STUDENT'})
+    }
+    catch (error) {
+        console.log('ERROR IN PUT STUDENT', error);
+        alert(`Sorry! Unable to update student. Try again later.`)
     }
 }
 
@@ -44,10 +59,12 @@ function* deleteStudentSaga(action) {
 
 
 
+
 function* studentSaga() {
-  yield takeLatest('ADD_STUDENT', addStudentSaga);
+  yield takeLatest ('ADD_STUDENT', addStudentSaga);
   yield takeLatest ('GET_STUDENT', getStudentSaga);
   yield takeLatest ('DELETE_STUDENT', deleteStudentSaga);
+  yield takeLatest ('EDIT_STUDENT', updateStudentSaga);
 }
 
 export default studentSaga;

@@ -7,6 +7,20 @@ const userStrategy = require('../strategies/user.strategy');
 const router = express.Router();
 
 
+router.delete('/:id', (req,res) => {
+    console.log('in SERVER STUDENT DELETE');
+    let studentId = req.params.id;
+    // console.log('ProjectId is,', studentId);
+    const sqlText = `DELETE FROM "students" WHERE "id" = $1;`
+    pool.query(sqlText, [studentId])
+    .then( (result) => {
+        res.sendStatus(201);
+    })
+    .catch( (error) => {
+        console.log('ERROR in DELETE', error);
+        res.sendStatus(500);
+    })
+})
 
 
 router.get('/', rejectUnauthenticated, (req, res) => {
@@ -14,11 +28,12 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     console.log(req.user.id);
     let user_id = req.user.id;
     pool.query(`SELECT "students"."date_added", "students"."id", "students"."first_name", "students"."last_name", "students"."student_id", "classes"."class_period", 
-                "classes"."class_name" FROM "students" JOIN "classes" ON "classes"."id" = "students"."class_id" JOIN "teachers" 
+                "students"."class_id","classes"."class_name", "students"."user_id" FROM "students" JOIN "classes" ON "classes"."id" = "students"."class_id" JOIN "teachers" 
                 ON "teachers"."id" = "classes"."teacher_id" JOIN "user" ON "user"."id" = "teachers"."user_id" WHERE "teachers"."user_id" = ${user_id} 
                 GROUP BY "students"."id", "students"."date_added", "students"."first_name", "students"."last_name", "classes"."class_period", 
-                "classes"."class_name" ORDER BY "students"."date_added" DESC LIMIT 10;`)
+                "classes"."class_name", "students"."user_id" ORDER BY "students"."date_added" DESC LIMIT 10;`)
     .then((result) => {
+        // console.log(result.rows);
         res.send(result.rows);
     })
     .catch((error) =>{
@@ -27,12 +42,11 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     })
 })
 
-
 router.post('/', rejectUnauthenticated, async (req, res) => {
     const client = await pool.connect();
   
     try {
-       console.log(req.body);
+    //    console.log(req.body);
       const username = req.body.username;
       const password = encryptLib.encryptPassword(req.body.password);
       const permissions = req.body.permissions;
@@ -62,44 +76,67 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
         client.release()
     }
   });
+
+
+  router.put('/:id', rejectUnauthenticated, async (req, res) => {
+    const client = await pool.connect();
   
-  
-  
-  
+    try {
+        console.log('in SERVER STUDENT PUT');
+        let studentId = req.params.id;
+        console.log('Student ID is', studentId);
+        let updatedStudent = req.body;
+        console.log(updatedStudent);
+        console.log(updatedStudent.username);
+        
+        studentQuery = `UPDATE "students" SET "date_added" = $1, "student_id" = $2, "first_name" = $3, 
+        "last_name" = $4, "class_id" = $5  WHERE "id" = $6;`;
+        usernameQuery = `UPDATE "user" SET "username" = $1 WHERE "id" = $2; `
+        
+        
+      await client.query('BEGIN')
+        const updateStudentResult = await client.query(studentQuery,[updatedStudent.date_added, updatedStudent.username, updatedStudent.first_name, updatedStudent.last_name, updatedStudent.class_id, studentId] );
+        const updateUsernameResult =  await client.query(usernameQuery, [updatedStudent.username, updatedStudent.userId]);
+        console.log('UpdatedUsernameResult is:', updateUsernameResult);
+        await client.query('COMMIT')
+        res.sendStatus(201);
+    } catch (error) {
+        await client.query('ROLLBACK')
+        console.log('Error UPDATE STUDENT', error);
+        res.sendStatus(500);
+    } finally {
+        client.release()
+    }
+  });
 
 
 
-
-
-
-// router.post('/', (req, res, next) => {  
-//   const username = req.body.username;
-//   const password = encryptLib.encryptPassword(req.body.password);
-//   const permissions = req.body.permissions;
-//   console.log('here', username);
-  
-
-//   const queryText = 'INSERT INTO "user" (username, password, permissions) VALUES ($1, $2, $3) RETURNING id';
-//   pool.query(queryText, [username, password, permissions])
-//   .then((result) => {
-//     console.log(id);
+// router.put('/:id', (req, res) => {
+//     console.log('in SERVER STUDENT PUT');
+//     let studentId = req.params.id;
+//     console.log('Student ID is', studentId);
+//     let updatedStudent = req.body;
+//     console.log(updatedStudent);
+//     let sqlText = `UPDATE "students" SET "date_added" = $1, "student_id" = $2, "first_name" = $3, 
+//     "last_name" = $4, "class_id" = $5  WHERE "id" = $6;`;
+//     pool.query(sqlText, [updatedStudent.date_added, updatedStudent.username, updatedStudent.first_name, updatedStudent.last_name, updatedStudent.class_id, studentId])
+// .then( (result) => {
+//     let usernameQuery = `UPDATE "user" SET "username" = $1 WHERE "id" = $2; `
+//     pool.query(usernameQuery, [updatedStudent.username, updatedStudent.user_id]);
+//     res.sendStatus(200);
+// }).catch( (error) => {
+//     console.log('Failed to update gallery item likes', error);
+//     res.sendStatus(500);
 // })
-//     .catch(() => res.sendStatus(500));
-// });
+// })
 
-// Handles login form authenticate/login POST
-// userStrategy.authenticate('local') is middleware that we run on this route
-// this middleware will run our POST if successful
-// this middleware will send a 404 if not successful
-// router.post('/login', userStrategy.authenticate('local'), (req, res) => {
-//   res.sendStatus(200);
-// });
+  
+  
+  
+  
 
-// clear all server session information about this user
-// router.post('/logout', (req, res) => {
-//   // Use passport's built-in method to log out the user
-//   req.logout();
-//   res.sendStatus(200);
-// });
+
+
+
 
 module.exports = router;

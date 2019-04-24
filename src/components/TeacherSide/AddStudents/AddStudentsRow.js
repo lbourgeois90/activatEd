@@ -25,21 +25,23 @@ class AddStudentsRow extends Component {
   state ={
     currentlyEditing: false,
     updatedStudent: {
-        date_added: '',
-        username: '',
-        first_name: '',
-        last_name: '',
-        class_id: '',
+        id: this.props.student.id,
+        date_added: moment(this.props.student.date_added).format('YYYY-MM-DD'),
+        username: this.props.student.student_id,
+        first_name: this.props.student.first_name,
+        last_name: this.props.student.last_name,
+        class_id: this.props.student.class_id,
+        userId: this.props.student.user_id,
         
 
     }
   }
 
 
-  componentDidMount(){
-    this.props.dispatch({type:'GET_CLASS'});
-    this.props.dispatch({type:'GET_STUDENT'})
-  }
+componentDidMount(){
+  this.props.dispatch({type:'GET_CLASS'});
+  this.props.dispatch({type:'GET_STUDENT'})
+}
 
 
 handleDelete = (event) => {
@@ -67,7 +69,7 @@ handleEditSubmit = (event) => {
     this.setState({
         currentlyEditing: false,
     })
-    this.props.dispatch({type:'EDIT_STUDENT'});
+    this.props.dispatch({type:'EDIT_STUDENT', payload: this.state.updatedStudent});
 }
 
 handleChange = propertyName => {
@@ -133,7 +135,7 @@ handleChange = propertyName => {
             }
         </TableCell>
 
-        <TableCell className={classes.tableFontHeader}><IconButton aria-label="Delete" onClick={this.handleDelete} >
+        <TableCell className={classes.tableFontHeader}><IconButton aria-label="Delete" onClick={this.handleDelete} value={this.props.student.id}>
           <DeleteOutlinedIcon/>
           </IconButton>
         </TableCell>

@@ -57,8 +57,19 @@ class AddStudents extends Component {
   handleSubmit = event => {
     event.preventDefault();
     console.log('in handleSubmit');
-    this.props.dispatch({type:'ADD_CLASS', payload: this.state.newStudent});
-    this.props.history.push('/addstudents');
+    this.props.dispatch({type:'ADD_STUDENT', payload: this.state.newStudent});
+    this.setState({
+      newStudent: {
+        date_added: '',
+        username: '',
+        first_name: '',
+        last_name: '',
+        class_id: '',
+        password: '',
+        permissions: '',
+      },
+    })
+    this.props.history.push('/welcome');
   }
 
   addAnotherStudent = event => {
