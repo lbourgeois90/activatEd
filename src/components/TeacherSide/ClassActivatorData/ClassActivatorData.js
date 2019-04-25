@@ -17,6 +17,7 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
 import NavBar from '../NavBar/NavBar';
 import InsertChartOutlined from '@material-ui/icons/InsertChartOutlined'
+import ClassActivatorDataTable from './ClassActivatorDataTable'
 
 var moment = require('moment');
 
@@ -129,6 +130,7 @@ handleDelete = (event) => {
           <Button onClick={this.handleSubmit}><InsertChartOutlined/> Get Activators</Button>
           <br/>
         </form>
+        <ClassActivatorDataTable/>
       </section>
     );
   }

@@ -14,7 +14,7 @@ import TextField from '@material-ui/core/TextField';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
 import Edit from '@material-ui/icons/Edit';
-import AddStudentRow from './AddStudentsRow';
+import ClassActivatorDataRow from './ClassActivatorDataRow';
 
 
 var moment = require('moment');
@@ -28,27 +28,27 @@ class ClassActivatorDataTable extends Component {
 
 
   componentDidMount(){
-    this.props.dispatch({type:'GET_CLASS'});
-    this.props.dispatch({type:'GET_STUDENT'})
+    // this.props.dispatch({type:'GET_CLASS'});
+    // this.props.dispatch({type:'GET_STUDENT'})
   }
 
 
 handleDelete = (event) => {
-  event.preventDefault();
-  console.log('in handleDelete');
-  let studentId = event.currentTarget.value;
-  console.log('Student Id is:', studentId);
-  this.props.dispatch({type:'DELETE_STUDENT', payload: studentId});
+//   event.preventDefault();
+//   console.log('in handleDelete');
+//   let studentId = event.currentTarget.value;
+//   console.log('Student Id is:', studentId);
+//   this.props.dispatch({type:'DELETE_STUDENT', payload: studentId});
 }
 
 handleEdit = (event) => {
-  console.log('in handleEdit');
-  let studentId = event.currentTarget.value;
-  console.log(studentId);
-  this.setState({
-    currentlyEditing: true,
-  })
-  console.log(this.state.currentlyEditing);
+//   console.log('in handleEdit');
+//   let studentId = event.currentTarget.value;
+//   console.log(studentId);
+//   this.setState({
+//     currentlyEditing: true,
+//   })
+//   console.log(this.state.currentlyEditing);
 
 
 }
@@ -72,8 +72,8 @@ handleEdit = (event) => {
               </TableRow>
           </TableHead>
           <TableBody>
-            {this.props.reduxState.student.map( (student) =>
-                <AddStudentRow key={student.id} student={student}/> 
+            {this.props.reduxState.classData.map( (student) =>
+                <ClassActivatorDataRow key={student.id} student={student}/> 
             )}
           </TableBody>
       </Table>             
