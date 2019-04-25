@@ -13,6 +13,7 @@ import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
+import TeacherProtectedRoute from '../ProtectedRoute/TeacherProtectedRoute';
 
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
@@ -24,7 +25,6 @@ import CreateClasses from '../TeacherSide/CreateClasses/CreateClasses';
 import CreateProfile from '../TeacherSide/CreateProfile/CreateProfile';
 import CreateUsernameAndPassword from '../TeacherSide/CreateUsernameAndPassword/CreateUsernameAndPassword';
 import StudentActivator from '../StudentSide/StudentActivator/StudentActivator';
-import StudentLogin from '../StudentSide/StudentLogin/StudentLogin';
 import Submission from '../StudentSide/Submission/Submission';
 import TeacherLogin from '../TeacherSide/TeacherLogin/TeacherLogin';
 import WelcomePage from '../TeacherSide/WelcomePage/WelcomePage';
@@ -56,27 +56,23 @@ class App extends Component {
               path="/teacherlogin"
               component={TeacherLogin}
             /> */}
-               <Route
-              exact
-              path="/studentlogin"
-              component={StudentLogin}
-            />
+         
             <Route
               exact
               path="/register"
               component={CreateUsernameAndPassword}
             />
-             <ProtectedRoute
+             <TeacherProtectedRoute
               exact
               path="/createprofile"
               component={CreateProfile}
             />
-            <ProtectedRoute
+            <TeacherProtectedRoute
               exact
               path="/createclasses"
               component={CreateClasses}
             />
-              <ProtectedRoute
+              <TeacherProtectedRoute
               exact
               path="/addstudents"
               component={AddStudents}
@@ -85,19 +81,19 @@ class App extends Component {
             Visiting localhost:3000/home will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the 'Login' or 'Register' page.
             Even though it seems like they are different pages, the user is always on localhost:3000/home */}
-            <ProtectedRoute
+            <TeacherProtectedRoute
               exact
               path="/welcome"
               component={WelcomePage}
             />
             {/* This works the same as the other protected route, except that if the user is logged in,
             they will see the info page instead. */}
-            <ProtectedRoute
+            <TeacherProtectedRoute
               exact
               path="/createactivator"
               component={CreateActivator}
             />
-            <ProtectedRoute
+            <TeacherProtectedRoute
               exact
               path="/classdata"
               component={ClassActivatorData}

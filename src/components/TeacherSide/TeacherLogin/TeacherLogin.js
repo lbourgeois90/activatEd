@@ -10,6 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper'
 import TextField from '@material-ui/core/TextField'
 import FormControl from '@material-ui/core/FormControl'
+import {withRouter} from 'react-router-dom'
 
 class TeacherLogin extends Component {
   state = {
@@ -43,11 +44,17 @@ class TeacherLogin extends Component {
     } else {
       this.props.dispatch({ type: 'LOGIN_INPUT_ERROR' });
     }
-    this.checkPath()
+    // this.checkPath();
   } // end login
 
   // checkPath = () => {
-  //   if (this.state.user)
+  //   console.log('This.props.user is:', this.props.user);
+  //   if (this.props.user.permissions === 'teacher'){
+  //     this.props.history.push('/welcome')
+  //   }
+  //   else if (this.props.user.permissions === 'student'){
+  //     this.props.history.push('/studentactivator');
+  //   }
   // }
 
   handleInputChangeFor = propertyName => (event) => {
@@ -69,7 +76,6 @@ class TeacherLogin extends Component {
   }
 
   render() {
-    console.log(this.state.open)
     return (
       <Paper>
         {this.props.errors.loginMessage && (
@@ -97,7 +103,7 @@ class TeacherLogin extends Component {
               ></TextField>
           </FormControl>
          
-          <Button value="Log In" variant="outlined">Log In</Button>
+          <Button value="Log In" variant="outlined" onClick={this.login}>Log In</Button>
         </form>
        
         
@@ -113,7 +119,7 @@ class TeacherLogin extends Component {
 // const mapStateToProps = ({errors}) => ({ errors });
 const mapStateToProps = state => ({
   errors: state.errors,
-  state,
+  user: state.user
 });
 
-export default connect(mapStateToProps)(TeacherLogin);
+export default withRouter(connect(mapStateToProps)(TeacherLogin));
