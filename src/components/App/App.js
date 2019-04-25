@@ -9,7 +9,6 @@ import {
 import {connect} from 'react-redux';
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 import theme from './theme';
-import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
@@ -46,10 +45,9 @@ class App extends Component {
             <Redirect exact from="/" to="/home" />
             {/* Visiting localhost:3000/about will show the about page.
             This is a route anyone can see, no login necessary */}
-            <Route
+            <ProtectedRoute
               exact
               path="/home"
-              component={TeacherLogin}
             />
                {/* <Route
               exact
@@ -62,7 +60,7 @@ class App extends Component {
               path="/register"
               component={CreateUsernameAndPassword}
             />
-             <TeacherProtectedRoute
+             <Route
               exact
               path="/createprofile"
               component={CreateProfile}

@@ -7,6 +7,7 @@ import teacher from './teacherReducer';
 import classes from './classReducer';
 import student from './studentReducer';
 import classData from './classDataReducer';
+import studentClass from './studentClassesReducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
   classes,
   student,
   classData,
+  studentClass,
 });
 
 export default rootReducer;

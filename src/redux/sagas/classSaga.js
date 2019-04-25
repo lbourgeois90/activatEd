@@ -17,7 +17,7 @@ function* getClassSaga(action) {
     console.log('in getClassSaga');
     try{
         const response = yield axios.get('/classes');
-        console.log('Response is', response);
+        // console.log('Response is', response);
         yield put({type:'SET_CLASS', payload: response.data});
     }
     catch (error) {

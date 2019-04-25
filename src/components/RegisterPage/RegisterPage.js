@@ -4,6 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper'
 import TextField from '@material-ui/core/TextField'
 import FormControl from '@material-ui/core/FormControl'
+import {withRouter} from 'react-router-dom';
 
 
 class RegisterPage extends Component {
@@ -35,6 +36,7 @@ class RegisterPage extends Component {
     } else {
       this.props.dispatch({type: 'REGISTRATION_INPUT_ERROR'});
     }
+    this.props.history.push('/createprofile');
   } // end registerUser
 
   handleInputChangeFor = propertyName => (event) => {
@@ -102,5 +104,5 @@ const mapStateToProps = state => ({
   errors: state.errors,
 });
 
-export default connect(mapStateToProps)(RegisterPage);
+export default withRouter(connect(mapStateToProps)(RegisterPage));
 

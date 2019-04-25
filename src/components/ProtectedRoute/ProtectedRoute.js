@@ -3,6 +3,8 @@ import {Route} from 'react-router-dom'
 import {connect} from 'react-redux';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import StudentClasses from '../StudentSide/StudentClass/StudentClass';
+import WelcomePage from '../TeacherSide/WelcomePage/WelcomePage';
 
 // A Custom Wrapper Component -- This will keep our code DRY.
 // Responsible for watching redux state, and returning an appropriate component
@@ -26,11 +28,21 @@ const ProtectedRoute = (props) => {
   } = props;
 
   let ComponentToShow;
-
+  console.log(otherProps);
   if(user.id) {
+    if (otherProps.path === '/home' && user.permissions === 'student'){
+      ComponentToShow = StudentClasses;
+    }
+    else if (otherProps.path === '/home' && user.permissions === 'teacher'){
+      ComponentToShow = WelcomePage;
+    }
+
+    else {
+      ComponentToShow = ComponentToProtect;
+    }
     // if the user is logged in (only logged in users have ids)
     // show the component that is protected
-    ComponentToShow = ComponentToProtect;
+    
   } else if (loginMode === 'login') {
     // if they are not logged in, check the loginMode on Redux State
     // if the mode is 'login', show the LoginPage

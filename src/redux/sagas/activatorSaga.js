@@ -14,29 +14,28 @@ function* addActivatorSaga(action) {
 }
 
 
-// function* getActivatorSaga(action) {
-//     console.log('in getActivatorSaga');
-//     try{
-//         const response = yield axios.get('/activator', {
-//             params: {
-//                 classData: action.payload,
-//             }
-//         });
-//         console.log('Response is', response);
-//         // yield put({type:'SET_CLASS', payload: response.data});
-//     }
-//     catch (error) {
-//         console.log('ERROR IN GET', error);
-//         alert(`Sorry! Unable to get class data. Try again later.`)
-//     }
-// }
+
+function* getActivatorSaga(action) {
+    console.log('in getActivatorSaga');
+    try{
+        const response = yield axios.get('/activator', {
+           
+        });
+        console.log('Response is', response);
+        // yield put({type:'SET_ACTIVATOR', payload: response.data});
+    }
+    catch (error) {
+        console.log('ERROR IN GET', error);
+        alert(`Sorry! Unable to get activator. Try again later.`)
+    }
+}
 
 
 
 
 function* activatorSaga() {
   yield takeLatest ('ADD_ACTIVATOR', addActivatorSaga);
-//   yield takeLatest ('GET_ACTIVATOR', getActivatorSaga);
+  yield takeLatest ('GET_ACTIVATOR', getActivatorSaga);
 }
 
 export default activatorSaga;

@@ -26,10 +26,8 @@ const TeacherProtectedRoute = (props) => {
   } = props;
 
   let ComponentToShow;
-
-  if(user.id && user.permissions === 'teacher') {
-    // if the user is logged in (only logged in users have ids)
-    // show the component that is protected
+  console.log('User is:', user);
+  if(user.id && user.permissions ==='teacher') {
     ComponentToShow = ComponentToProtect;
   } else if (loginMode === 'login') {
     // if they are not logged in, check the loginMode on Redux State

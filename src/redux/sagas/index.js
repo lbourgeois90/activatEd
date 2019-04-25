@@ -8,6 +8,7 @@ import classSaga from './classSaga';
 import studentSaga from './studentSaga';
 import activatorSaga from './activatorSaga';
 import answerSaga from './answerSaga';
+import studentClassSaga from './studentClassSaga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -27,5 +28,6 @@ export default function* rootSaga() {
     studentSaga(),
     activatorSaga(),
     answerSaga(),
+    studentClassSaga(),
   ]);
 }
