@@ -6,6 +6,10 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import Typography from '@material-ui/core/Typography';
+import Paper from '@material-ui/core/Paper'
+import TextField from '@material-ui/core/TextField'
+import FormControl from '@material-ui/core/FormControl'
 
 class TeacherLogin extends Component {
   state = {
@@ -34,13 +38,17 @@ class TeacherLogin extends Component {
         payload: {
           username: this.state.username,
           password: this.state.password,
-          permissions: 'teacher',
         },
       });
     } else {
       this.props.dispatch({ type: 'LOGIN_INPUT_ERROR' });
     }
+    this.checkPath()
   } // end login
+
+  // checkPath = () => {
+  //   if (this.state.user)
+  // }
 
   handleInputChangeFor = propertyName => (event) => {
     this.setState({
@@ -53,60 +61,49 @@ class TeacherLogin extends Component {
     this.props.history.push('/register');
   }
 
+  handleToggle = () => {
+    console.log('in toggle');
+    this.setState({
+      open: !this.state.open
+    })
+  }
+
   render() {
+    console.log(this.state.open)
     return (
-      <div>
+      <Paper>
         {this.props.errors.loginMessage && (
-            <h2
-              className="alert"
-              role="alert"
-            >
+          <h2
+            className="alert"
+            role="alert"
+          >
             {this.props.errors.loginMessage}
           </h2>
         )}
         <form onSubmit={this.login}>
-          <h1>Login</h1>
-          <div>
-            <label htmlFor="username">
-              Username:
-              <input
-                type="text"
-                name="username"
-                value={this.state.username}
-                onChange={this.handleInputChangeFor('username')}
-              />
-            </label>
-          </div>
-          <div>
-            <label htmlFor="password">
-              Password:
-              <input
-                type="password"
-                name="password"
-                value={this.state.password}
-                onChange={this.handleInputChangeFor('password')}
-              />
-            </label>
-          </div>
-          <div>
-            <input
-              className="log-in"
-              type="submit"
-              name="submit"
-              value="Log In"
-            />
-          </div>
+          <Typography variant="h3">Login</Typography>
+          <FormControl>
+              <TextField label="Username" variant="outlined" color="primary"
+              value={this.state.username}
+              onChange={this.handleInputChangeFor('username')}
+              ></TextField>
+          </FormControl>
+          
+          <FormControl>
+              <TextField label="Password" variant="outlined" color="primary"
+              value={this.state.password}
+              onChange={this.handleInputChangeFor('password')}
+              type="password"
+              ></TextField>
+          </FormControl>
+         
+          <Button value="Log In" variant="outlined">Log In</Button>
         </form>
-        <center>
-          <button
-            type="button"
-            className="link-button"
-            onClick={this.handleRegister}
-          >
-            Register
-          </button>
-        </center>
-      </div>
+       
+        
+          <Button onClick={this.handleRegister}>Register</Button>
+        
+      </Paper>
     );
   }
 }
@@ -116,6 +113,7 @@ class TeacherLogin extends Component {
 // const mapStateToProps = ({errors}) => ({ errors });
 const mapStateToProps = state => ({
   errors: state.errors,
+  state,
 });
 
 export default connect(mapStateToProps)(TeacherLogin);

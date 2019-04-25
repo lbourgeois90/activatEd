@@ -27,7 +27,7 @@ class ClassActivatorDataRow extends Component {
     currentlyEditing: false,
     studentScore:{
         id: this.props.student.id,
-        score: '',
+        score: this.props.student.score,
     }
         
 
@@ -45,7 +45,7 @@ handleDelete = (event) => {
   console.log('in handleDelete');
   let id = event.currentTarget.value;
   console.log('Student_Answer_Id is:', id);
-//   this.props.dispatch({type:'DELETE_STUDENT_ANSWER', payload: id});
+  this.props.dispatch({type:'DELETE_STUDENT_ANSWER', payload: {StudentId: id, ClassData: this.props.classData }});
 }
 
 handleEdit = (event) => {

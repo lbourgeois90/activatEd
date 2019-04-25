@@ -3,7 +3,7 @@ import axios from 'axios';
 
 function* getAnswerSaga(action) {
     console.log('in getAnswerSaga');
-    console.log(action.payload);
+    // console.log(action.payload);
     try{
         const response = yield axios.get(`/answer/?class_id=${action.payload.class_id}&date=${action.payload.date}`, {
          
@@ -19,8 +19,8 @@ function* getAnswerSaga(action) {
 
 function* editScoreSaga(action){
     console.log('in editScoreSaga');
-    console.log('Edit Score is', action.payload.StudentScore);
-    console.log('Class data is', action.payload.ClassData);
+    // console.log('Edit Score is', action.payload.StudentScore);
+    // console.log('Class data is', action.payload.ClassData);
     try{
         yield axios.put(`/answer/${action.payload.StudentScore.id}`, action.payload.StudentScore);
         yield put({type:'GET_ANSWERS', payload: action.payload.ClassData});
@@ -32,16 +32,16 @@ function* editScoreSaga(action){
 }
 
 
-function* deleteStudentSaga(action) {
-    console.log('in deleteStudentSaga');
-    console.log(action.payload)
+function* deleteScoreSaga(action) {
+    console.log('in deleteScoreSaga');
+    console.log(action.payload.StudentId)
     try{
-        yield axios.delete(`/student/${action.payload}`, action.payload);
-        yield put({type:'GET_STUDENT'})
+        yield axios.delete(`/student/${action.payload.StudentId}`);
+        yield put({type:'GET_ANSWERS', payload: action.payload.ClassData});
     }
     catch (error) {
-        console.log('ERROR IN DELETE STUDENT', error);
-        alert(`Sorry! Unable to delete student. Try again later.`)
+        console.log('ERROR IN DELETE STUDENT SCORE', error);
+        alert(`Sorry! Unable to delete student score. Try again later.`)
     }
 }
 

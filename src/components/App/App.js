@@ -30,7 +30,6 @@ import TeacherLogin from '../TeacherSide/TeacherLogin/TeacherLogin';
 import WelcomePage from '../TeacherSide/WelcomePage/WelcomePage';
 import LoginSelector from '../LoginSelector/LoginSelector';
 
-import './App.css';
 
 class App extends Component {
   componentDidMount () {
@@ -50,13 +49,13 @@ class App extends Component {
             <Route
               exact
               path="/home"
-              component={LoginSelector}
+              component={TeacherLogin}
             />
-               <Route
+               {/* <Route
               exact
               path="/teacherlogin"
               component={TeacherLogin}
-            />
+            /> */}
                <Route
               exact
               path="/studentlogin"
@@ -67,17 +66,17 @@ class App extends Component {
               path="/register"
               component={CreateUsernameAndPassword}
             />
-             <Route
+             <ProtectedRoute
               exact
               path="/createprofile"
               component={CreateProfile}
             />
-            <Route
+            <ProtectedRoute
               exact
               path="/createclasses"
               component={CreateClasses}
             />
-              <Route
+              <ProtectedRoute
               exact
               path="/addstudents"
               component={AddStudents}
@@ -86,29 +85,29 @@ class App extends Component {
             Visiting localhost:3000/home will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the 'Login' or 'Register' page.
             Even though it seems like they are different pages, the user is always on localhost:3000/home */}
-            <Route
+            <ProtectedRoute
               exact
               path="/welcome"
               component={WelcomePage}
             />
             {/* This works the same as the other protected route, except that if the user is logged in,
             they will see the info page instead. */}
-            <Route
+            <ProtectedRoute
               exact
               path="/createactivator"
               component={CreateActivator}
             />
-            <Route
+            <ProtectedRoute
               exact
               path="/classdata"
               component={ClassActivatorData}
             />
-            <Route
+            <ProtectedRoute
               exact
               path="/studentactivator"
               component={StudentActivator}
             />
-              <Route
+              <ProtectedRoute
               exact
               path="/submission"
               component={Submission}

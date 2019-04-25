@@ -1,17 +1,31 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import Stepper from 'react-stepper-horizontal';
+import Typography from '@material-ui/core/Typography';
+import Paper from '@material-ui/core/Paper'
+import TextField from '@material-ui/core/TextField'
+import FormControl from '@material-ui/core/FormControl';
+import Button from '@material-ui/core/Button';
+
 
 class CreateUsernameAndPassword extends Component {
   state = {
     username: '',
     password: '',
-    permissions: 'teacher',
+    accessCode: '',
+  };
+
+
+  handleClickOpen = () => {
+    this.setState({ open: true });
+  };
+
+  handleClose = () => {
+    this.setState({ open: false });
   };
 
   registerUser = (event) => {
     event.preventDefault();
-
+    console.log('in registerUser');
     if (this.state.username && this.state.password) {
       this.props.dispatch({
         type: 'REGISTER',
@@ -19,9 +33,9 @@ class CreateUsernameAndPassword extends Component {
           username: this.state.username,
           password: this.state.password,
           permissions: 'teacher',
+          accessCode: this.state.accessCode,
         },
-      })
-      this.props.history.push('/createprofile')
+      });
     } else {
       this.props.dispatch({type: 'REGISTRATION_INPUT_ERROR'});
     }
@@ -33,12 +47,10 @@ class CreateUsernameAndPassword extends Component {
     });
   }
 
-
   render() {
+    console.log(this.state);
     return (
-      <section>
-         <Stepper steps={ [{title: 'Create Username and Password'}, {title: 'Create Profile'}, {title: 'Create Classes'}, {title: 'Add Students'}] } activeStep={ 0 } activeColor= '#814fff' defaultBarColor= '#814fff' activeTitleColor= '#814fff' defaultTitleColor= '#814fff' circleFontColor='#0B172A' className="stepper" completeColor="#463940" completeTitleColor="#463940" />
-      <div>
+      <Paper>
         {this.props.errors.registrationMessage && (
           <h2
             className="alert"
@@ -48,49 +60,42 @@ class CreateUsernameAndPassword extends Component {
           </h2>
         )}
         <form onSubmit={this.registerUser}>
-          <h1>Register User</h1>
-          <div>
-            <label htmlFor="username">
-              Username:
-              <input
-                type="text"
-                name="username"
-                value={this.state.username}
-                onChange={this.handleInputChangeFor('username')}
-              />
-            </label>
-          </div>
-          <div>
-            <label htmlFor="password">
-              Password:
-              <input
-                type="password"
-                name="password"
-                value={this.state.password}
-                onChange={this.handleInputChangeFor('password')}
-              />
-            </label>
-          </div>
-          <div>
-            <input
-              className="register"
-              type="submit"
-              name="submit"
-              value="Register"
-            />
-          </div>
+          <Typography variant="h4">Register User</Typography>
+          
+          <FormControl>
+              <TextField label="Username" variant="outlined" color="primary"
+              value={this.state.username}
+              onChange={this.handleInputChangeFor('username')}
+              ></TextField>
+          </FormControl>
+          
+          <FormControl>
+              <TextField label="Password" variant="outlined" color="primary"
+              value={this.state.password}
+              onChange={this.handleInputChangeFor('password')}
+              type="password"
+              ></TextField>
+          </FormControl>
+
+          <FormControl>
+              <TextField label="Access Code" variant="outlined" color="primary"
+              value={this.state.accessCode}
+              onChange={this.handleInputChangeFor('accessCode')}
+              type="password"
+              >
+              </TextField>
+          </FormControl>
+
+         <Button onClick={this.registerUser} >Register</Button>
         </form>
-        <center>
-        <button
+
+        <Button
             type="button"
             className="link-button"
-            onClick={() => {this.props.dispatch({type: 'SET_TO_LOGIN_MODE'})}}
-          >
+            onClick={() => {this.props.dispatch({type: 'SET_TO_LOGIN_MODE'})}}>
             Login
-          </button>
-        </center>
-      </div>
-      </section>
+        </Button>
+      </Paper>
     );
   }
 }

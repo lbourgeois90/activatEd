@@ -3,6 +3,7 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 const encryptLib = require('../modules/encryption');
 const pool = require('../modules/pool');
 const userStrategy = require('../strategies/user.strategy');
+require('dotenv').config();
 
 const router = express.Router();
 
@@ -20,13 +21,18 @@ router.post('/register', (req, res, next) => {
   const username = req.body.username;
   const password = encryptLib.encryptPassword(req.body.password);
   const permissions = req.body.permissions;
-  console.log('here', username);
-  
-
-  const queryText = 'INSERT INTO "user" (username, password, permissions) VALUES ($1, $2, $3) RETURNING id';
-  pool.query(queryText, [username, password, permissions])
+  let accessCode = req.body.accessCode;
+  console.log('accessCode', req.body.accessCode)
+  if( accessCode == process.env.ACCESS_CODE){
+    console.log('in if statement')
+  // const queryText = 'INSERT INTO "user" (username, password, permissions) VALUES ($1, $2, $3) RETURNING id';
+  // pool.query(queryText, [username, password, permissions])
     .then(() => res.sendStatus(201))
     .catch(() => res.sendStatus(500));
+  }
+  else{
+    console.log('in else statement');
+  }
 });
 
 // Handles login form authenticate/login POST

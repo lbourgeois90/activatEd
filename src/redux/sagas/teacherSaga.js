@@ -5,7 +5,7 @@ function* getTeacherSaga(action) {
     console.log('in getTeacherSaga');
     try{
         const response = yield axios.get('/teacher');
-        console.log('Response is', response);
+        // console.log('Response is', response);
         yield put({type:'SET_TEACHER', payload: response.data});
     }
     catch (error) {

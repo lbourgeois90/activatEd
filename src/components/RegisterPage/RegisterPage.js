@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import Typography from '@material-ui/core/Typography';
+import Paper from '@material-ui/core/Paper'
+import TextField from '@material-ui/core/TextField'
+import FormControl from '@material-ui/core/FormControl'
 
 
 class RegisterPage extends Component {
@@ -41,6 +44,7 @@ class RegisterPage extends Component {
   }
 
   render() {
+ 
     return (
       <div>
         {this.props.errors.registrationMessage && (
@@ -52,29 +56,22 @@ class RegisterPage extends Component {
           </h2>
         )}
         <form onSubmit={this.registerUser}>
-          <h1>Register User</h1>
-          <div>
-            <label htmlFor="username">
-              Username:
-              <input
-                type="text"
-                name="username"
-                value={this.state.username}
-                onChange={this.handleInputChangeFor('username')}
-              />
-            </label>
-          </div>
-          <div>
-            <label htmlFor="password">
-              Password:
-              <input
-                type="password"
-                name="password"
-                value={this.state.password}
-                onChange={this.handleInputChangeFor('password')}
-              />
-            </label>
-          </div>
+          <Typography variant="h4">Register User</Typography>
+          
+          <FormControl>
+              <TextField label="Username" variant="outlined" color="primary"
+              value={this.state.username}
+              onChange={this.handleInputChangeFor('username')}
+              ></TextField>
+          </FormControl>
+          
+          <FormControl>
+              <TextField label="Password" variant="outlined" color="primary"
+              value={this.state.password}
+              onChange={this.handleInputChangeFor('password')}
+              type="password"
+              ></TextField>
+          </FormControl>
           <div>
             <input
               className="register"

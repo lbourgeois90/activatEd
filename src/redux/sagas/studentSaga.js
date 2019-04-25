@@ -18,7 +18,7 @@ function* getStudentSaga(action) {
     console.log('in getStudentSaga');
     try{
         const response = yield axios.get('/student');
-        console.log('Response is', response);
+        // console.log('Response is', response);
         yield put({type:'SET_STUDENT', payload: response.data});
     }
     catch (error) {
@@ -30,7 +30,7 @@ function* getStudentSaga(action) {
 
 function* deleteStudentSaga(action) {
     console.log('in deleteStudentSaga');
-    console.log(action.payload)
+    // console.log(action.payload)
     try{
         yield axios.delete(`/student/${action.payload}`, action.payload);
         yield put({type:'GET_STUDENT'})
@@ -43,7 +43,7 @@ function* deleteStudentSaga(action) {
 
 function* updateStudentSaga(action) {
     console.log('in updateStudentSaga');
-    console.log(action.payload)
+    // console.log(action.payload)
     try{
         yield axios.put(`/student/${action.payload.id}`, action.payload);
         yield put({type:'GET_STUDENT'})
