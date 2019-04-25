@@ -16,6 +16,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
 import NavBar from '../NavBar/NavBar';
+import InsertChartOutlined from '@material-ui/icons/InsertChartOutlined'
 
 var moment = require('moment');
 
@@ -24,7 +25,10 @@ class ClassActivatorData extends Component {
 
 
   state= {
-    selectedClass: '',
+    classData:{
+        class_id: '',
+        date: '',
+    },
     labelWidth: 0,
   }
 
@@ -37,9 +41,10 @@ class ClassActivatorData extends Component {
     });
   }
 
-  handleSubmit = event => {
+  handleSubmit =(event)=>{
     event.preventDefault();
     console.log('in handleSubmit');
+     this.props.dispatch({type:'GET_ANSWERS', payload: this.state.classData});
     // this.props.dispatch({type:'ADD_STUDENT', payload: this.state.newStudent});
     // this.setState({
     //   newStudent: {
@@ -59,11 +64,13 @@ class ClassActivatorData extends Component {
   handleChange = propertyName => {
     return(event) =>{
     
-    this.setState({
-        selectedClass: event.target.value,
+      this.setState({
+        classData: {
+            ...this.state.classData,
+            [propertyName]: event.target.value,
+        }
     })
   }
-  this.props.dispatch({type:'GET_ANSWERS', payload: this.state.selectedClass});
 }
 
 handleDelete = (event) => {
@@ -76,12 +83,11 @@ handleDelete = (event) => {
 
 
   render() {
-    console.log(this.state.selectedClass);
+    console.log(this.state.classData);
     const {classes} = this.props;
     return (
       <section>
        <NavBar/>
-       <Typography>Period</Typography>
         <form className={classes.form}>
           <FormControl variant="outlined">
               <InputLabel
@@ -90,7 +96,7 @@ handleDelete = (event) => {
                 }}
                 htmlFor="class_id" >Select a Class </InputLabel>
               <Select
-                value={this.state.selectedClass.class_id}
+                value={this.state.classData.class_id}
                 onChange={this.handleChange('class_id')}
                 input={
                   <OutlinedInput
@@ -104,7 +110,23 @@ handleDelete = (event) => {
                     <MenuItem value={classes.class_id} key={classes.class_id}>{classes.class_period}</MenuItem>
                     )}
               </Select>
+              <br/>
+              <br/>
+              <TextField
+                id= "date"
+                label="Assigned Date"
+                type="date"
+                InputLabelProps={{
+                  shrink: true,
+                      }}
+                variant="outlined"
+                value={this.state.classData.date}
+                onChange={this.handleChange('date')}
+                   />
+            <br/>
           </FormControl>
+          <br/>
+          <Button onClick={this.handleSubmit}><InsertChartOutlined/> Get Activators</Button>
           <br/>
         </form>
       </section>

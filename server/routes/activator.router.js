@@ -6,6 +6,21 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 
+// router.get('/', rejectUnauthenticated, (req, res) => {
+//     console.log('in SERVER GET ACTIVATORS');
+//     console.log(req.params)
+//     // let user_id = req.user.id;
+//     // pool.query(`SELECT "classes"."id" AS "class_id", "classes"."class_name", "classes"."class_period", "classes"."teacher_id" FROM "classes" JOIN "teachers" ON "teachers"."id" = "classes"."teacher_id" JOIN "user" on "user"."id" = "teachers"."user_id" WHERE "user"."id" = ${user_id} ORDER BY "classes"."class_period" ASC;`)
+//     .then((result) => {
+//         console.log(result.rows);
+//     //     res.send(result.rows);
+//     })
+//     .catch((error) =>{
+//         console.log(`Error getting teachers!`, error);
+//         res.sendStatus(500);
+//     })
+// })
+
 
 router.post('/', rejectUnauthenticated, async (req, res) => {
     const client = await pool.connect();
