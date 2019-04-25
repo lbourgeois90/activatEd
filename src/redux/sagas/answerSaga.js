@@ -17,11 +17,41 @@ function* getAnswerSaga(action) {
     }
 }
 
+function* editScoreSaga(action){
+    console.log('in editScoreSaga');
+    console.log('Edit Score is', action.payload.StudentScore);
+    console.log('Class data is', action.payload.ClassData);
+    try{
+        yield axios.put(`/answer/${action.payload.StudentScore.id}`, action.payload.StudentScore);
+        yield put({type:'GET_ANSWERS', payload: action.payload.ClassData});
+    }
+    catch (error) {
+        console.log('ERROR IN PUT ANSWER', error);
+        alert(`Sorry! Unable to update student score. Try again later.`)
+    }
+}
+
+
+function* deleteStudentSaga(action) {
+    console.log('in deleteStudentSaga');
+    console.log(action.payload)
+    try{
+        yield axios.delete(`/student/${action.payload}`, action.payload);
+        yield put({type:'GET_STUDENT'})
+    }
+    catch (error) {
+        console.log('ERROR IN DELETE STUDENT', error);
+        alert(`Sorry! Unable to delete student. Try again later.`)
+    }
+}
+
 
 
 
 function* answerSaga() {
   yield takeLatest ('GET_ANSWERS', getAnswerSaga);
+  yield takeLatest ('EDIT_STUDENT_ANSWER', editScoreSaga);
+  yield takeLatest ('DELETE_STUDENT_ANSWER', deleteScoreSaga);
 }
 
 export default answerSaga;

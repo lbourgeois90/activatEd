@@ -1,5 +1,5 @@
 
-import React, { Component} from 'react';
+import React, { Component, Fragment} from 'react';
 import ReactDOM from 'react-dom';
 import {connect} from 'react-redux';
 import {withStyles} from '@material-ui/core/styles'
@@ -16,6 +16,7 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
 import Edit from '@material-ui/icons/Edit';
 import Add from '@material-ui/icons/Add'
+import Button from '@material-ui/core/Button';
 
 var moment = require('moment');
 
@@ -24,14 +25,10 @@ class ClassActivatorDataRow extends Component {
 
   state ={
     currentlyEditing: false,
-    // updatedStudent: {
-    //     id: this.props.student.id,
-    //     date_added: moment(this.props.student.date_added).format('YYYY-MM-DD'),
-    //     username: this.props.student.student_id,
-    //     first_name: this.props.student.first_name,
-    //     last_name: this.props.student.last_name,
-    //     class_id: this.props.student.class_id,
-    //     userId: this.props.student.user_id,
+    studentScore:{
+        id: this.props.student.id,
+        score: '',
+    }
         
 
     }
@@ -46,15 +43,15 @@ componentDidMount(){
 handleDelete = (event) => {
   event.preventDefault();
   console.log('in handleDelete');
-  let studentId = event.currentTarget.value;
-  console.log('Student Id is:', studentId);
-  this.props.dispatch({type:'DELETE_STUDENT', payload: studentId});
+  let id = event.currentTarget.value;
+  console.log('Student_Answer_Id is:', id);
+//   this.props.dispatch({type:'DELETE_STUDENT_ANSWER', payload: id});
 }
 
 handleEdit = (event) => {
   console.log('in handleEdit');
-  let studentId = event.currentTarget.value;
-  console.log(studentId);
+  let id = event.currentTarget.value;
+  console.log('Student_Answer_Id is:', id);
   this.setState({
     currentlyEditing: true,
   })
@@ -68,17 +65,17 @@ handleEditSubmit = (event) => {
     this.setState({
         currentlyEditing: false,
     })
-    this.props.dispatch({type:'EDIT_STUDENT', payload: this.state.updatedStudent});
+    this.props.dispatch({type:'EDIT_STUDENT_ANSWER', payload: {StudentScore: this.state.studentScore, ClassData: this.props.classData }});
+    // this.props.dispatch({type: 'GET_ANSWERS', payload: this.props.classData });
 }
 
 handleChange = propertyName => {
     return(event) =>{
     
     this.setState({
-        updatedStudent: {
-            ...this.state.updatedStudent,
+        studentScore: {
+            ...this.state.studentScore,
             [propertyName]: event.target.value,
-            student_id: this.state.updatedStudent.username,
 
         }
     });
@@ -92,7 +89,7 @@ handleChange = propertyName => {
   render() {
     const {classes} = this.props;
     console.log(this.state.currentlyEditing);
-    console.log(this.state.updatedStudent);
+    console.log(this.state.studentScore);
     return (
         <TableRow key={this.props.student.id} hover={true} className={classes.tableRowHover}>
         <TableCell className={classes.tableFontHeader}>
@@ -113,8 +110,13 @@ handleChange = propertyName => {
 
        
         <TableCell className={classes.tableFontHeader}>
+        { this.state.currentlyEditing === true ? <TextField onChange={this.handleChange('score')}/> : 
+            this.props.student.score}
+        </TableCell>
+
+        <TableCell className={classes.tableFontHeader}>
             { this.state.currentlyEditing === true ? 
-                <TextField><IconButton aria-label="Add" onClick={this.handleEditSubmit}> <Add/> </IconButton></TextField> :
+                <IconButton aria-label="Add" onClick={this.handleEditSubmit}> <Add/> </IconButton> :
                 <IconButton aria-label="Edit" onClick={this.handleEdit} >
               <Edit/>
            </IconButton>
@@ -125,6 +127,7 @@ handleChange = propertyName => {
           <DeleteOutlinedIcon/>
           </IconButton>
         </TableCell>
+
 
         </TableRow>
 

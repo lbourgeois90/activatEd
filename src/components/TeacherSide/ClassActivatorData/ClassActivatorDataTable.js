@@ -68,12 +68,13 @@ handleEdit = (event) => {
                 <TableCell className={classes.tableFontHeader}>Activator Question</TableCell>
                 <TableCell className={classes.tableFontHeader}>Student Answer</TableCell>
                 <TableCell className={classes.tableFontHeader}>Score</TableCell>
+                <TableCell className={classes.tableFontHeader}>Edit Score</TableCell>
                 <TableCell className={classes.tableFontHeader}>Delete</TableCell>
               </TableRow>
           </TableHead>
           <TableBody>
             {this.props.reduxState.classData.map( (student) =>
-                <ClassActivatorDataRow key={student.id} student={student}/> 
+                <ClassActivatorDataRow key={student.id} student={student} classData={this.props.classData}/> 
             )}
           </TableBody>
       </Table>             
