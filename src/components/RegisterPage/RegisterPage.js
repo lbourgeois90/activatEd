@@ -1,10 +1,21 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
+import Typography from '@material-ui/core/Typography';
+
 
 class RegisterPage extends Component {
   state = {
     username: '',
     password: '',
+  };
+
+
+  handleClickOpen = () => {
+    this.setState({ open: true });
+  };
+
+  handleClose = () => {
+    this.setState({ open: false });
   };
 
   registerUser = (event) => {

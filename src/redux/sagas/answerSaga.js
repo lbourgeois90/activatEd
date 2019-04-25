@@ -9,7 +9,7 @@ function* getAnswerSaga(action) {
          
         });
         console.log('Response is', response);
-        // yield put({type:'SET_CLASS', payload: response.data});
+        yield put({type:'SET_CLASSDATA', payload: response.data});
     }
     catch (error) {
         console.log('ERROR IN GET', error);

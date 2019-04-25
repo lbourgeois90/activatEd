@@ -15,6 +15,7 @@ import InsertChartOutlined from '@material-ui/icons/InsertChartOutlined'
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import PersonOutlined from '@material-ui/icons/PersonOutlined'
+import { withRouter } from 'react-router-dom';
 
 
 
@@ -161,4 +162,4 @@ const mapReduxStateToProps = (reduxState) => ({
   reduxState,
 });
 
-export default connect( mapReduxStateToProps )(withStyles(styles)(NavBar));
+export default withRouter(connect( mapReduxStateToProps )(withStyles(styles)(NavBar)));

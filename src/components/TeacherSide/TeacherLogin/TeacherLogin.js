@@ -1,12 +1,29 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 class TeacherLogin extends Component {
   state = {
     username: '',
     password: '',
     permissions: 'teacher',
+    open: false,
   };
+
+  handleClickOpen = () => {
+    this.setState({ open: true });
+  };
+
+  handleClose = () => {
+    this.setState({ open: false });
+  };
+
+
 
   login = (event) => {
     event.preventDefault();
@@ -40,10 +57,10 @@ class TeacherLogin extends Component {
     return (
       <div>
         {this.props.errors.loginMessage && (
-          <h2
-            className="alert"
-            role="alert"
-          >
+            <h2
+              className="alert"
+              role="alert"
+            >
             {this.props.errors.loginMessage}
           </h2>
         )}

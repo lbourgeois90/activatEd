@@ -2,6 +2,7 @@ import React , { Component } from 'react';
 import { connect } from 'react-redux';
 import Button from '@material-ui/core/Button';
 import ExitToApp from '@material-ui/icons/ExitToApp';
+import { withRouter } from 'react-router-dom';
 
 class LogoutButton extends Component {
 
@@ -9,6 +10,7 @@ class LogoutButton extends Component {
     console.log('in handleLogout');
    
    this.props.dispatch({ type: 'LOGOUT' });
+   this.props.history.push('/home');
   }
 
 
@@ -33,5 +35,5 @@ const mapReduxStateToProps = (reduxState) => ({
 reduxState,
 });
 
-export default connect( mapReduxStateToProps )(LogoutButton);
+export default withRouter(connect( mapReduxStateToProps )(LogoutButton));
 
