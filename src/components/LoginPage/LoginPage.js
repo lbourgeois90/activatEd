@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -77,6 +77,11 @@ class LoginPage extends Component {
 
   render() {
     return (
+      <Fragment>
+      <Paper>
+       <img src="images/Activated.png" />
+      </Paper>
+
       <Paper>
         {this.props.errors.loginMessage && (
           <h2
@@ -110,6 +115,7 @@ class LoginPage extends Component {
           <Button onClick={this.handleRegister}>Register</Button>
         
       </Paper>
+      </Fragment>
     );
   }
 }

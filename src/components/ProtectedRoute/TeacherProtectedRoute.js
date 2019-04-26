@@ -2,8 +2,8 @@ import React from 'react';
 import {Route} from 'react-router-dom'
 import {connect} from 'react-redux';
 import LoginPage from '../LoginPage/LoginPage';
-import RegisterPage from '../RegisterPage/RegisterPage';
-
+import Registration from '../Registration/Registration';
+import CreateProfile from '../TeacherSide/CreateProfile/CreateProfile';
 // A Custom Wrapper Component -- This will keep our code DRY.
 // Responsible for watching redux state, and returning an appropriate component
 // API for this component is the same as a regular route
@@ -26,17 +26,26 @@ const TeacherProtectedRoute = (props) => {
   } = props;
 
   let ComponentToShow;
-  console.log('User is:', user);
+  console.log('otherProps is:', otherProps);
   if(user.id && user.permissions ==='teacher') {
-    ComponentToShow = ComponentToProtect;
-  } else if (loginMode === 'login') {
+
+      ComponentToShow = ComponentToProtect;
+  
+    // ComponentToShow = ComponentToProtect;
+
+  } 
+  else if (otherProps.path === '/register' && loginMode === 'createProfile'){
+    ComponentToShow = CreateProfile
+}
+  
+  else if (loginMode === 'login') {
     // if they are not logged in, check the loginMode on Redux State
     // if the mode is 'login', show the LoginPage
     ComponentToShow = LoginPage;
   } else {
     // the the user is not logged in and the mode is not 'login'
     // show the RegisterPage
-    ComponentToShow = RegisterPage;
+    ComponentToShow = Registration;
   }
 
   // We return a Route component that gets added to our list of routes

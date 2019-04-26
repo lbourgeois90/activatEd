@@ -3,14 +3,15 @@ import {connect} from 'react-redux';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper'
 import TextField from '@material-ui/core/TextField'
-import FormControl from '@material-ui/core/FormControl'
-import {withRouter} from 'react-router-dom';
+import FormControl from '@material-ui/core/FormControl';
+import Button from '@material-ui/core/Button';
 
 
-class RegisterPage extends Component {
+class Registration extends Component {
   state = {
     username: '',
     password: '',
+    accessCode: '',
   };
 
 
@@ -24,19 +25,24 @@ class RegisterPage extends Component {
 
   registerUser = (event) => {
     event.preventDefault();
-
+    console.log('in registerUser');
     if (this.state.username && this.state.password) {
       this.props.dispatch({
         type: 'REGISTER',
         payload: {
           username: this.state.username,
           password: this.state.password,
+          permissions: 'teacher',
+          accessCode: this.state.accessCode,
         },
       });
+      // if(this.props.errors.loginMode === 'createProfile'){
+      //   this.props.history.push('/createProfile')
+      // }
+   
     } else {
       this.props.dispatch({type: 'REGISTRATION_INPUT_ERROR'});
     }
-    this.props.history.push('/createprofile');
   } // end registerUser
 
   handleInputChangeFor = propertyName => (event) => {
@@ -46,9 +52,9 @@ class RegisterPage extends Component {
   }
 
   render() {
- 
+    console.log('User is:', this.user);
     return (
-      <div>
+      <Paper>
         {this.props.errors.registrationMessage && (
           <h2
             className="alert"
@@ -74,25 +80,26 @@ class RegisterPage extends Component {
               type="password"
               ></TextField>
           </FormControl>
-          <div>
-            <input
-              className="register"
-              type="submit"
-              name="submit"
-              value="Register"
-            />
-          </div>
+
+          <FormControl>
+              <TextField label="Access Code" variant="outlined" color="primary"
+              value={this.state.accessCode}
+              onChange={this.handleInputChangeFor('accessCode')}
+              type="password"
+              >
+              </TextField>
+          </FormControl>
+
+         <Button onClick={this.registerUser} >Register</Button>
         </form>
-        <center>
-          <button
+
+        <Button
             type="button"
             className="link-button"
-            onClick={() => {this.props.dispatch({type: 'SET_TO_LOGIN_MODE'})}}
-          >
+            onClick={() => {this.props.dispatch({type: 'SET_TO_LOGIN_MODE'})}}>
             Login
-          </button>
-        </center>
-      </div>
+        </Button>
+      </Paper>
     );
   }
 }
@@ -102,7 +109,8 @@ class RegisterPage extends Component {
 // const mapStateToProps = ({errors}) => ({ errors });
 const mapStateToProps = state => ({
   errors: state.errors,
+  user : state.user,
 });
 
-export default withRouter(connect(mapStateToProps)(RegisterPage));
+export default connect(mapStateToProps)(Registration);
 

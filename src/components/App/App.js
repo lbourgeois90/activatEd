@@ -22,7 +22,7 @@ import CreateActivator from '../TeacherSide/CreateActivator/CreateActivator';
 import ClassActivatorData from '../TeacherSide/ClassActivatorData/ClassActivatorData';
 import CreateClasses from '../TeacherSide/CreateClasses/CreateClasses';
 import CreateProfile from '../TeacherSide/CreateProfile/CreateProfile';
-import CreateUsernameAndPassword from '../TeacherSide/CreateUsernameAndPassword/CreateUsernameAndPassword';
+import Registration from '../Registration/Registration';
 import StudentActivator from '../StudentSide/StudentActivator/StudentActivator';
 import Submission from '../StudentSide/Submission/Submission';
 import TeacherLogin from '../TeacherSide/TeacherLogin/TeacherLogin';
@@ -58,9 +58,9 @@ class App extends Component {
             <Route
               exact
               path="/register"
-              component={CreateUsernameAndPassword}
+              component={Registration}
             />
-             <Route
+             <TeacherProtectedRoute
               exact
               path="/createprofile"
               component={CreateProfile}
