@@ -59,12 +59,12 @@ class WelcomePage extends Component {
         
             <Grid
             item xs={6} column>
-              <Paper className={classes.pencilPaper} elevation={0}><img src="/images/lightbulbFormatted.png"></img></Paper>
+              <Paper className={classes.pencilPaper} elevation={0}><img src="/images/lightbulbFormattedSmaller.png"></img></Paper>
             </Grid>
 
             <Grid
             item xs={6} column>
-              <Paper className={classes.dataPaper} elevation={0}><img src="/images/graphFormatted.png"></img></Paper>
+              <Paper className={classes.dataPaper} elevation={0}><img src="/images/templateGraphSmaller.png"></img></Paper>
             </Grid>
         </Grid>
       </Grid>
