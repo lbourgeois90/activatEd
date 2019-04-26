@@ -9,7 +9,13 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import {withStyles} from '@material-ui/core/styles'
 import NavBar from '../NavBar/NavBar';
-
+import Grid from '@material-ui/core/Grid';
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardMedia from '@material-ui/core/CardMedia';
+import CardContent from '@material-ui/core/CardContent';
+import CardActions from '@material-ui/core/CardActions';
+import { unstable_Box as Box } from '@material-ui/core/Box';
 
 
 
@@ -25,56 +31,85 @@ class WelcomePage extends Component {
     return (
       <section>
         <NavBar/>
+        <Paper elevation = '0'>
+          <Typography className={classes.name} variant="h4">Welcome {this.props.reduxState.teacher.first_name}</Typography>
+        </Paper>
+        <Grid
+          container
+          direction="row"
+          justify="flex-start"
+          alignItems="flex-start"
+          spacing={24}
+        >
+        <Grid item xs={6} >
+        <Box className={classes.boxSize}>
+          <Card className={classes.educationCard} elevation={1}>
+            <CardMedia
+              component="img"
+              alt="Project Screenshot"
+              className={classes.media}
+              image='/images/pencil.png'
+            /> 
+            <CardContent>
+            <Button>Create Activator</Button>
+            </CardContent>
+            
+          </Card>
+          </Box>
         
+        </Grid>
+        <Grid item xs={6}>
+            <Card className={classes.educationCard} elevation={1}>
+                <CardMedia
+                  component="img"
+                  alt="Project Screenshot"
+                  className={classes.media}
+                  image='/images/graphs.png'
+                /> 
+                <CardContent>
+                <Button>See Class Data</Button>
+                </CardContent>
+                
+                
+              </Card>
 
+
+
+        
+        </Grid>
+        </Grid>
+
+
+    
+        
       </section>
     );
   }
 }
 
 const styles = theme => ({
-  // formControl:{
-  //   margin: '0 auto',
+  education: {
+    backgroundImage: "url('/images/educationImage.png')",
+    // backgroundColor: '#D60E54
+  },
+  media:{
+    height: 'auto',
+    width: '100%',
+    margin:'0 auto',       
+  },
+  name: {
+    textAlign: 'center',
+    margin: '2%',
+  },
+  educationCard:{
+    width: '100%',
+    margin: '0 auto',
+    height: '50%',
+  },
+  boxSize:{
     
-  // },
-  // form:{
-  //   backgroundColor: 'white',
-  //   padding: '0',
-  //   margin: '0 auto',
-  // },
-  // addStudents:{
-  //   textAlign: 'center',
-  // },
-  // table:{
-  //   width: '90%',
-  //   margin: '0 auto',
-  //   marginBottom: '50px',
-  //   marginTop: '100px',
-  //  },
-   
-  //  tableFont:{
-  //    fontSize: '22px',
-  //    color: '#ff65af',
-  //  },
-  //  tableFontHeader:{
-  //    fontSize: '22px',
-  //    color: '#ff65af',
-  //  },
-  //  tableFontCenter:{
-  //    fontSize: '22px',
-  //    textAlign: '#ff65af',
-  //    color: '#ff65af',
-  //  },
-  //  tableFontHeaderCenter:{
-  //    fontSize: '22px',
-  //    textAlign: 'center',
-  //    color: '#ff65af' 
-  //  },
-  //  tableRowHover: {
-  //    '&:hover': {
-  //      backgroundColor: 'primary',
-  //    },
-  //  },
+  }
+
   })
 
 

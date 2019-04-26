@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import ReactDOM from 'react-dom';
 import LogoutButton from '../../LogOutButton/LogOutButton';
 import NavBar from '../NavBar/NavBar';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -9,12 +10,14 @@ import OutlinedInput from '@material-ui/core/OutlinedInput';
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
 
 
 class StudentClass extends Component {
 
   state = {
     class_id: '',
+    labelWidth: 0,
   }
 
 
@@ -26,10 +29,10 @@ class StudentClass extends Component {
   handleSubmit = event => {
     event.preventDefault();
     console.log('in handleSubmit');
-    this.setState({
-     
-    })
-    this.props.history.push('/welcome');
+    console.log(this.state.class_id);
+    this.props.dispatch({type:'GET_STUDENT_ACTIVATOR', payload: this.state.class_id});
+    
+
   }
 
 
@@ -37,13 +40,14 @@ class StudentClass extends Component {
     return(event) =>{
     
     this.setState({
-     
-
+        ...this.state,
+        [propertyName]: event.target.value,
         })
   }
 }
 
   render() {
+    console.log(this.state.class_id);
     return (
       <section>
           <NavBar/>
@@ -53,30 +57,23 @@ class StudentClass extends Component {
         
           </header>
           <FormControl>
-                <InputLabel
-                    ref={ref => {
-                      this.InputLabelRef = ref;
-                    }}
-                    htmlFor="class_id" >Select a Class 
-                </InputLabel>
-                <Select
-                    value={this.state.class_id}
-                    onChange={this.handleChange('class_id')}
-                    input={
-                      <OutlinedInput
-                        labelWidth={this.state.labelWidth}
-                        name="class_id"
-                        id="class_id"
-                        />}
-                        >
-                        <MenuItem disabled>Select a Class</MenuItem>
-                        {this.props.reduxState.studentClass.map( classes =>
-                        <MenuItem value={classes.class_id} key={classes.class_id}>{classes.class_period}</MenuItem>
-                        )}
-                </Select>
-              <FormHelperText>Required Field</FormHelperText>
+            <TextField
+              id="class_id"
+              select
+              label="Select"
+              value={this.state.class_id}
+              onChange={this.handleChange('class_id')}
+              helperText="Please select your class"
+              margin="normal"
+              variant="outlined"
+            >
+               {this.props.reduxState.studentClass.map( classes =>
+                        <MenuItem value={classes.id} key={classes.id}>{classes.class_period}</MenuItem>
+                      )}
+            </TextField>
           </FormControl>
-          <Button onClick={this.handleNext}>Get Activator</Button>
+          <br/>
+          <Button onClick={this.handleSubmit}>Get Activator</Button>
       </section>
     );
   }

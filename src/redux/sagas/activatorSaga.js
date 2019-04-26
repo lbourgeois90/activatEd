@@ -18,7 +18,7 @@ function* addActivatorSaga(action) {
 function* getActivatorSaga(action) {
     console.log('in getActivatorSaga');
     try{
-        const response = yield axios.get('/activator', {
+        const response = yield axios.get('/activator?class_id=${action.payload}`', {
            
         });
         console.log('Response is', response);
@@ -35,7 +35,7 @@ function* getActivatorSaga(action) {
 
 function* activatorSaga() {
   yield takeLatest ('ADD_ACTIVATOR', addActivatorSaga);
-  yield takeLatest ('GET_ACTIVATOR', getActivatorSaga);
+  yield takeLatest ('GET_STUDENT_ACTIVATOR', getActivatorSaga);
 }
 
 export default activatorSaga;

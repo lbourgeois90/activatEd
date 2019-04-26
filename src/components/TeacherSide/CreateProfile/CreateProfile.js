@@ -26,6 +26,7 @@ class CreateProfile extends Component {
     console.log('in handleSubmit');
     this.props.dispatch({type:'ADD_PROFILE', payload: this.state.newProfile});
     this.props.history.push('/createclasses');
+    this.props.dispatch({type:'SET_TO_LOGIN_MODE'});
   }
 
   handleChange = propertyName => {

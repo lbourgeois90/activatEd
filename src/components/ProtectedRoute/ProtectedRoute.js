@@ -38,6 +38,9 @@ const ProtectedRoute = (props) => {
     else if (otherProps.path === '/home' && user.permissions === 'teacher'){
       ComponentToShow = WelcomePage;
     }
+    else if (loginMode === 'createProfile'){
+      ComponentToShow = CreateProfile
+  }
 
     else {
       ComponentToShow = ComponentToProtect;
@@ -46,6 +49,7 @@ const ProtectedRoute = (props) => {
     // show the component that is protected
     
   } 
+  
   else if (loginMode === 'login') {
     // if they are not logged in, check the loginMode on Redux State
     // if the mode is 'login', show the LoginPage

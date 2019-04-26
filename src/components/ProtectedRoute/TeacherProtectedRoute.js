@@ -34,9 +34,6 @@ const TeacherProtectedRoute = (props) => {
     // ComponentToShow = ComponentToProtect;
 
   } 
-  else if (otherProps.path === '/register' && loginMode === 'createProfile'){
-    ComponentToShow = CreateProfile
-}
   
   else if (loginMode === 'login') {
     // if they are not logged in, check the loginMode on Redux State

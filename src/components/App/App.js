@@ -9,14 +9,8 @@ import {
 import {connect} from 'react-redux';
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 import theme from './theme';
-import Footer from '../Footer/Footer';
-
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 import TeacherProtectedRoute from '../ProtectedRoute/TeacherProtectedRoute';
-
-import AboutPage from '../AboutPage/AboutPage';
-import UserPage from '../UserPage/UserPage';
-import InfoPage from '../InfoPage/InfoPage';
 import AddStudents from '../TeacherSide/AddStudents/AddStudents';
 import CreateActivator from '../TeacherSide/CreateActivator/CreateActivator';
 import ClassActivatorData from '../TeacherSide/ClassActivatorData/ClassActivatorData';
@@ -25,9 +19,8 @@ import CreateProfile from '../TeacherSide/CreateProfile/CreateProfile';
 import Registration from '../Registration/Registration';
 import StudentActivator from '../StudentSide/StudentActivator/StudentActivator';
 import Submission from '../StudentSide/Submission/Submission';
-import TeacherLogin from '../TeacherSide/TeacherLogin/TeacherLogin';
 import WelcomePage from '../TeacherSide/WelcomePage/WelcomePage';
-import LoginSelector from '../LoginSelector/LoginSelector';
+
 
 
 class App extends Component {
@@ -55,7 +48,7 @@ class App extends Component {
               component={TeacherLogin}
             /> */}
          
-            <Route
+            <ProtectedRoute
               exact
               path="/register"
               component={Registration}
