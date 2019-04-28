@@ -18,15 +18,13 @@ import NavBar from '../NavBar/NavBar';
 import List from '@material-ui/icons/List';
 import Input from '@material-ui/core/Input';
 import InputAdornment from '@material-ui/core/InputAdornment';
+import LogoutButton from '../../LogOutButton/LogOutButton';
 
 
 class CreateActivator extends Component {
   
   componentDidMount(){
     this.props.dispatch({type:'GET_CLASS'});
-    this.setState({
-      labelWidth: ReactDOM.findDOMNode(this.InputLabelRef).offsetWidth,
-    });
   }
 
 
@@ -45,7 +43,6 @@ class CreateActivator extends Component {
       mc_c: '',
       mc_d: '',
     },
-    labelWidth: 0,
   }
 
   clearInputs = () => {
@@ -101,61 +98,63 @@ handleSubmit = event => {
 displayMCOptions = () => {
   if(this.state.newActivator.question_type === 'Multiple_Choice_Question'){
     return(
-      
-      <form>
+      <Fragment>
       <FormControl>
-      <InputLabel htmlFor="multiple_choice-a">A</InputLabel>
+        <InputLabel htmlFor="multiple_choice-a">A</InputLabel>
+        <Input
+          id="multiple_choice-a"
+          startAdornment={
+            <InputAdornment position="start">
+              <List/>
+            </InputAdornment>
+          }
+          value={this.state.multipleChoiceOptions.mc_a}
+          onChange={this.handleChangeMC('mc_a')}
+        />
+    </FormControl>
+
+    <FormControl>
+        <InputLabel htmlFor="multiple_choice-b">B</InputLabel>
+        <Input
+          id="multiple_choice-b"
+          startAdornment={
+            <InputAdornment position="start">
+              <List/>
+            </InputAdornment>
+          }
+          value={this.state.multipleChoiceOptions.mc_b}
+          onChange={this.handleChangeMC('mc_b')}
+        />
+   </FormControl>
+
+   <FormControl>
+      <InputLabel htmlFor="multiple_choice-c">C</InputLabel>
       <Input
-        id="multiple_choice-a"
+        id="multiple_choice-c"
         startAdornment={
           <InputAdornment position="start">
             <List/>
           </InputAdornment>
         }
-        value={this.state.multipleChoiceOptions.mc_a}
-        onChange={this.handleChangeMC('mc_a')}
+        value={this.state.multipleChoiceOptions.mc_c}
+        onChange={this.handleChangeMC('mc_c')}
       />
-    </FormControl>
-    <FormControl>
-     <InputLabel htmlFor="multiple_choice-b">B</InputLabel>
-     <Input
-       id="multiple_choice-b"
-       startAdornment={
-         <InputAdornment position="start">
-           <List/>
-         </InputAdornment>
-       }
-       value={this.state.multipleChoiceOptions.mc_b}
-       onChange={this.handleChangeMC('mc_b')}
-     />
    </FormControl>
+
    <FormControl>
-     <InputLabel htmlFor="multiple_choice-c">C</InputLabel>
-     <Input
-       id="multiple_choice-c"
-       startAdornment={
-         <InputAdornment position="start">
-           <List/>
-         </InputAdornment>
-       }
-       value={this.state.multipleChoiceOptions.mc_c}
-       onChange={this.handleChangeMC('mc_c')}
-     />
+        <InputLabel htmlFor="multiple_choice-d">D</InputLabel>
+        <Input
+          id="multiple_choice-d"
+          startAdornment={
+            <InputAdornment position="start">
+              <List/>
+            </InputAdornment>
+          }
+          value={this.state.multipleChoiceOptions.mc_d}
+          onChange={this.handleChangeMC('mc_d')}
+        />
    </FormControl>
-   <FormControl>
-     <InputLabel htmlFor="multiple_choice-d">D</InputLabel>
-     <Input
-       id="multiple_choice-d"
-       startAdornment={
-         <InputAdornment position="start">
-           <List/>
-         </InputAdornment>
-       }
-       value={this.state.multipleChoiceOptions.mc_d}
-       onChange={this.handleChangeMC('mc_d')}
-     />
-   </FormControl>
-   </form>
+   </Fragment>
     )
   }
 }
@@ -167,30 +166,33 @@ displayMCOptions = () => {
     console.log(this.state.multipleChoiceOptions);
     const {classes} = this.props;
     return (
-      <section>
-        <NavBar/>
+      <section className={classes.root}>
+        <header>
+          <Typography variant="h4">Create an Activator</Typography>
+        </header>
         <form className={classes.form}>
-          <FormControl variant="outlined" >
-              <InputLabel
-                ref={ref => {
-                  this.InputLabelRef = ref;
-                }}
-                htmlFor="class_id" >Select a Class </InputLabel>
-              <Select
-                value={this.state.newActivator.class_id}
-                onChange={this.handleChange('class_id')}
-                input={
-                  <OutlinedInput
-                    labelWidth={this.state.labelWidth}
-                    name="class_id"
-                    id="class_id"
-                    />}
-                    >
-                    {this.props.reduxState.classes.map( classes =>
+          <FormControl variant="outlined" className={classes.formControl}>
+              <TextField
+              id="class_id"
+              select
+              label="Select A Class Period"
+              value={this.state.newActivator.class_id}
+              onChange={this.handleChange('class_id')}
+              SelectProps={{
+                MenuProps: {
+                  className: classes.menu,
+                },
+              }}
+              margin="normal"
+              variant="outlined"
+              style = {{width: 200}}
+            >
+              <MenuItem disabled>Select a Class Period</MenuItem>
+              {this.props.reduxState.classes.map( classes =>
                     <MenuItem value={classes.class_id} key={classes.class_id}>{classes.class_period}</MenuItem>
                     )}
-              </Select>
-              <FormHelperText>Required Field</FormHelperText>
+                  
+            </TextField>
           </FormControl>
           
           <FormControl className={classes.formControl}>
@@ -204,6 +206,7 @@ displayMCOptions = () => {
                   variant="outlined"
                   value={this.state.newActivator.date}
                   onChange={this.handleChange('date')}
+                  style = {{width: 200}}
                     />
           </FormControl>
 
@@ -221,6 +224,7 @@ displayMCOptions = () => {
                   variant="outlined"
                   value={this.state.newActivator.time_start}
                   onChange={this.handleChange('time_start')}
+                  style = {{width: 200}}
               />
           </FormControl>
 
@@ -238,24 +242,30 @@ displayMCOptions = () => {
                   variant="outlined"
                   value={this.state.newActivator.time_end}
                   onChange={this.handleChange('time_end')}
+                style = {{width: 200}}
               />
           </FormControl>
           
           <FormControl className={classes.formControl}>
-              <Select
-                value={this.state.newActivator.question_type}
-                onChange={this.handleChange('question_type')}
-                input={
-                  <OutlinedInput
-                    labelWidth={this.state.labelWidth}
-                    name="question_type"
-                    id="question_type"
-                    />}
-                    >
-                  <MenuItem disabled>Choose a Question Type</MenuItem>
+              <TextField
+              id="question_type"
+              select
+              label="Select A Question Type"
+              value={this.state.newActivator.question_type}
+              onChange={this.handleChange('question_type')}
+              SelectProps={{
+                MenuProps: {
+                  className: classes.menu,
+                },
+              }}
+              margin="normal"
+              variant="outlined"
+              style = {{width: 200}}
+            >
+              <MenuItem disabled>Choose a Question Type</MenuItem>
                   <MenuItem value={'Text_Question'}>Text Question</MenuItem>
                   <MenuItem value={'Multiple_Choice_Question'}>Multiple Choice Question</MenuItem>
-              </Select>
+            </TextField>
           </FormControl>
           
           <FormControl className={classes.formControl}>
@@ -279,15 +289,28 @@ displayMCOptions = () => {
 }
 
 const styles = theme => ({
+  root:{
+    margin: '0 auto',
+    textAlign: 'center',
+  },
+
   formControl:{
     margin: '0 auto',
+
+    marginTop: '20px',
     display: 'block',
     
   },
+  formControlTime:{
+    display: 'inline-block',
+    marginTop: '20px',
+  },
+
   form:{
     backgroundColor: 'white',
     padding: '0',
     margin: '0 auto',
+    width: '50%',
   },
   addStudents:{
     textAlign: 'center',
