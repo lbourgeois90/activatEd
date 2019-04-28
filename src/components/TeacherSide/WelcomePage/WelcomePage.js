@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import Paper from '@material-ui/core/Paper';
 import AppBar from '@material-ui/core/AppBar';
@@ -15,6 +15,9 @@ import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
+import './WelcomePageGrid.css';
+import LogoutButton from '../../LogOutButton/LogOutButton';
+var moment = require('moment');
 
 
 
@@ -22,55 +25,58 @@ import CardActions from '@material-ui/core/CardActions';
 class WelcomePage extends Component {
 
   componentDidMount(){
-    this.props.dispatch({type:'GET_TEACHER'})
+    this.props.dispatch({type:'GET_TEACHER'});
+    this.props.dispatch({type:'GET_QUOTE'});
   }
+
+  navToClassData = () => {
+    this.props.history.push('/classData')
+  }
+
+  navToCreateActivator = () => {
+    this.props.history.push('/createActivator')
+  }
+
+
+
+
 
   render() {
     const { classes } = this.props;
     return (
       <section>
-        {/* <NavBar/> */}
-        {/* <img src="/images/Activated.png"></img> */}
-        <Paper elevation = '0'>
-          <Typography className={classes.name} variant="h4">Welcome {this.props.reduxState.teacher.first_name}</Typography>
-        </Paper>
-        <Grid
-          container
-          direction="rows"
-          justify="space-between"
-          alignItems="flex-end"
-          spacing={40}
-        >
-        {/* <Grid
-          container
-          direction="rows"
-          justify="flex-start"
-          alignItems="flex-start"
-          spacing={8}> */}
-            <Grid
-            item xs={6}>
-              <Paper className={classes.treePaper} elevation={0}><img src="/images/education_tree_concept_.jpg"></img></Paper>
-            </Grid>
-        {/* </Grid> */}
+       
+       <div className="wrapper">
+
+        <div className="childOne">
+          Welcome {this.props.reduxState.teacher.first_name}
+          <LogoutButton/>
         
-        <Grid 
-          item xs={6}
-          >
         
-            <Grid
-            item xs={6} column>
-              <Paper className={classes.pencilPaper} elevation={0}><img src="/images/lightbulbFormattedSmaller.png"></img></Paper>
-            </Grid>
-
-            <Grid
-            item xs={6} column>
-              <Paper className={classes.dataPaper} elevation={0}><img src="/images/templateGraphSmaller.png"></img></Paper>
-            </Grid>
-        </Grid>
-      </Grid>
-
-
-    
+        </div>
+        <div className="childTwo">
+          <img src="/images/thoughBubble.png" className="quoteImage"></img>
+          <p className="dateAndTime">Today's Date Is: {moment().format('MMMM Do YYYY')}</p>
+          <p className="dateAndTime">Current Time Is: {moment().format('LT')}</p>
+          <p className="quoteText">Inspirational Quote of the Day:</p>
+          <p className="quoteText">'{this.props.reduxState.quote.quoteText}'</p>
+          <p className="quoteText">Author: {this.props.reduxState.quote.quoteAuthor}</p>
+        </div>
+         
+        <div className="childThree">
+          <img src="/images/createactivatoricon.png" className="activatorImage"></img>
+          <p className={classes.buttonContainer}>
+            <Button color="primary" className={classes.activatorButton} onClick={this.navToCreateActivator}>Create an Activator</Button>
+          </p>
+        </div>
+        <div className="childFour">
+          <img src="/images/data.png" className="dataImage"></img>
+          <p className={classes.buttonContainer}>
+          <Button color="primary" className={classes.activatorButton} onClick={this.navToClassData}>See Class Data</Button>
+          </p>
+        </div>
+          
+       </div>
         
       </section>
     );
@@ -78,26 +84,16 @@ class WelcomePage extends Component {
 }
 
 const styles = theme => ({
-
-
-  treePaper:{
-    // height: '100vw',
-    // width: '100%',
-    // backgroundImage: "url('/images/education_tree_concept_.jpg')",
-    // backgroundRepeat: 'no-repeat',
+  activatorButton:{
+    fontSize: '36px',
+    justifyContent: 'center',
+    fontFamily: 'Lato',
   },
-  pencilPaper:{
-    // height: '100vw',
-    // width: '100%',
-    // backgroundImage: "url('/images/create-an-activitor.png')",
-    // backgroundRepeat: 'no-repeat',
-  },
-  dataPaper:{
-    // height: '100vw',
-    // width: '100%',
-    // backgroundImage: "url('/images/graphs.png')",
-    // backgroundRepeat: 'no-repeat',
-  },
+  buttonContainer:{
+    textAlign: 'center',
+    margin: '0',
+  }
+ 
 
 
   })
