@@ -1,4 +1,3 @@
-
 import React, { Component, Fragment} from 'react';
 import ReactDOM from 'react-dom';
 import {connect} from 'react-redux';
@@ -286,7 +285,7 @@ const styles = theme => ({
     
   },
   form:{
-    backgroundColor:'white',
+    backgroundColor: 'white',
     padding: '0',
     margin: '0 auto',
   },
