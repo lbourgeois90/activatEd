@@ -282,7 +282,7 @@ const styles = theme => ({
     
   },
   form:{
-    backgroundColor: 'white',
+    backgroundColor:'white',
     padding: '0',
     margin: '0 auto',
   },
