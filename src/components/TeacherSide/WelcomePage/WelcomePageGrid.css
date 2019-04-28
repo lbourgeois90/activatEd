@@ -1,0 +1,89 @@
+.wrapper {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: 100px 1fr 1fr ;
+    grid-template-areas:
+    "header header"
+    "tree activator"
+    "tree classData";
+    gap: 20px;
+}
+
+body{
+    font-family: 'Lato';
+}
+
+.childOne{
+    grid-area: header;
+    border-bottom: 2px solid #a51d85;
+    text-align: center;
+    font-size: 36px;
+}
+
+.logoutButton{
+    float: right;
+}
+
+.quoteText {
+    font-family: 'Old Standard TT';
+    font-style: italic;
+}
+
+.childTwo{
+    grid-area: tree;
+    /* padding-top: 20px;
+    background-image: url('/images/education_tree.jpg');
+    background-repeat: no-repeat;
+    background-position: center; */
+    font-size: 36px;
+    text-align: center;
+
+}
+
+.childThree{
+    grid-area: activator;
+    padding-bottom: 20px;
+    /* background-image: url('/images/lightbulbFormattedSmaller.png');
+    background-repeat: no-repeat;
+    background-position: center; */
+}
+
+.activatorImage{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    height: 200px;
+    width:  600px;
+}
+
+.dataImage{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    height: 200px;
+    width:  600px;
+}
+
+.quoteImage{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    height: 200px;
+    width:  600px
+}
+
+.quoteText{
+   font-size: 26px;
+}
+
+.dateAndTime{
+    font-size: 32px;
+}
+
+.childFour{
+    grid-area: classData;
+  
+}

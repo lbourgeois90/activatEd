@@ -17,6 +17,7 @@ const studentRouter =  require('./routes/student.router');
 const activatorRouter = require('./routes/activator.router');
 const answerRouter = require('./routes/answers.router');
 const studentClasses = require('./routes/studentClasses.router')
+const quoteRouter = require('./routes/inspirationalQuote.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -38,7 +39,7 @@ app.use('/student', studentRouter);
 app.use('/activator', activatorRouter);
 app.use('/answer', answerRouter);
 app.use('/studentClasses', studentClasses);
-
+app.use ('/quote', quoteRouter);
 // Serve static files
 app.use(express.static('build'));
 

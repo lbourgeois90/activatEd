@@ -102,7 +102,8 @@ handleSubmit = event => {
 displayMCOptions = () => {
   if(this.state.newActivator.question_type === 'Multiple_Choice_Question'){
     return(
-      <Fragment>
+      
+      <form>
       <FormControl>
       <InputLabel htmlFor="multiple_choice-a">A</InputLabel>
       <Input
@@ -155,7 +156,7 @@ displayMCOptions = () => {
        onChange={this.handleChangeMC('mc_d')}
      />
    </FormControl>
-   </Fragment>
+   </form>
     )
   }
 }
@@ -170,105 +171,107 @@ displayMCOptions = () => {
       <section>
         <NavBar/>
         <form className={classes.form}>
-        <FormControl variant="outlined">
-            <InputLabel
-              ref={ref => {
-                this.InputLabelRef = ref;
-              }}
-              htmlFor="class_id" >Select a Class </InputLabel>
-            <Select
-              value={this.state.newActivator.class_id}
-              onChange={this.handleChange('class_id')}
-              input={
-                <OutlinedInput
-                  labelWidth={this.state.labelWidth}
-                  name="class_id"
-                  id="class_id"
-                  />}
-                  >
-                  {this.props.reduxState.classes.map( classes =>
-                  <MenuItem value={classes.class_id} key={classes.class_id}>{classes.class_period}</MenuItem>
-                  )}
-            </Select>
-            <FormHelperText>Required Field</FormHelperText>
-        </FormControl>
-        <br/>
-        <br/>
-            <br/>
-            <TextField
-                id= "date"
-                label="Assigned Date"
-                type="date"
-                InputLabelProps={{
+          <FormControl variant="outlined" >
+              <InputLabel
+                ref={ref => {
+                  this.InputLabelRef = ref;
+                }}
+                htmlFor="class_id" >Select a Class </InputLabel>
+              <Select
+                value={this.state.newActivator.class_id}
+                onChange={this.handleChange('class_id')}
+                input={
+                  <OutlinedInput
+                    labelWidth={this.state.labelWidth}
+                    name="class_id"
+                    id="class_id"
+                    />}
+                    >
+                    {this.props.reduxState.classes.map( classes =>
+                    <MenuItem value={classes.class_id} key={classes.class_id}>{classes.class_period}</MenuItem>
+                    )}
+              </Select>
+              <FormHelperText>Required Field</FormHelperText>
+          </FormControl>
+          
+          <FormControl className={classes.formControl}>
+              <TextField
+                  id= "date"
+                  label="Assigned Date"
+                  type="date"
+                  InputLabelProps={{
+                    shrink: true,
+                        }}
+                  variant="outlined"
+                  value={this.state.newActivator.date}
+                  onChange={this.handleChange('date')}
+                    />
+          </FormControl>
+
+          <FormControl className={classes.formControl}>
+              <TextField
+                  id="time"
+                  label="Start Time"
+                  type="time"
+                  InputLabelProps={{
                   shrink: true,
-                      }}
-                variant="outlined"
-                value={this.state.newActivator.date}
-                onChange={this.handleChange('date')}
-                   />
-            <br/>
-            <br/>
+                  }}
+                  inputProps={{
+                  step: 60, // 5 min
+                  }}
+                  variant="outlined"
+                  value={this.state.newActivator.time_start}
+                  onChange={this.handleChange('time_start')}
+              />
+          </FormControl>
 
-            <TextField
-                id="time"
-                label="Start Time"
-                type="time"
-                InputLabelProps={{
-                shrink: true,
-                }}
-                inputProps={{
-                step: 60, // 5 min
-                }}
-                variant="outlined"
-                value={this.state.newActivator.time_start}
-                onChange={this.handleChange('time_start')}
-            />
-            <br/>
-            <br/>
+          <FormControl className={classes.formControl}>
+              <TextField
+                  id="time"
+                  label="End Time"
+                  type="time"
+                  InputLabelProps={{
+                  shrink: true,
+                  }}
+                  inputProps={{
+                  step: 60, // 5 min
+                  }}
+                  variant="outlined"
+                  value={this.state.newActivator.time_end}
+                  onChange={this.handleChange('time_end')}
+              />
+          </FormControl>
+          
+          <FormControl className={classes.formControl}>
+              <Select
+                value={this.state.newActivator.question_type}
+                onChange={this.handleChange('question_type')}
+                input={
+                  <OutlinedInput
+                    labelWidth={this.state.labelWidth}
+                    name="question_type"
+                    id="question_type"
+                    />}
+                    >
+                  <MenuItem disabled>Choose a Question Type</MenuItem>
+                  <MenuItem value={'Text_Question'}>Text Question</MenuItem>
+                  <MenuItem value={'Multiple_Choice_Question'}>Multiple Choice Question</MenuItem>
+              </Select>
+          </FormControl>
+          
+          <FormControl className={classes.formControl}>
+              <TextField
+                  placeholder="Type Question Here"
+                  multiline={true}
+                  rows={6}
+                  variant="outlined"
+                  value={this.state.newActivator.question}
+                  onChange={this.handleChange('question')}
+              />
+          </FormControl>
 
-            <TextField
-                id="time"
-                label="End Time"
-                type="time"
-                InputLabelProps={{
-                shrink: true,
-                }}
-                inputProps={{
-                step: 60, // 5 min
-                }}
-                variant="outlined"
-                value={this.state.newActivator.time_end}
-                onChange={this.handleChange('time_end')}
-            />
-            <br/>
-            <br/>
-            <Select
-              value={this.state.newActivator.question_type}
-              onChange={this.handleChange('question_type')}
-              input={
-                <OutlinedInput
-                  labelWidth={this.state.labelWidth}
-                  name="question_type"
-                  id="question_type"
-                  />}
-                  >
-                <MenuItem disabled>Choose a Question Type</MenuItem>
-                <MenuItem value={'Text_Question'}>Text Question</MenuItem>
-                <MenuItem value={'Multiple_Choice_Question'}>Multiple Choice Question</MenuItem>
-            </Select>
-            <br/>
-            <br/>
-            <TextField
-                placeholder="Type Question Here"
-                multiline={true}
-                rows={6}
-                variant="outlined"
-                value={this.state.newActivator.question}
-                onChange={this.handleChange('question')}
-            />
-            <br/>
-            <br/>
             {this.displayMCOptions()}
+
             <Button onClick={this.handleSubmit}>Create Activator</Button>
       </form>
     </section>
@@ -279,6 +282,7 @@ displayMCOptions = () => {
 const styles = theme => ({
   formControl:{
     margin: '0 auto',
+    display: 'block',
     
   },
   form:{
