@@ -2,24 +2,31 @@ const express = require('express');
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 const encryptLib = require('../modules/encryption');
 const pool = require('../modules/pool');
-
 const router = express.Router();
+var moment = require('moment');
 
 
 router.get('/', rejectUnauthenticated, (req, res) => {
     console.log('in SERVER GET ACTIVATORS')
-  
-    // let user_id = req.user.id;
-    // pool.query(`SELECT "classes"."id" AS "class_id", "classes"."class_name", "classes"."class_period", "classes"."teacher_id" FROM "classes" JOIN "teachers" ON "teachers"."id" = "classes"."teacher_id" JOIN "user" on "user"."id" = "teachers"."user_id" WHERE "user"."id" = ${user_id} ORDER BY "classes"."class_period" ASC;`)
+    console.log('Req query is', req.query);
+    let user_id = req.user.id;
+    let class_id = req.query.class_id;
+    let activatorDate = moment().format('YYYY-MM-DD');
+    console.log(activatorDate);
+    const sqlText = `SELECT "questions"."id", "questions"."class_id", "questions"."date", left("questions"."time_start"::text, 5) AS "time_start", left("questions"."time_end"::text, 5) AS "time_end" FROM "questions" WHERE "questions"."date" = $1 AND "questions"."class_id" = $2;`;
+    pool.query(sqlText, 
+        [ activatorDate, class_id]
+    )
     .then((result) => {
-        // console.log(result.rows);
-    //     res.send(result.rows);
+        console.log(result.rows);
+        res.send(result.rows[0]);
     })
     .catch((error) =>{
-        console.log(`Error getting teachers!`, error);
+        console.log(`Error getting activators!`, error);
         res.sendStatus(500);
     })
 })
+
 
 
 router.post('/', rejectUnauthenticated, async (req, res) => {

@@ -17,18 +17,20 @@ function* addActivatorSaga(action) {
 
 function* getActivatorSaga(action) {
     console.log('in getActivatorSaga');
+    console.log('IN GETACTIVATORSAGA',action.payload);
     try{
-        const response = yield axios.get('/activator?class_id=${action.payload}`', {
+        const response = yield axios.get(`/activator?class_id=${action.payload.id}`, {
            
         });
         console.log('Response is', response);
-        // yield put({type:'SET_ACTIVATOR', payload: response.data});
+        yield put({type:'SET_ACTIVATOR', payload: response.data});
     }
     catch (error) {
         console.log('ERROR IN GET', error);
         alert(`Sorry! Unable to get activator. Try again later.`)
     }
 }
+
 
 
 

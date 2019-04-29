@@ -1,20 +1,11 @@
 import React, { Component, Fragment} from 'react';
-import ReactDOM from 'react-dom';
 import {connect} from 'react-redux';
-import Stepper from 'react-stepper-horizontal';
 import TextField from '@material-ui/core/TextField'
 import {withStyles} from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
-import IconButton from '@material-ui/core/IconButton'
-import Select from '@material-ui/core/Select';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
 import FormControl from '@material-ui/core/FormControl'
-// import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import NavBar from '../NavBar/NavBar';
 import List from '@material-ui/icons/List';
 import Input from '@material-ui/core/Input';
 import InputAdornment from '@material-ui/core/InputAdornment';

@@ -4,7 +4,7 @@
     grid-template-rows: 200px 1fr;
     grid-template-areas:
     "header header"
-    "template form";
+    "form template";
     gap: 20px;
     background-color: #FFFFFF;
 }

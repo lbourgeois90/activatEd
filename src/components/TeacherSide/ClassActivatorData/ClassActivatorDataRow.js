@@ -1,18 +1,11 @@
 
-import React, { Component, Fragment} from 'react';
-import ReactDOM from 'react-dom';
+import React, { Component} from 'react';
 import {connect} from 'react-redux';
 import {withStyles} from '@material-ui/core/styles'
 import IconButton from '@material-ui/core/IconButton'
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TextField from '@material-ui/core/TextField';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
 import Edit from '@material-ui/icons/Edit';
 import Add from '@material-ui/icons/Add'

@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import LogoutButton from '../../LogOutButton/LogOutButton'
+import qs from 'query-string';
 
 
 class StudentActivator extends Component {
 
   componentDidMount(){
-    this.props.dispatch({type: 'GET_ACTIVATOR'})
+    const searchObject = qs.parse(this.props.location.search);
+    console.log(searchObject.id);
+    this.props.dispatch({type:'GET_STUDENT_ACTIVATOR', payload: searchObject});
   }
-
 
   render() {
     return (
