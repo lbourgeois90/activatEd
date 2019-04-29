@@ -1,0 +1,37 @@
+.loginWrapper{
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 2fr;
+    grid-template-areas:
+    "header header header"
+    "lside login rside"
+    "lside login rside"
+    "footer footer footer";
+    gap: 20px;
+    padding-bottom: 20px;
+    background-image: url('/images/bigblackboard.jpg');
+}
+
+.loginHeader{
+    grid-area: header;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.loginArea{
+    grid-area: login;
+    text-align: center;
+    background-color: rgba(231, 228, 228, 0.3);
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
+
+.logoImage{
+    margin: 0 auto;
+    width: 100%,
+}
+
+.loginFooter{
+    grid-area: footer;
+    height: 100%;
+}

@@ -11,6 +11,8 @@ import Paper from '@material-ui/core/Paper'
 import TextField from '@material-ui/core/TextField'
 import FormControl from '@material-ui/core/FormControl'
 import {withRouter} from 'react-router-dom'
+import './LoginPage.css';
+import {withStyles} from '@material-ui/core/styles'
 
 class LoginPage extends Component {
   state = {
@@ -76,13 +78,13 @@ class LoginPage extends Component {
   }
 
   render() {
+    const {classes} = this.props
     return (
-      <Fragment>
-      <Paper>
-       <img src="images/Activated.png" />
-      </Paper>
+      <div className="loginWrapper">
+      <header className="loginHeader">
+      </header>
 
-      <Paper>
+      <div className="loginArea">
         {this.props.errors.loginMessage && (
           <h2
             className="alert"
@@ -92,33 +94,55 @@ class LoginPage extends Component {
           </h2>
         )}
         <form onSubmit={this.login}>
-          <Typography variant="h3">Login</Typography>
-          <FormControl>
-              <TextField label="Username" variant="outlined" color="primary"
+          <Typography variant="h3" className={classes.loginTypography}>Login</Typography>
+          <FormControl className={classes.formControl}>
+              <TextField label="Username" variant="outlined" color="secondary"
               value={this.state.username}
               onChange={this.handleInputChangeFor('username')}
+              style = {{width: 400}}
               ></TextField>
           </FormControl>
           
-          <FormControl>
-              <TextField label="Password" variant="outlined" color="primary"
+          <FormControl className={classes.formControl}>
+              <TextField label="Password" variant="outlined"  color="secondary"
               value={this.state.password}
               onChange={this.handleInputChangeFor('password')}
               type="password"
-              ></TextField>
+              style = {{width: 400}}
+            ></TextField>
           </FormControl>
          
-          <Button value="Log In" variant="outlined" onClick={this.login}>Log In</Button>
+          <Button size= "large" value="Log In" variant="outlined" onClick={this.login} className={classes.loginButton}>Log In</Button>
         </form>
        
         
-          <Button onClick={this.handleRegister}>Register</Button>
+          <Button size= "large" onClick={this.handleRegister}>Register</Button>
         
-      </Paper>
-      </Fragment>
+      </div>
+      <div className="loginFooter">
+      </div>
+      </div>
     );
   }
 }
+
+const styles = theme => ({
+
+  formControl:{
+    display: 'block',
+    marginBottom: '25px',
+  },
+  loginTypography:{
+    textAlign: 'center',
+    fontFamily: 'Lato',
+    color: 'black',
+    paddingBottom: '25px',
+  },
+  loginButton:{
+    marginBottom:'25px',
+  }
+
+  })
 
 // Instead of taking everything from state, we just want the error messages.
 // if you wanted you could write this code like this:
@@ -128,4 +152,4 @@ const mapStateToProps = state => ({
   user: state.user
 });
 
-export default withRouter(connect(mapStateToProps)(LoginPage));
+export default withRouter(connect(mapStateToProps)(withStyles(styles)(LoginPage)));

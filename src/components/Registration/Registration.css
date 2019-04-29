@@ -1,0 +1,32 @@
+.wrapperRegistration{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr ;
+    grid-template-rows: 1fr 4fr;
+    grid-template-areas:
+    "lessonPlan header header"
+    "lessonPlan register register";
+    gap: 20px;
+    padding-bottom: 20px;
+}
+
+.registrationHeader{
+    grid-area: header;
+    text-align: center;
+    color: #a51d85;
+    font-size: 36px;
+}
+
+.registrationBody{
+    grid-area: register;
+    margin: 0 auto;
+}
+
+.registrationForm{
+    display: block;
+}
+
+.lessonPlan{
+    grid-area: lessonPlan;
+    text-align: center;
+    margin: 0 auto;
+}

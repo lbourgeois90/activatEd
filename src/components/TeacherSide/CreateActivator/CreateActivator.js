@@ -168,7 +168,7 @@ displayMCOptions = () => {
     console.log(this.state.multipleChoiceOptions);
     const {classes} = this.props;
     return (
-      <div className="wrapper">
+      <div className="wrapper1">
         <div className="activatorHeader">
         </div>
         <div className="randomQuestion">
