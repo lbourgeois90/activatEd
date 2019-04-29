@@ -9,6 +9,7 @@ import student from './studentReducer';
 import classData from './classDataReducer';
 import studentClass from './studentClassesReducer';
 import quote from './quoteReducer';
+import randomQuestion from './randomQuestionReducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -27,6 +28,7 @@ const rootReducer = combineReducers({
   classData,
   studentClass,
   quote,
+  randomQuestion,
 });
 
 export default rootReducer;

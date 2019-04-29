@@ -19,12 +19,13 @@ import List from '@material-ui/icons/List';
 import Input from '@material-ui/core/Input';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import LogoutButton from '../../LogOutButton/LogOutButton';
-
+import './CreateActivator.css';
 
 class CreateActivator extends Component {
   
   componentDidMount(){
     this.props.dispatch({type:'GET_CLASS'});
+    this.props.dispatch({type:'GET_RANDOM_QUESTION'})
   }
 
 
@@ -126,7 +127,7 @@ displayMCOptions = () => {
           onChange={this.handleChangeMC('mc_b')}
         />
    </FormControl>
-
+   <br/>
    <FormControl>
       <InputLabel htmlFor="multiple_choice-c">C</InputLabel>
       <Input
@@ -154,6 +155,7 @@ displayMCOptions = () => {
           onChange={this.handleChangeMC('mc_d')}
         />
    </FormControl>
+   <br/>
    </Fragment>
     )
   }
@@ -166,157 +168,143 @@ displayMCOptions = () => {
     console.log(this.state.multipleChoiceOptions);
     const {classes} = this.props;
     return (
-      <section className={classes.root}>
-        <header>
-          <Typography variant="h4">Create an Activator</Typography>
-        </header>
-        <form className={classes.form}>
-          <FormControl variant="outlined" className={classes.formControl}>
-              <TextField
-              id="class_id"
-              select
-              label="Select A Class Period"
-              value={this.state.newActivator.class_id}
-              onChange={this.handleChange('class_id')}
-              SelectProps={{
-                MenuProps: {
-                  className: classes.menu,
-                },
-              }}
-              margin="normal"
-              variant="outlined"
-              style = {{width: 200}}
-            >
-              <MenuItem disabled>Select a Class Period</MenuItem>
-              {this.props.reduxState.classes.map( classes =>
-                    <MenuItem value={classes.class_id} key={classes.class_id}>{classes.class_period}</MenuItem>
-                    )}
-                  
-            </TextField>
-          </FormControl>
-          
-          <FormControl className={classes.formControl}>
-              <TextField
-                  id= "date"
-                  label="Assigned Date"
-                  type="date"
-                  InputLabelProps={{
-                    shrink: true,
-                        }}
-                  variant="outlined"
-                  value={this.state.newActivator.date}
-                  onChange={this.handleChange('date')}
-                  style = {{width: 200}}
-                    />
-          </FormControl>
-
-          <FormControl className={classes.formControl}>
-              <TextField
-                  id="time"
-                  label="Start Time"
-                  type="time"
-                  InputLabelProps={{
-                  shrink: true,
-                  }}
-                  inputProps={{
-                  step: 60, // 5 min
-                  }}
-                  variant="outlined"
-                  value={this.state.newActivator.time_start}
-                  onChange={this.handleChange('time_start')}
-                  style = {{width: 200}}
-              />
-          </FormControl>
-
-          <FormControl className={classes.formControl}>
-              <TextField
-                  id="time"
-                  label="End Time"
-                  type="time"
-                  InputLabelProps={{
-                  shrink: true,
-                  }}
-                  inputProps={{
-                  step: 60, // 5 min
-                  }}
-                  variant="outlined"
-                  value={this.state.newActivator.time_end}
-                  onChange={this.handleChange('time_end')}
+      <div className="wrapper">
+        <div className="activatorHeader">
+        </div>
+        <div className="randomQuestion">
+          <h3>Question: {this.props.reduxState.randomQuestion.question}?</h3>
+          <h3 className="questionAnswer">Answer: {this.props.reduxState.randomQuestion.answer}</h3>
+        </div>
+        <div className="activatorForm">
+          <h1 className="headerText">Create an Activator</h1>
+          <form className={classes.form}>
+            <FormControl variant="outlined" className={classes.formControl}>
+                <TextField
+                id="class_id"
+                select
+                label="Select A Class Period"
+                value={this.state.newActivator.class_id}
+                onChange={this.handleChange('class_id')}
+                SelectProps={{
+                  MenuProps: {
+                    className: classes.menu,
+                  },
+                }}
+                margin="normal"
+                variant="outlined"
                 style = {{width: 200}}
-              />
-          </FormControl>
-          
-          <FormControl className={classes.formControl}>
-              <TextField
-              id="question_type"
-              select
-              label="Select A Question Type"
-              value={this.state.newActivator.question_type}
-              onChange={this.handleChange('question_type')}
-              SelectProps={{
-                MenuProps: {
-                  className: classes.menu,
-                },
-              }}
-              margin="normal"
-              variant="outlined"
-              style = {{width: 200}}
-            >
-              <MenuItem disabled>Choose a Question Type</MenuItem>
-                  <MenuItem value={'Text_Question'}>Text Question</MenuItem>
-                  <MenuItem value={'Multiple_Choice_Question'}>Multiple Choice Question</MenuItem>
-            </TextField>
-          </FormControl>
-          
-          <FormControl className={classes.formControl}>
-              <TextField
-                  placeholder="Type Question Here"
-                  multiline={true}
-                  rows={6}
-                  variant="outlined"
-                  value={this.state.newActivator.question}
-                  onChange={this.handleChange('question')}
-              />
-          </FormControl>
+              >
+                <MenuItem disabled>Select a Class Period</MenuItem>
+                {this.props.reduxState.classes.map( classes =>
+                      <MenuItem value={classes.class_id} key={classes.class_id}>{classes.class_period}</MenuItem>
+                      )}
+                    
+              </TextField>
+            </FormControl>
+            
+            <FormControl className={classes.formControl}>
+                <TextField
+                    id= "date"
+                    label="Assigned Date"
+                    type="date"
+                    InputLabelProps={{
+                      shrink: true,
+                          }}
+                    variant="outlined"
+                    value={this.state.newActivator.date}
+                    onChange={this.handleChange('date')}
+                    style = {{width: 200}}
+                      />
+            </FormControl>
 
-            {this.displayMCOptions()}
+            <FormControl className={classes.formControl}>
+                <TextField
+                    id="time"
+                    label="Start Time"
+                    type="time"
+                    InputLabelProps={{
+                    shrink: true,
+                    }}
+                    inputProps={{
+                    step: 60, // 5 min
+                    }}
+                    variant="outlined"
+                    value={this.state.newActivator.time_start}
+                    onChange={this.handleChange('time_start')}
+                    style = {{width: 200}}
+                />
+            </FormControl>
 
-            <Button onClick={this.handleSubmit}>Create Activator</Button>
-      </form>
-    </section>
+            <FormControl className={classes.formControl}>
+                <TextField
+                    id="time"
+                    label="End Time"
+                    type="time"
+                    InputLabelProps={{
+                    shrink: true,
+                    }}
+                    inputProps={{
+                    step: 60, // 5 min
+                    }}
+                    variant="outlined"
+                    value={this.state.newActivator.time_end}
+                    onChange={this.handleChange('time_end')}
+                  style = {{width: 200}}
+                  className={classes.textField}
+                />
+            </FormControl>
+            
+            <FormControl className={classes.formControl}>
+                <TextField
+                id="question_type"
+                select
+                label="Select A Question Type"
+                value={this.state.newActivator.question_type}
+                onChange={this.handleChange('question_type')}
+                SelectProps={{
+                  MenuProps: {
+                    className: classes.menu,
+                  },
+                }}
+                margin="normal"
+                variant="outlined"
+                style = {{width: 200}}
+              >
+                <MenuItem disabled>Choose a Question Type</MenuItem>
+                    <MenuItem value={'Text_Question'}>Text Question</MenuItem>
+                    <MenuItem value={'Multiple_Choice_Question'}>Multiple Choice Question</MenuItem>
+              </TextField>
+            </FormControl>
+            
+            <FormControl className={classes.formControl}>
+                <TextField
+                    placeholder="Type Question Here"
+                    multiline={true}
+                    rows={6}
+                    variant="outlined"
+                    value={this.state.newActivator.question}
+                    onChange={this.handleChange('question')}
+                />
+            </FormControl>
+
+              {this.displayMCOptions()}
+
+              <Button onClick={this.handleSubmit}>Create Activator</Button>
+        </form>
+      </div>
+    </div>
     );
   }
 }
 
 const styles = theme => ({
-  root:{
-    margin: '0 auto',
-    textAlign: 'center',
-  },
-
+ 
   formControl:{
     margin: '0 auto',
-
     marginTop: '20px',
-    display: 'block',
-    
+    display: 'block',  
   },
-  formControlTime:{
-    display: 'inline-block',
-    marginTop: '20px',
-  },
-
-  form:{
-    backgroundColor: 'white',
-    padding: '0',
-    margin: '0 auto',
-    width: '50%',
-  },
-  addStudents:{
-    textAlign: 'center',
-  },
-  })
-
+})
 
 
 

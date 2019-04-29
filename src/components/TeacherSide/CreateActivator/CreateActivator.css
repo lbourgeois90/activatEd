@@ -1,0 +1,45 @@
+.wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 200px 1fr;
+    grid-template-areas:
+    "header header"
+    "template form";
+    gap: 20px;
+    background-color: #FFFFFF;
+}
+
+body{
+    font-family: 'Lato';
+}
+
+.activatorHeader{
+    grid-area: header;
+    text-align: center;
+    font-size: 36px;
+    background-image: url("/images/ActivatorHeader.png");
+    
+}
+
+.randomQuestion{
+    grid-area: template;
+}
+
+.questionAnswer{
+    text-transform: capitalize;
+}
+
+.headerText{
+   color: #95af49;
+   text-align: center;
+   font-size: 36px;
+   margin: 0px;
+}
+
+
+.activatorForm{
+    grid-area: form;
+    margin: 0 auto;
+    
+}
+
