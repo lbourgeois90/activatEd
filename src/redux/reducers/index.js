@@ -11,6 +11,8 @@ import studentClass from './studentClassesReducer';
 import quote from './quoteReducer';
 import randomQuestion from './randomQuestionReducer';
 import activator from './activatorReducer';
+import activatorConditional from './activatorConditionReducer';
+import multipleChoice from './multipleChoiceReducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -31,6 +33,8 @@ const rootReducer = combineReducers({
   quote,
   randomQuestion,
   activator,
+  activatorConditional,
+  multipleChoice,
 });
 
 export default rootReducer;

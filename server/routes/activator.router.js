@@ -13,7 +13,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     let class_id = req.query.class_id;
     let activatorDate = moment().format('YYYY-MM-DD');
     console.log(activatorDate);
-    const sqlText = `SELECT "questions"."id", "questions"."class_id", "questions"."date", left("questions"."time_start"::text, 5) AS "time_start", left("questions"."time_end"::text, 5) AS "time_end" FROM "questions" WHERE "questions"."date" = $1 AND "questions"."class_id" = $2;`;
+    const sqlText = `SELECT "questions"."id", "questions"."class_id", "questions"."date", left("questions"."time_start"::text, 5) AS "time_start", left("questions"."time_end"::text, 5) AS "time_end", "questions"."question_type", "questions"."question" FROM "questions" WHERE "questions"."date" = $1 AND "questions"."class_id" = $2;`;
     pool.query(sqlText, 
         [ activatorDate, class_id]
     )
@@ -26,6 +26,29 @@ router.get('/', rejectUnauthenticated, (req, res) => {
         res.sendStatus(500);
     })
 })
+
+
+router.get('/mc', rejectUnauthenticated, (req, res) => {
+    console.log('in SERVER GET ACTIVATOR MC')
+    console.log('Req query is', req.query);
+    let question_id = req.query.question_id;
+    console.log(question_id)
+    const sqlText = `SELECT * FROM "multiple_choice_options" WHERE "multiple_choice_options"."questions_id" = $1`;
+    pool.query(sqlText, 
+        [ question_id]
+    )
+    .then((result) => {
+        console.log(result.rows);
+        res.send(result.rows[0]);
+    })
+    .catch((error) =>{
+        console.log(`Error getting activators!`, error);
+        res.sendStatus(500);
+    })
+})
+
+
+
 
 
 

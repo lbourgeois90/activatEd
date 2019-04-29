@@ -43,13 +43,6 @@ class StudentClass extends Component {
 
   }
 
-  trigger() {
-    setInterval(() => { 
-        this.activatorTimeCheck();
-    }, 10000);
-}
-
-
 
   handleChange = propertyName => {
     return(event) =>{
