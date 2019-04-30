@@ -36,7 +36,7 @@ class WelcomePage extends Component {
        <div className="wrapper">
 
         <div className="childOne">
-          <LogoutButton/>
+          <p className="logoutButtonWelcome"><LogoutButton/></p>
         
         
         </div>

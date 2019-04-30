@@ -10,6 +10,8 @@
     gap: 20px;
     padding-bottom: 20px;
     background-image: url('/images/bigblackboard.jpg');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
 }
 
 .loginHeader{

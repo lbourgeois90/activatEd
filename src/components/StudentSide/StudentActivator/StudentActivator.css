@@ -1,0 +1,46 @@
+.activatorWrapper {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 200px 1fr ;
+    grid-template-areas:
+    "header"
+    "activatorArea"
+
+}
+
+.studentActivatorHeader{
+    grid-area: header;
+    text-align: center;
+    font-size: 36px;
+    margin-top: 10px;
+}
+
+.activatorDisplayMC{
+    grid-area: activatorArea;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.activatorDisplayText{
+    grid-area: activatorArea;
+    text-align: center;
+}
+
+.activatorWait{
+    grid-area: activatorArea;
+    text-align: center;
+}
+
+.activatorEnd{
+    grid-area: activatorArea;
+    text-align: center;
+}
+
+.logoutButtonStudentActivator{
+    float: right;
+}
+
+.mcAnswers{
+    max-width: 600px;
+    margin: 0 auto;
+}

@@ -1,12 +1,11 @@
 .wrapper {
     display: grid;
     grid-template-columns: 1fr 1fr ;
-    grid-template-rows: 50px 0.5fr 1fr 0.5fr ;
+    grid-template-rows: 100px 1fr 2fr ;
     grid-template-areas:
     "header header"
     "tree tree"
-    "activator classData"
-    "footer footer";
+    "activator classData";
     background-image: linear-gradient(to right, rgb(189, 186, 169, 0), rgb(189, 186, 169, 1));
 }
 
@@ -21,8 +20,9 @@ body{
     font-size: 36px;
 }
 
-.logoutButton{
+.logoutButtonWelcome{
     float: right;
+    padding: 0px;
 }
 
 .quoteText {

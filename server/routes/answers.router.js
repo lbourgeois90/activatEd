@@ -47,13 +47,29 @@ router.delete('/:id', (req,res) => {
     console.log('in SERVER ANSWER DELETE');
     let answerId = req.params.id;
     console.log('answerId is,', answerId)
-    // const sqlText = `DELETE FROM "students" WHERE "id" = $1;`
-    // pool.query(sqlText, [studentId])
+    const sqlText = `DELETE FROM "students" WHERE "id" = $1;`
+    pool.query(sqlText, [studentId])
     .then( (result) => {
         res.sendStatus(201);
     })
     .catch( (error) => {
         console.log('ERROR in DELETE', error);
+        res.sendStatus(500);
+    })
+})
+
+router.post('/studentanswer', (req,res) => {
+    console.log('in SERVER STUDENT ANSWER POST');
+    console.log(req.body);
+    let answer = req.body;
+    console.log('Answer is', answer)
+    const sqlText= `INSERT INTO "student_answers" ("date", "answer", "students_id", "questions_id") VALUES ($1, $2, $3, $4)`
+    pool.query(sqlText, [answer.date, answer.answer, answer.student_id, answer.question_id])
+    .then( (result) => {
+        res.sendStatus(201);
+    })
+    .catch( (error) => {
+        console.log('ERROR in STUDENT ANSWER POST', error);
         res.sendStatus(500);
     })
 })

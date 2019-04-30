@@ -19,6 +19,8 @@ import NavBar from '../NavBar/NavBar';
 import InsertChartOutlined from '@material-ui/icons/InsertChartOutlined';
 import ClassActivatorDataTable from './ClassActivatorDataTable';
 import ClassActivatorDataRow from './ClassActivatorDataRow';
+import ArrowBack from '@material-ui/icons/ArrowBack';
+import './ClassActivatorData.css';
 
 var moment = require('moment');
 
@@ -83,104 +85,82 @@ handleDelete = (event) => {
 //   this.props.dispatch({type:'DELETE_STUDENT', payload: studentId});
 }
 
+backToHomepage = () => {
+  this.props.history.push('/home')
+}
+
 
   render() {
     console.log(this.state.classData);
     const {classes} = this.props;
     return (
-      <section>
-       <NavBar/>
-        <form className={classes.form}>
-          <FormControl variant="outlined">
-              <InputLabel
-                ref={ref => {
-                  this.InputLabelRef = ref;
-                }}
-                htmlFor="class_id" >Select a Class </InputLabel>
-              <Select
-                value={this.state.classData.class_id}
-                onChange={this.handleChange('class_id')}
-                input={
-                  <OutlinedInput
-                    labelWidth={this.state.labelWidth}
-                    name="class_id"
-                    id="class_id"
-                    />}
-                    >
-                     <MenuItem disabled>Select a Class</MenuItem>
-                    {this.props.reduxState.classes.map( classes =>
-                    <MenuItem value={classes.class_id} key={classes.class_id}>{classes.class_period}</MenuItem>
-                    )}
-              </Select>
+      <section className="classActivatorDataSection">
+        <div className="activatorClassDataHeaderDiv">
+          <img src="/images/passionHeader.png" width="100%" className="passionImage"></img>
+        </div>
+        <div className="backButtonDiv">
+        <Button onClick={this.backToHomepage} size="large" color="primary" className="backButtonClassData"><ArrowBack color="primary"/>Back to Homepage</Button>
+        </div>
+
+
+        <div className="classDataFormDiv">
+        
+          <form className="classDataForm">
+
+            <FormControl variant="outlined">
+                <InputLabel
+                  ref={ref => {
+                    this.InputLabelRef = ref;
+                  }}
+                  htmlFor="class_id" >Select a Class </InputLabel>
+                <Select
+                  value={this.state.classData.class_id}
+                  onChange={this.handleChange('class_id')}
+                  input={
+                    <OutlinedInput
+                      labelWidth={this.state.labelWidth}
+                      name="class_id"
+                      id="class_id"
+                      />}
+                      >
+                      <MenuItem disabled>Select a Class</MenuItem>
+                      {this.props.reduxState.classes.map( classes =>
+                      <MenuItem value={classes.class_id} key={classes.class_id}>{classes.class_period}</MenuItem>
+                      )}
+                </Select>
+                <br/>
+                <br/>
+                <TextField
+                  id= "date"
+                  label="Assigned Date"
+                  type="date"
+                  InputLabelProps={{
+                    shrink: true,
+                        }}
+                  variant="outlined"
+                  value={this.state.classData.date}
+                  onChange={this.handleChange('date')}
+                    />
               <br/>
-              <br/>
-              <TextField
-                id= "date"
-                label="Assigned Date"
-                type="date"
-                InputLabelProps={{
-                  shrink: true,
-                      }}
-                variant="outlined"
-                value={this.state.classData.date}
-                onChange={this.handleChange('date')}
-                   />
+            </FormControl>
             <br/>
-          </FormControl>
-          <br/>
-          <Button onClick={this.handleSubmit}><InsertChartOutlined/> Get Activators</Button>
-          <br/>
-        </form>
+            <Button onClick={this.handleSubmit} color="primary"><InsertChartOutlined/> Get Activators</Button>
+            <br/>
+          </form>
+
+        </div>
+
         <ClassActivatorDataTable classData={this.state.classData}/>
+
       </section>
     );
   }
 }
 
 const styles = theme => ({
-  formControl:{
-    margin: '0 auto',
-    
-  },
-  form:{
-    backgroundColor: 'white',
-    padding: '0',
-    margin: '0 auto',
-  },
-  addStudents:{
-    textAlign: 'center',
-  },
-  table:{
-    width: '90%',
-    margin: '0 auto',
-    marginBottom: '50px',
-    marginTop: '100px',
-   },
-   
-   tableFont:{
-     fontSize: '22px',
-     color: '#ff65af',
-   },
-   tableFontHeader:{
-     fontSize: '22px',
-     color: '#ff65af',
-   },
-   tableFontCenter:{
-     fontSize: '22px',
-     textAlign: '#ff65af',
-     color: '#ff65af',
-   },
-   tableFontHeaderCenter:{
-     fontSize: '22px',
-     textAlign: 'center',
-     color: '#ff65af' 
-   },
-   tableRowHover: {
-     '&:hover': {
-       backgroundColor: 'primary',
-     },
-   },
-  })
+
+})
+
 
 
 

@@ -170,9 +170,9 @@ backToHomepage = () => {
         </div>
         <div className="randomQuestion">
           <div className="questionClass">
-            <h3>Question: </h3>
-            <h3>{this.props.reduxState.randomQuestion.question}?</h3>
-            <h3 className="questionAnswer">Answer: {this.props.reduxState.randomQuestion.answer}</h3>
+            <h3 className="randomQuestionText">Question: </h3>
+            <h3 className="randomQuestionText">{this.props.reduxState.randomQuestion.question}?</h3>
+            <h3 className="randomQuestionText">Answer: {this.props.reduxState.randomQuestion.answer}</h3>
           </div>
         </div>
         <div className="activatorForm">
@@ -182,7 +182,7 @@ backToHomepage = () => {
               </p>  
           </header>
           <div className="createActivatorFormDiv">
-            <form className="createActivatorForm">
+            <form className="createActivatorForm" onSubmit={this.handleSubmit}>
               <h1 className="headerText">Create an Activator</h1>
               <FormControl variant="outlined" className={classes.formControl}>
                   <TextField
@@ -199,6 +199,7 @@ backToHomepage = () => {
                   margin="normal"
                   variant="outlined"
                   style = {{width: 400}}
+                  required
                 >
                   <MenuItem disabled>Select a Class Period</MenuItem>
                   {this.props.reduxState.classes.map( classes =>
@@ -207,8 +208,8 @@ backToHomepage = () => {
                       
                 </TextField>
               </FormControl>
-              <br/>
-              <FormControl className={classes.formControl}>
+            
+              <FormControl className={classes.formControlDate}>
                   <TextField
                       id= "date"
                       label="Assigned Date"
@@ -220,9 +221,10 @@ backToHomepage = () => {
                       value={this.state.newActivator.date}
                       onChange={this.handleChange('date')}
                       style = {{width: 400}}
+                      required
                         />
               </FormControl>
-
+              <br/>
               <FormControl className={classes.formControl}>
                   <TextField
                       id="time"
@@ -238,9 +240,10 @@ backToHomepage = () => {
                       value={this.state.newActivator.time_start}
                       onChange={this.handleChange('time_start')}
                       style = {{width: 400}}
+                      required
                   />
               </FormControl>
-
+        
               <FormControl className={classes.formControl}>
                   <TextField
                       id="time"
@@ -257,10 +260,11 @@ backToHomepage = () => {
                       onChange={this.handleChange('time_end')}
                       style = {{width: 400}}
                     className={classes.textField}
+                    required
                   />
               </FormControl>
               <br/>
-              <FormControl className={classes.formControl}>
+              <FormControl className={classes.formControlQuestionType}>
                   <TextField
                   id="question_type"
                   select
@@ -275,14 +279,15 @@ backToHomepage = () => {
                   margin="normal"
                   variant="outlined"
                   style = {{width: 400}}
+                  required
                 >
                   <MenuItem disabled>Choose a Question Type</MenuItem>
                       <MenuItem value={'Text_Question'}>Text Question</MenuItem>
                       <MenuItem value={'Multiple_Choice_Question'}>Multiple Choice Question</MenuItem>
                 </TextField>
               </FormControl>
-              <br/>
-              <FormControl className={classes.formControl}>
+              
+              <FormControl className={classes.formControlQuestion}>
                   <TextField
                       placeholder="Type Question Here"
                       multiline={true}
@@ -291,13 +296,14 @@ backToHomepage = () => {
                       value={this.state.newActivator.question}
                       onChange={this.handleChange('question')}
                       style = {{width: 400}}
+                      required
                   />
               </FormControl>
               <br/>
 
                 {this.displayMCOptions()}
 
-                <Button size="large" onClick={this.handleSubmit}>Create Activator</Button>
+                <Button type="submit" size="large">Create Activator</Button>
           </form>
         </div>
       </div>
@@ -313,6 +319,18 @@ const styles = theme => ({
    padding: '10px',
      
   },
+  formControlDate:{
+    marginTop: '15px',
+    padding: '10px',
+  },
+  formControlQuestion:{
+    padding: '10px',
+    paddingTop: '15px',
+    paddingLeft: '21px',
+  },
+  formControlQuestionType:{
+    paddingLeft: '10px',
+  }
 })
 
 

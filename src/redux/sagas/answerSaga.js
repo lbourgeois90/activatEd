@@ -45,6 +45,18 @@ function* deleteScoreSaga(action) {
     }
 }
 
+function* addStudentAnswer(action) {
+    console.log('in addStudentAnswer')
+    console.log('Student answer is', action.payload);
+    try{
+        yield axios.post('/answer/studentanswer', action.payload)
+    }
+    catch (error){
+        console.log('ERROR IN ADD STUDENT ANSWER', error);
+        alert(`Sorry! Was unable to submit answer! Try again later.`)
+    }
+}
+
 
 
 
@@ -52,6 +64,7 @@ function* answerSaga() {
   yield takeLatest ('GET_ANSWERS', getAnswerSaga);
   yield takeLatest ('EDIT_STUDENT_ANSWER', editScoreSaga);
   yield takeLatest ('DELETE_STUDENT_ANSWER', deleteScoreSaga);
+  yield takeLatest('ADD_STUDENT_ANSWER', addStudentAnswer)
 }
 
 export default answerSaga;
