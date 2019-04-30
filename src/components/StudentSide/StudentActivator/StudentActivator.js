@@ -55,7 +55,8 @@ activatorStartTimeCheck=() => {
   let time_end = this.props.reduxState.activator.time_end;
   console.log('Moment is', moment(time_start, "HH:mm"))
   console.log('Start Time is', time_start);
-  if(moment().isSameOrAfter(moment(time_start, "HH:mm"))){
+  if( time_start == moment().format("HH:mm") || moment().isAfter(moment(time_start, "HH:mm")) & moment().isBefore(moment(time_end, "HH:mm"))){
+    
       console.log('in IF STATEMENT activatorstarttime');
       this.props.dispatch({type:'SET_ACTIVATOR_BOOLEAN', payload: 1})
       clearInterval(this.state.startActivator);

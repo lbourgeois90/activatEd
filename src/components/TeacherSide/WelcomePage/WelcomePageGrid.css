@@ -1,12 +1,13 @@
 .wrapper {
     display: grid;
-    grid-template-columns: 1fr 2fr;
-    grid-template-rows: 100px 1fr 1fr ;
+    grid-template-columns: 1fr 1fr ;
+    grid-template-rows: 50px 0.5fr 1fr 0.5fr ;
     grid-template-areas:
     "header header"
-    "tree activator"
-    "tree classData";
-    gap: 20px;
+    "tree tree"
+    "activator classData"
+    "footer footer";
+    background-image: linear-gradient(to right, rgb(189, 186, 169, 0), rgb(189, 186, 169, 1));
 }
 
 body{
@@ -15,7 +16,7 @@ body{
 
 .childOne{
     grid-area: header;
-    border-bottom: 2px solid #a51d85;
+    border-bottom: 20px solid #F7C331;
     text-align: center;
     font-size: 36px;
 }
@@ -43,28 +44,25 @@ body{
 .childThree{
     grid-area: activator;
     padding-bottom: 20px;
+    border-top: solid #6B7A8F 20px;
+
     /* background-image: url('/images/lightbulbFormattedSmaller.png');
     background-repeat: no-repeat;
     background-position: center; */
 }
 
-.activatorImage{
+ .activatorImage{
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width: 50%;
-    height: 200px;
-    width:  600px;
-}
+   
+} 
 
 .dataImage{
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width: 50%;
-    height: 200px;
-    width:  600px;
-}
+} 
 
 .quoteImage{
     display: block;
@@ -85,5 +83,12 @@ body{
 
 .childFour{
     grid-area: classData;
+    border-top: solid #6B7A8F 20px;
+ 
   
+}
+
+.childFive{
+    grid-area: footer;
+
 }

@@ -36,13 +36,12 @@ class WelcomePage extends Component {
        <div className="wrapper">
 
         <div className="childOne">
-          Welcome {this.props.reduxState.teacher.first_name}
           <LogoutButton/>
         
         
         </div>
         <div className="childTwo">
-          <img src="/images/thoughBubble.png" className="quoteImage"></img>
+          {/* <img src="/images/thoughBubble.png" className="quoteImage"></img> */}
           <p className="dateAndTime">Today's Date Is: {moment().format('MMMM Do YYYY')}</p>
           <p className="dateAndTime">Current Time Is: {moment().format('LT')}</p>
           <p className="quoteText">Inspirational Quote of the Day:</p>
@@ -51,18 +50,23 @@ class WelcomePage extends Component {
         </div>
          
         <div className="childThree">
-          <img src="/images/createactivatoricon.png" className="activatorImage"></img>
           <p className={classes.buttonContainer}>
-            <Button color="primary" className={classes.activatorButton} onClick={this.navToCreateActivator}>Create an Activator</Button>
+            <Button color="secondary" className={classes.activatorButton} onClick={this.navToCreateActivator}>Create an Activator</Button>
           </p>
+          <img src="/images/createPhoto.png" className="activatorImage"></img>
         </div>
+       
+
         <div className="childFour">
-          <img src="/images/data.png" className="dataImage"></img>
           <p className={classes.buttonContainer}>
-          <Button color="primary" className={classes.activatorButton} onClick={this.navToClassData}>See Class Data</Button>
+          <Button color="secondary" className={classes.activatorButton} onClick={this.navToClassData}>See Class Data</Button>
           </p>
+          <img src="/images/dataPhoto.png" className="dataImage"></img>
+         
         </div>
-          
+        <footer className="childFive">
+
+        </footer>
        </div>
         
       </section>

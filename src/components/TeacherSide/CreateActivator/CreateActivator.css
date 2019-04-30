@@ -1,12 +1,10 @@
 .wrapper1 {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 200px 1fr;
+    grid-template-columns: 1fr 0.5fr;
+    grid-template-rows: 400px 3fr;
     grid-template-areas:
-    "header header"
-    "form template";
-    gap: 20px;
-    background-color: #FFFFFF;
+    "header template"
+    "form form";
 }
 
 body{
@@ -17,29 +15,57 @@ body{
     grid-area: header;
     text-align: center;
     font-size: 36px;
-    background-image: url("/images/ActivatorHeader.png");
+    background-image: url("/images/lockers.png");
+    
     
 }
 
 .randomQuestion{
     grid-area: template;
+    color: #ed8a63;
+    font-family: 'Old Standard TT';
+    font-style: italic;
+    font-size: 28px;
+    font-weight: lighter;
+    box-sizing: border-box;
+    border: 20px solid #3a4660;
+    margin: 0 auto;
+    text-align: center;
+    width: 100%;
+
+    
 }
 
 .questionAnswer{
     text-transform: capitalize;
+
 }
 
 .headerText{
-   color: #95af49;
-   text-align: center;
+   color: #ed8a63;;
    font-size: 36px;
-   margin: 0px;
 }
 
 
 .activatorForm{
     grid-area: form;
-    margin: 0 auto;
-    
+    margin-top: 25px;   
 }
+
+.backbuttonP{
+    float:left;
+    text-align: left;
+}
+
+.createActivatorFormDiv{
+    text-align: center;
+}
+
+.createActivatorForm{
+    display: inline-block;
+}
+/* 
+.questionClass{
+    margin: auto;
+} */
 
