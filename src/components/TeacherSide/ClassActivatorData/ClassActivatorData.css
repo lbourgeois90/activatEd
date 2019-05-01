@@ -1,22 +1,27 @@
 body{
-    background-image: linear-gradient(to right, rgb(189, 186, 169, 0), rgb(189, 186, 169, 1));
+    background-image: linear-gradient(to right, rgb(189, 186, 169, 0), rgb(192, 188, 171, 1));
 }
 
+.classDataForm{
+    display: inline;
+}
 .classDataFormDiv{
     text-align: center;
     padding-top: 50px;
+    display: inline;
 }
 
 .classActivatorDataSection{
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr 25px 50px fr;
+    grid-template-rows: 1fr 200px auto ;
     grid-template-areas:
     "header"
-    "button"
     "form"
     "table";
 }
+
+
 
 .backButtonDiv{
     grid-area: button;
@@ -24,16 +29,16 @@ body{
 
 .activatorClassDataHeaderDiv{
     grid-area: header;
+    border-bottom: 20px solid #F7C331;
 }
 
 .activatorDataTableDiv{
-    height: fit-content;
+    grid-area: table;
+    border-top: solid #6B7A8F 20px;
 }
-.backButtonClassData{
-    text-align: left;
-    margin-top: 10px;
-}
-
-.passionImage{
-    border-bottom: 15px #543739 solid;
+.classDataHeader{
+    text-align: center;
+    font-size: 42px;
+    margin-top: 0px;
+    color: #f4976c;
 }

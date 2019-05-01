@@ -1,5 +1,5 @@
 
-import React, { Component} from 'react';
+import React, { Component, Fragment} from 'react';
 import ReactDOM from 'react-dom';
 import {connect} from 'react-redux';
 import Stepper from 'react-stepper-horizontal';
@@ -33,16 +33,12 @@ class ClassActivatorData extends Component {
         class_id: '',
         date: '',
     },
-    labelWidth: 0,
   }
 
 
 
   componentDidMount(){
     this.props.dispatch({type:'GET_CLASS'});
-    this.setState({
-      labelWidth: ReactDOM.findDOMNode(this.InputLabelRef).offsetWidth,
-    });
   }
 
   handleSubmit =(event)=>{
@@ -96,60 +92,59 @@ backToHomepage = () => {
     return (
       <section className="classActivatorDataSection">
         <div className="activatorClassDataHeaderDiv">
-          <img src="/images/passionHeader.png" width="100%" className="passionImage"></img>
+          <Button onClick={this.backToHomepage} size="large" color="primary" className="backButtonClassData"><ArrowBack color="primary"/>Back to Homepage</Button>
+          <h1 className="classDataHeader">Class Data</h1>
         </div>
-        <div className="backButtonDiv">
-        <Button onClick={this.backToHomepage} size="large" color="primary" className="backButtonClassData"><ArrowBack color="primary"/>Back to Homepage</Button>
-        </div>
-
-
+       
         <div className="classDataFormDiv">
-        
+          
           <form className="classDataForm">
-
-            <FormControl variant="outlined">
-                <InputLabel
-                  ref={ref => {
-                    this.InputLabelRef = ref;
-                  }}
-                  htmlFor="class_id" >Select a Class </InputLabel>
-                <Select
-                  value={this.state.classData.class_id}
-                  onChange={this.handleChange('class_id')}
-                  input={
-                    <OutlinedInput
-                      labelWidth={this.state.labelWidth}
-                      name="class_id"
+                <FormControl className={classes.classDataFormControlClassPeriod}>
+                    <TextField
                       id="class_id"
-                      />}
-                      >
-                      <MenuItem disabled>Select a Class</MenuItem>
+                      select
+                      label="Select A Class Period"
+                      value={this.state.classData.class_id}
+                      onChange={this.handleChange('class_id')}
+                      SelectProps={{
+                        MenuProps: {
+                          className: classes.menu,
+                        },
+                      }}
+                      margin="normal"
+                      variant="outlined"
+                      style = {{width: 400}}
+                      required
+                    >
+                      <MenuItem disabled>Select a Class Period</MenuItem>
                       {this.props.reduxState.classes.map( classes =>
-                      <MenuItem value={classes.class_id} key={classes.class_id}>{classes.class_period}</MenuItem>
-                      )}
-                </Select>
-                <br/>
-                <br/>
-                <TextField
-                  id= "date"
-                  label="Assigned Date"
-                  type="date"
-                  InputLabelProps={{
-                    shrink: true,
-                        }}
-                  variant="outlined"
-                  value={this.state.classData.date}
-                  onChange={this.handleChange('date')}
-                    />
-              <br/>
-            </FormControl>
+                            <MenuItem value={classes.class_id} key={classes.class_id}>{classes.class_period}</MenuItem>
+                            )}
+                          
+                    </TextField>
+                </FormControl>
+
+                <FormControl className={classes.classDataFormControlDate}>
+                    <TextField
+                      id= "date"
+                      label="Assigned Date"
+                      type="date"
+                      InputLabelProps={{
+                        shrink: true,
+                            }}
+                      variant="outlined"
+                      value={this.state.classData.date}
+                      onChange={this.handleChange('date')}
+                      require
+                      style = {{width: 400}}
+                        />
+                </FormControl>
             <br/>
-            <Button onClick={this.handleSubmit} color="primary"><InsertChartOutlined/> Get Activators</Button>
+            <Button onClick={this.handleSubmit} color="primary" size="large"><InsertChartOutlined/> Get Activators</Button>
             <br/>
           </form>
 
-        </div>
-
+        </div>         
         <ClassActivatorDataTable classData={this.state.classData}/>
 
       </section>
@@ -158,6 +153,16 @@ backToHomepage = () => {
 }
 
 const styles = theme => ({
+
+  classDataFormControlDate:{
+    paddingRight: '10px',
+    marginTop: '15px'
+},
+
+
+classDataFormControlClassPeriod:{
+    marginRight: '25px',
+}
 
 })
 

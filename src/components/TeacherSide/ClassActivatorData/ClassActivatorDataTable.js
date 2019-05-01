@@ -77,15 +77,7 @@ handleEdit = (event) => {
 }
 
 const styles = theme => ({
-  formControl:{
-    margin: '0 auto',
-    
-  },
-  form:{
-    backgroundColor: 'white',
-    padding: '0',
-    margin: '0 auto',
-  },
+ 
   addStudents:{
     textAlign: 'center',
   },

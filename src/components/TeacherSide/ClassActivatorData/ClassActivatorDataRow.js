@@ -84,29 +84,29 @@ handleChange = propertyName => {
     console.log(this.state.studentScore);
     return (
         <TableRow key={this.props.student.id} hover={true} className={classes.tableRowHover}>
-        <TableCell className={classes.tableFontHeader}>
+        <TableCell className={classes.tableFontBody}>
             {moment(this.props.student.date).format('YYYY-MM-DD')}
         </TableCell>
 
-        <TableCell className={classes.tableFontHeader}>
+        <TableCell className={classes.tableFontBody}>
             {this.props.student.first_name} {this.props.student.last_name}
             </TableCell>
 
-        <TableCell className={classes.tableFontHeader}>
+        <TableCell className={classes.tableFontBody}>
             {this.props.student.question}
             </TableCell>
 
-        <TableCell className={classes.tableFontHeader}>
+        <TableCell className={classes.tableFontBody}>
             { this.props.student.answer}
         </TableCell>
 
        
-        <TableCell className={classes.tableFontHeader}>
+        <TableCell className={classes.tableFontBody}>
         { this.state.currentlyEditing === true ? <TextField onChange={this.handleChange('score')}/> : 
             this.props.student.score}
         </TableCell>
 
-        <TableCell className={classes.tableFontHeader}>
+        <TableCell className={classes.tableFontBody}>
             { this.state.currentlyEditing === true ? 
                 <IconButton aria-label="Add" onClick={this.handleEditSubmit}> <Add/> </IconButton> :
                 <IconButton aria-label="Edit" onClick={this.handleEdit} >
@@ -115,7 +115,7 @@ handleChange = propertyName => {
             }
         </TableCell>
 
-        <TableCell className={classes.tableFontHeader}><IconButton aria-label="Delete" onClick={this.handleDelete} value={this.props.student.id}>
+        <TableCell className={classes.tableFontBody}><IconButton aria-label="Delete" onClick={this.handleDelete} value={this.props.student.id}>
           <DeleteOutlinedIcon/>
           </IconButton>
         </TableCell>
@@ -129,8 +129,8 @@ handleChange = propertyName => {
 }
 
 const styles = theme => ({
-  tableFontHeader:{
-    fontSize: '16x',
+  tableFontBody:{
+    fontSize: '18px',
     color: '#543739',
   },
 

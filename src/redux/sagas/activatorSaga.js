@@ -22,7 +22,7 @@ function* getActivatorSaga(action) {
         console.log('Response is', response.data);
         if(response.data.question_type === 'Multiple_Choice_Question'){
             console.log('in if statement')
-            yield put ({type: 'GET_MULTIPLE_CHOICE', payload: response.data.id})
+            yield put ({type: 'GET_MULTIPLE_CHOICE', payload: response.data.question_id})
         }
         yield put({type:'SET_ACTIVATOR', payload: response.data});
     }

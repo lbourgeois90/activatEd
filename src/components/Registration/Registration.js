@@ -53,6 +53,11 @@ class Registration extends Component {
     });
   }
 
+
+  backToLogin = () => {
+    this.props.history.push('/home');
+  }
+
   render() {
     const {classes} = this.props
     return (
@@ -101,8 +106,11 @@ class Registration extends Component {
                   </TextField>
               </FormControl>
               <br/>
-            <FormControl className={classes.registrationFormControl}>
-            <Button size="large" color="primary" onClick={this.registerUser} >Register</Button>
+            <FormControl className={classes.registrationFormControlRegistrationButtons}>
+                <Button size="large" color="primary" onClick={this.registerUser} >Register</Button>
+            </FormControl>
+            <FormControl className={classes.registrationFormControlButtons}>
+                <Button size="large" color="primary" onClick={this.backToLogin} >Back To Login</Button>
             </FormControl>
             </form>
 
@@ -122,7 +130,14 @@ const styles = theme => ({
   registrationFormControl:{
     dispaly: 'block',
     margin:'25px',
-  }
+  },
+  registrationFormControlButtons:{
+    display: 'inline-block',
+  },
+  registrationFormControlRegistrationButtons:{
+    display: 'inline-block',
+    paddingRight: '150px',
+  },
 
   })
 

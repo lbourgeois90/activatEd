@@ -1,7 +1,8 @@
+
 .loginWrapper{
     display: grid;
     grid-template-columns: 1fr 2fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr 2fr;
+    grid-template-rows: 1fr 1fr 1fr 400px;;
     grid-template-areas:
     "header header header"
     "lside login rside"
@@ -12,7 +13,13 @@
     background-image: url('/images/bigblackboard.jpg');
     background-repeat: no-repeat;
     background-size: 100% 100%;
+    position: relative;
+    margin: auto;
+    height: fit-content;
 }
+
+
+
 
 .loginHeader{
     grid-area: header;

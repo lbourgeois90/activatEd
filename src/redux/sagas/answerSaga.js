@@ -3,7 +3,7 @@ import axios from 'axios';
 
 function* getAnswerSaga(action) {
     console.log('in getAnswerSaga');
-    // console.log(action.payload);
+    console.log('Answer Saga is', action.payload);
     try{
         const response = yield axios.get(`/answer/?class_id=${action.payload.class_id}&date=${action.payload.date}`, {
          
@@ -36,7 +36,7 @@ function* deleteScoreSaga(action) {
     console.log('in deleteScoreSaga');
     console.log(action.payload.StudentId)
     try{
-        yield axios.delete(`/student/${action.payload.StudentId}`);
+        yield axios.delete(`/answer/${action.payload.StudentId}`);
         yield put({type:'GET_ANSWERS', payload: action.payload.ClassData});
     }
     catch (error) {

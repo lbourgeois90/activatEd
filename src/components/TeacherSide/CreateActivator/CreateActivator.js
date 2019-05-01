@@ -167,23 +167,25 @@ backToHomepage = () => {
     return (
       <div className="wrapper1">
         <div className="activatorHeader">
+            <p className="backbuttonP">
+              <Button className={classes.button} onClick={this.backToHomepage} size="large" color="primary"><ArrowBack color="primary"/>Back to Homepage</Button>
+            </p>  
         </div>
         <div className="randomQuestion">
           <div className="questionClass">
+            <h2 className="randomQuestionHeader">Random Question</h2>
+            <hr className="createActivatorHR"/>
             <h3 className="randomQuestionText">Question: </h3>
             <h3 className="randomQuestionText">{this.props.reduxState.randomQuestion.question}?</h3>
-            <h3 className="randomQuestionText">Answer: {this.props.reduxState.randomQuestion.answer}</h3>
+            <h3 className="randomQuestionText">Answer:</h3>
+            <h3 className="randomQuestionText">{this.props.reduxState.randomQuestion.answer}</h3>
           </div>
         </div>
         <div className="activatorForm">
-          <header>
-              <p className="backbuttonP">
-                <Button className={classes.button} onClick={this.backToHomepage} size="large" color="primary"><ArrowBack color="primary"/>Back to Homepage</Button>
-              </p>  
-          </header>
           <div className="createActivatorFormDiv">
+           <h2 className="headerText">Create an Activator</h2>
+           <hr className="createActivatorHR"/>
             <form className="createActivatorForm" onSubmit={this.handleSubmit}>
-              <h1 className="headerText">Create an Activator</h1>
               <FormControl variant="outlined" className={classes.formControl}>
                   <TextField
                   id="class_id"

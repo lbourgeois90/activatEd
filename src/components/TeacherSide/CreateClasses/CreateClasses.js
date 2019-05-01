@@ -2,12 +2,13 @@
 import React, { Component} from 'react';
 import ReactDOM from 'react-dom';
 import {connect} from 'react-redux';
-import TextField from '@material-ui/core/TextField'
-import {withStyles} from '@material-ui/core/styles'
-import FormControl from '@material-ui/core/FormControl'
+import TextField from '@material-ui/core/TextField';
+import {withStyles} from '@material-ui/core/styles';
+import FormControl from '@material-ui/core/FormControl';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import Stepper from 'react-stepper-horizontal';
+import Button from '@material-ui/core/Button';
 
 
 class CreateClasses extends Component {
@@ -31,13 +32,14 @@ class CreateClasses extends Component {
   handleSubmit = event => {
     event.preventDefault();
     console.log('in handleSubmit');
-    this.props.dispatch({type:'ADD_CLASS', payload: this.state.newClass});
-    this.props.history.push('/addstudents');
-  }
+    // this.props.dispatch({type:'ADD_CLASS', payload: this.state.newClass});
+    // this.props.history.push('/addstudents');
+    }
 
   addAnotherClass = event => {
     event.preventDefault();
-    console.log('in handleSubmit');
+    console.log('in addAnotherClass');
+    if(this.state.class_name !== '' && this.state.class_period !== ''){
     this.props.dispatch({type:'ADD_CLASS', payload: this.state.newClass});
     alert(`Class Has Been Added!`);
     this.setState({
@@ -47,6 +49,11 @@ class CreateClasses extends Component {
         teacher_id: '',
       }
     })
+  }
+    else{
+      alert(`All required fields must be completed to add a class.`)
+    
+    }
   }
 
   handleChange = propertyName => {
@@ -64,38 +71,48 @@ class CreateClasses extends Component {
 
 
 
+ 
+
+
+
 
   render() {
     console.log(this.state.newClass);
     const {classes} = this.props;
     return (
       <section>
-        <Stepper steps={ [{title: 'Create Username and Password'}, {title: 'Create Profile'}, {title: 'Create Classes'}, {title: 'Add Students'}] } activeStep={ 2 } activeColor= '#814fff' defaultBarColor= '#814fff' activeTitleColor= '#814fff' defaultTitleColor= '#814fff' circleFontColor='#0B172A' className="stepper" completeColor="#ffbe5c" completeTitleColor="#463940" />
+        <Stepper steps={ [{title: 'Create Username and Password'}, {title: 'Create Profile'}, {title: 'Create Classes'}, {title: 'Add Students'}] } activeStep={ 2 } activeColor= '#F7C331' defaultBarColor= 'black' activeTitleColor= '#F7C331' defaultTitleColor= '#6B7A8F' circleFontColor='#0B172A' className="stepper" completeColor="#6B7A8F" completeTitleColor="#6B7A8F" />
         <Typography variant="h4" className={classes.createClasses}>Create Classes</Typography>
-        <form className={classes.form}>
-          <FormControl className={classes.formControl}>
-              <TextField label="Class Name" variant="outlined" color="primary"
-              value={this.state.newClass.class_name}
-              helperText="Required Field"
-              onChange={this.handleChange('class_name')}
-              ></TextField>
-          </FormControl>
-          <br/>
-          <FormControl className={classes.formControl}>
-              <TextField label="Class Period" variant="outlined" color="primary"
-              value={this.state.newClass.class_period}
-              helperText="Required Field"
-              onChange={this.handleChange('class_period')}
-              ></TextField>
-          </FormControl>
-          <FormControl className={classes.formControl}>
-              <IconButton color="primary" onClick={this.addAnotherClass} size="large">Add Another Class</IconButton>
-          </FormControl>
-          <FormControl className={classes.formControl}>
-              <IconButton color="primary" onClick={this.handleSubmit} size="large">Create Class and Submit</IconButton>
-          </FormControl>
-        </form>
-
+        <div className={classes.createClassesFormDiv}>
+          <form className={classes.form}>
+            <FormControl className={classes.formControl}>
+                <TextField label="Class Name" variant="outlined" color="primary"
+                value={this.state.newClass.class_name}
+                helperText="Required Field"
+                onChange={this.handleChange('class_name')}
+                required
+                type="text"
+                style = {{width: 400}}
+                ></TextField>
+            </FormControl>
+            <br/>
+            <FormControl className={classes.formControl}>
+                <TextField label="Class Period" variant="outlined" color="primary"
+                value={this.state.newClass.class_period}
+                helperText="Required Field"
+                onChange={this.handleChange('class_period')}
+                required
+                style = {{width: 400}}
+                ></TextField>
+            </FormControl>
+            <FormControl className={classes.formControlButton}>
+                <Button color="primary" size="large" onClick={this.addAnotherClass}>Add Another Class</Button>
+            </FormControl>
+            <FormControl className={classes.formControlButton}>
+                <Button color="primary"  size="large" onClick={this.handleSubmit}>Submit</Button>
+            </FormControl>
+          </form>
+        </div>
       </section>
     );
   }
@@ -104,16 +121,23 @@ class CreateClasses extends Component {
 const styles = theme => ({
   formControl:{
     margin: '0 auto',
+    display: 'block',
+    margin: '20px',
     
   },
   form:{
-    backgroundColor: 'white',
     padding: '0',
     margin: '0 auto',
+    marginTop: '50px',
   },
   createClasses:{
     textAlign: 'center',
+    marginTop: '50px',
+    color: '#303c6c',
   },
+  createClassesFormDiv:{
+    textAlign: 'center',
+  }
   })
 
 

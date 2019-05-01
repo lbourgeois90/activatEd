@@ -7,18 +7,18 @@ var moment = require('moment');
 
 
 router.get('/', rejectUnauthenticated, (req, res) => {
-    console.log('in SERVER GET ACTIVATORS')
-    console.log('Req query is', req.query);
+    // console.log('in SERVER GET ACTIVATORS')
+    // console.log('Req query is', req.query);
     let user_id = req.user.id;
     let class_id = req.query.class_id;
     let activatorDate = moment().format('YYYY-MM-DD');
-    console.log(activatorDate);
+    // console.log(activatorDate);
     const sqlText = `SELECT "questions"."id" AS "question_id", "questions"."class_id", "questions"."date", left("questions"."time_start"::text, 5) AS "time_start", left("questions"."time_end"::text, 5) AS "time_end", "questions"."question_type", "questions"."question", "students"."id" AS "student_id" FROM "questions" JOIN "classes" ON "classes"."id" = "questions"."class_id" JOIN "students" ON "classes"."id" = "students"."class_id" WHERE "questions"."date" = $1 AND "questions"."class_id" = $2;`;
     pool.query(sqlText, 
         [ activatorDate, class_id]
     )
     .then((result) => {
-        console.log(result.rows);
+        // console.log(result.rows);
         res.send(result.rows[0]);
     })
     .catch((error) =>{
@@ -29,16 +29,16 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 
 
 router.get('/mc', rejectUnauthenticated, (req, res) => {
-    console.log('in SERVER GET ACTIVATOR MC')
+    // console.log('in SERVER GET ACTIVATOR MC')
     console.log('Req query is', req.query);
     let question_id = req.query.question_id;
-    console.log(question_id)
+    // console.log(question_id)
     const sqlText = `SELECT * FROM "multiple_choice_options" WHERE "multiple_choice_options"."questions_id" = $1`;
     pool.query(sqlText, 
         [ question_id]
     )
     .then((result) => {
-        console.log(result.rows);
+        // console.log(result.rows);
         res.send(result.rows[0]);
     })
     .catch((error) =>{
@@ -56,8 +56,8 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
     const client = await pool.connect();
   
     try {
-       console.log(req.body);
-       console.log(req.body.newActivator);
+    //    console.log(req.body);
+    //    console.log(req.body.newActivator);
        const class_id = req.body.newActivator.class_id;
        const date = req.body.newActivator.date;
        const time_start = req.body.newActivator.time_start;
@@ -75,7 +75,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
       await client.query('BEGIN')
         const questionInsertResults = await client.query(questionsQuery, [class_id, date, time_start, time_end, question_type, question ]);
         const questionId = questionInsertResults.rows[0].id;
-        console.log(questionId);
+        // console.log(questionId);
   
         if(mc_a !== ''){
             const insertMultipleChoice =  await client.query(mcQuery, [mc_a, mc_b, mc_c, mc_d, questionId]);

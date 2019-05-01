@@ -1,11 +1,18 @@
 .wrapper1 {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 300px 2fr;
+    grid-template-rows: 100px 50px 2fr;
     grid-template-areas:
     "header header"
+    "button button"
     "form template"; 
 }
+
+.createActivatorButtonDiv{
+    grid-area: button;
+}
+
+
 
 body{
     font-family: 'Lato';
@@ -14,19 +21,13 @@ body{
 .activatorHeader{
     grid-area: header;
     text-align: center;
-    font-size: 36px;
-    background-image: url("/images/lockers.png");
-    border-bottom: 10px solid #531816;
-    
-    
+    border-bottom: 20px solid #F7C331;
 }
 
 
 .randomQuestion{
     grid-area: template;
     color: #3a4660;
-    font-family: 'Old Standard TT';
-    font-style: italic;
     font-size: 28px;
     font-weight: lighter;
     box-sizing: border-box;
@@ -38,18 +39,30 @@ body{
 }
 
 .randomQuestionText{
-    padding: 1px;
+    padding: 25px;
+    /* font-family: 'Old Standard TT';
+    font-style: italic; */
+    margin: 0 auto;
 }
 
 .headerText{
-   color: #3a4660;;
-   font-size: 36px;
+   color: #3a4660;
+   font-size: 42px;
+  
+}
+
+.createActivatorHR{
+    width: 75%;
+    border-color: #6B7A8F;
+}
+
+.randomQuestionHeader{
+
 }
 
 
 .activatorForm{
     grid-area: form;
-    margin-top: 25px;   
 }
 
 .backbuttonP{
