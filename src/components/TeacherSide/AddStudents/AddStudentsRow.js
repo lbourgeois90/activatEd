@@ -93,26 +93,26 @@ handleChange = propertyName => {
     console.log(this.state.updatedStudent);
     return (
         <TableRow key={this.props.student.id} hover={true} className={classes.tableRowHover}>
-        <TableCell className={classes.tableFontHeader}>
+        <TableCell className={classes.tableFont}>
             {moment(this.props.student.date_added).format('YYYY-MM-DD')}
         </TableCell>
 
-        <TableCell className={classes.tableFontHeader}>
+        <TableCell className={classes.tableFont}>
             {this.state.currentlyEditing === true ? <TextField onChange={this.handleChange('username')} defaultValue={`${this.props.student.student_id}`}/> : 
             this.props.student.student_id}
             </TableCell>
 
-        <TableCell className={classes.tableFontHeader}>
+        <TableCell className={classes.tableFont}>
             { this.state.currentlyEditing === true ? <TextField onChange={this.handleChange('first_name')} defaultValue={`${this.props.student.first_name}`}/> : 
             this.props.student.first_name}
             </TableCell>
 
-        <TableCell className={classes.tableFontHeader}>
+        <TableCell className={classes.tableFont}>
             { this.state.currentlyEditing === true ? <TextField onChange={this.handleChange('last_name')} defaultValue={`${this.props.student.last_name}`}/> : 
             this.props.student.last_name}
         </TableCell>
 
-        <TableCell className={classes.tableFontHeader}>
+        <TableCell className={classes.tableFont}>
             { this.state.currentlyEditing === true ?  
             <Select
                     value={this.state.updatedStudent.class_id}
@@ -123,7 +123,7 @@ handleChange = propertyName => {
             </Select> : this.props.student.class_period}
         </TableCell>
        
-        <TableCell className={classes.tableFontHeader}>
+        <TableCell className={classes.tableFont}>
             { this.state.currentlyEditing === true ? 
                 <IconButton aria-label="Add" onClick={this.handleEditSubmit}> <Add/> </IconButton> :
                 <IconButton aria-label="Edit" onClick={this.handleEdit} >
@@ -132,7 +132,7 @@ handleChange = propertyName => {
             }
         </TableCell>
 
-        <TableCell className={classes.tableFontHeader}><IconButton aria-label="Delete" onClick={this.handleDelete} value={this.props.student.id}>
+        <TableCell className={classes.tableFont}><IconButton aria-label="Delete" onClick={this.handleDelete} value={this.props.student.id}>
           <DeleteOutlinedIcon/>
           </IconButton>
         </TableCell>
@@ -145,43 +145,11 @@ handleChange = propertyName => {
 }
 
 const styles = theme => ({
-  formControl:{
-    margin: '0 auto',
-    
-  },
-  form:{
-    backgroundColor: 'white',
-    padding: '0',
-    margin: '0 auto',
-  },
-  addStudents:{
-    textAlign: 'center',
-  },
-  table:{
-    width: '90%',
-    margin: '0 auto',
-    marginBottom: '50px',
-    marginTop: '100px',
-   },
-   
+ 
    tableFont:{
-     fontSize: '22px',
-     color: '#ff65af',
+     fontSize: '18px',
    },
-   tableFontHeader:{
-     fontSize: '22px',
-     color: '#ff65af',
-   },
-   tableFontCenter:{
-     fontSize: '22px',
-     textAlign: '#ff65af',
-     color: '#ff65af',
-   },
-   tableFontHeaderCenter:{
-     fontSize: '22px',
-     textAlign: 'center',
-     color: '#ff65af' 
-   },
+  
    tableRowHover: {
      '&:hover': {
        backgroundColor: 'primary',

@@ -94,7 +94,7 @@ class CreateClasses extends Component {
     const {classes} = this.props;
     return (
       <section>
-        <Stepper steps={ [{title: 'Create Username and Password'}, {title: 'Create Profile'}, {title: 'Create Classes'}, {title: 'Add Students'}] } activeStep={ 2 } activeColor= '#F7C331' defaultBarColor= 'black' activeTitleColor= '#F7C331' defaultTitleColor= '#6B7A8F' circleFontColor='#0B172A' className="stepper" completeColor="#6B7A8F" completeTitleColor="#6B7A8F" />
+        <Stepper steps={ [{title: 'Create Username and Password'}, {title: 'Create Profile'}, {title: 'Create Classes'}, {title: 'Add Students'}] } activeStep={ 2 } activeColor= '#F7C331' defaultBarColor= 'black' activeTitleColor= 'black' defaultTitleColor= '#6B7A8F' circleFontColor='#0B172A' className="stepper" completeColor="#6B7A8F" completeTitleColor="#6B7A8F" />
         <Typography variant="h4" className={classes.createClasses}>Create Classes</Typography>
         <div className={classes.createClassesFormDiv}>
           <form className={classes.form}>

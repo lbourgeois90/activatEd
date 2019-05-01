@@ -55,6 +55,7 @@ class Registration extends Component {
 
 
   backToLogin = () => {
+    this.props.dispatch({type:'SET_TO_LOGIN_MODE'})
     this.props.history.push('/home');
   }
 

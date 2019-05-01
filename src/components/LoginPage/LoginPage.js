@@ -13,15 +13,6 @@ class LoginPage extends Component {
     username: '',
     password: '',
     permissions: 'teacher',
-    open: false,
-  };
-
-  handleClickOpen = () => {
-    this.setState({ open: true });
-  };
-
-  handleClose = () => {
-    this.setState({ open: false });
   };
 
 
@@ -75,18 +66,12 @@ class LoginPage extends Component {
     const {classes} = this.props
     return (
       <div className="loginWrapper">
-      <header className="loginHeader">
-      </header>
+      <div className="loginHeader">
+        <img src="/images/activated4.svg" className="activatedImage"></img>
+      </div>
 
       <div className="loginArea">
-        {this.props.errors.loginMessage && (
-          <h2
-            className="alert"
-            role="alert"
-          >
-            {this.props.errors.loginMessage}
-          </h2>
-        )}
+        
         <form onSubmit={this.login}>
           <Typography variant="h3" className={classes.loginTypography}>Login</Typography>
           <FormControl className={classes.formControl}>
@@ -105,6 +90,14 @@ class LoginPage extends Component {
               style = {{width: 400}}
             ></TextField>
           </FormControl>
+          {this.props.errors.loginMessage && (
+          <h2
+            className="alert"
+            role="alert"
+          >
+            {this.props.errors.loginMessage}
+          </h2>
+        )}
          
           <Button size= "large" value="Log In" variant="outlined" onClick={this.login} className={classes.loginButton}>Log In</Button>
         </form>
@@ -129,7 +122,7 @@ const styles = theme => ({
   loginTypography:{
     textAlign: 'center',
     fontFamily: 'Lato',
-    color: 'black',
+    color: '#313D6B',
     paddingBottom: '25px',
   },
   loginButton:{

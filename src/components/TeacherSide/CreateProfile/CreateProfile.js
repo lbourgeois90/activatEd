@@ -6,7 +6,7 @@ import TextField from '@material-ui/core/TextField'
 import {withStyles} from '@material-ui/core/styles'
 import FormControl from '@material-ui/core/FormControl'
 import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
+import Button from '@material-ui/core/Button';
 import Stepper from 'react-stepper-horizontal';
 
 
@@ -49,7 +49,7 @@ class CreateProfile extends Component {
     const {classes} = this.props;
     return (
       <section>
-        <Stepper steps={ [{title: 'Create Username and Password'}, {title: 'Create Profile'}, {title: 'Create Classes'}, {title: 'Add Students'}] } activeStep={ 1 } activeColor= '#F7C331' defaultBarColor= '#F7C331' activeTitleColor= '#F7C331' defaultTitleColor= '#6B7A8F' circleFontColor='#0B172A' className="stepper" completeColor="#6B7A8F" completeTitleColor="#6B7A8F" />
+        <Stepper steps={ [{title: 'Create Username and Password'}, {title: 'Create Profile'}, {title: 'Create Classes'}, {title: 'Add Students'}] } activeStep={ 1 } activeColor= '#F7C331' defaultBarColor= '#F7C331' activeTitleColor= 'black' defaultTitleColor= '#6B7A8F' circleFontColor='#0B172A' className="stepper" completeColor="#6B7A8F" completeTitleColor="#6B7A8F" />
         <Typography variant="h4" className={classes.createProfile}>Create Profile</Typography>
         <div className={classes.createProfileFormContainer}>
           <form className={classes.form} onSubmit={this.handleSubmit}>
@@ -98,7 +98,7 @@ class CreateProfile extends Component {
               </FormControl>
               <br/>
               <FormControl className={classes.formControl}>
-                  <IconButton color="primary" type="submit" size="large">Submit</IconButton>
+                  <Button color="primary" type="submit" size="large">Submit</Button>
               </FormControl>
          </form>
         </div>

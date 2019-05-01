@@ -3,25 +3,16 @@ import React, { Component} from 'react';
 import ReactDOM from 'react-dom';
 import {connect} from 'react-redux';
 import Stepper from 'react-stepper-horizontal';
-import TextField from '@material-ui/core/TextField'
-import {withStyles} from '@material-ui/core/styles'
-import Button from '@material-ui/core/Button'
-import IconButton from '@material-ui/core/IconButton'
+import TextField from '@material-ui/core/TextField';
+import {withStyles} from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
 import Select from '@material-ui/core/Select';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
-import FormControl from '@material-ui/core/FormControl'
-// import Paper from '@material-ui/core/Paper';
+import FormControl from '@material-ui/core/FormControl';
 import Typography from '@material-ui/core/Typography';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-// import swal from '@sweetalert/with-react'
 import FormHelperText from '@material-ui/core/FormHelperText';
-import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
 import AddStudentsTable from './AddStudentsTable';
 import swal from 'sweetalert';
 var moment = require('moment');
@@ -137,7 +128,7 @@ handleDelete = (event) => {
     const {classes} = this.props;
     return (
       <section>
-        <Stepper steps={ [{title: 'Create Username and Password'}, {title: 'Create Profile'}, {title: 'Create Classes'}, {title: 'Add Students'}] } activeStep={ 3 } activeColor= '#F7C331' defaultBarColor= 'black' activeTitleColor= '#F7C331' defaultTitleColor= '#6B7A8F' circleFontColor='#0B172A' className="stepper" completeColor="#6B7A8F" completeTitleColor="#6B7A8F" />
+        <Stepper steps={ [{title: 'Create Username and Password'}, {title: 'Create Profile'}, {title: 'Create Classes'}, {title: 'Add Students'}] } activeStep={ 3 } activeColor= '#F7C331' defaultBarColor= 'black' activeTitleColor= '#black' defaultTitleColor= '#6B7A8F' circleFontColor='#0B172A' className="stepper" completeColor="#6B7A8F" completeTitleColor="#6B7A8F" />
         <Typography variant="h4" className={classes.addStudents}>Add Students to Class</Typography>
         <div className={classes.addStudentsFormDiv}>
           <form className={classes.form}>
@@ -211,11 +202,11 @@ handleDelete = (event) => {
             </FormControl>
             <br/>
             <FormControl className={classes.formControlButton}>
-                <IconButton color="primary" onClick={this.addAnotherStudent} size="large">Add Another Student</IconButton>
+                <Button color="primary" onClick={this.addAnotherStudent} size="large">Add Another Student</Button>
             </FormControl>
             <br/>
             <FormControl className={classes.formControlButton}>
-                <IconButton color="primary" onClick={this.handleSubmit} size="large">Add Student and Submit</IconButton>
+                <Button color="primary" onClick={this.handleSubmit} size="large">Add Student and Submit</Button>
             </FormControl>
           </form>
           <AddStudentsTable/>
@@ -241,36 +232,6 @@ const styles = theme => ({
   addStudents:{
     textAlign: 'center',
   },
-  table:{
-    width: '90%',
-    margin: '0 auto',
-    marginBottom: '50px',
-    marginTop: '100px',
-   },
-   
-   tableFont:{
-     fontSize: '22px',
-     color: '#ff65af',
-   },
-   tableFontHeader:{
-     fontSize: '22px',
-     color: '#ff65af',
-   },
-   tableFontCenter:{
-     fontSize: '22px',
-     textAlign: '#ff65af',
-     color: '#ff65af',
-   },
-   tableFontHeaderCenter:{
-     fontSize: '22px',
-     textAlign: 'center',
-     color: '#ff65af' 
-   },
-   tableRowHover: {
-     '&:hover': {
-       backgroundColor: 'primary',
-     },
-   },
   })
 
 

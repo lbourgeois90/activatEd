@@ -12,7 +12,9 @@ function* registerUser(action) {
 
     // automatically log a user in after registration
     yield put({ type: 'LOGIN', payload: action.payload });
-    
+
+    yield put({type: 'SET_TO_LOGIN_MODE'});
+
     // set to 'login' mode so they see the login screen
     // after registration or after they log out
     yield put({type: 'SET_TO_CREATE_PROFILE'});

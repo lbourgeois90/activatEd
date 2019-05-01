@@ -2,7 +2,7 @@
 .loginWrapper{
     display: grid;
     grid-template-columns: 1fr 2fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr 400px;;
+    grid-template-rows: 1fr 1fr 1fr 1fr;;
     grid-template-areas:
     "header header header"
     "lside login rside"
@@ -10,12 +10,6 @@
     "footer footer footer";
     gap: 20px;
     padding-bottom: 20px;
-    background-image: url('/images/bigblackboard.jpg');
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    position: relative;
-    margin: auto;
-    height: fit-content;
 }
 
 
@@ -30,9 +24,10 @@
 .loginArea{
     grid-area: login;
     text-align: center;
-    background-color: rgba(231, 228, 228, 0.3);
+    background-color: rgba(107, 122, 143, 0.1);
     padding-top: 25px;
     padding-bottom: 25px;
+    border: 20px solid #F7C331;
 }
 
 .logoImage{
@@ -43,4 +38,9 @@
 .loginFooter{
     grid-area: footer;
     height: 100%;
+}
+
+.activatedImage{
+    margin-top: 25px;
+    width: 700px;
 }

@@ -86,18 +86,7 @@ handleEdit = (event) => {
 }
 
 const styles = theme => ({
-  formControl:{
-    margin: '0 auto',
-    
-  },
-  form:{
-    backgroundColor: 'white',
-    padding: '0',
-    margin: '0 auto',
-  },
-  addStudents:{
-    textAlign: 'center',
-  },
+
   table:{
     width: '90%',
     margin: '0 auto',
@@ -105,28 +94,10 @@ const styles = theme => ({
     marginTop: '100px',
    },
    
-   tableFont:{
-     fontSize: '22px',
-     color: '#ff65af',
-   },
+  
    tableFontHeader:{
      fontSize: '22px',
-     color: '#ff65af',
-   },
-   tableFontCenter:{
-     fontSize: '22px',
-     textAlign: '#ff65af',
-     color: '#ff65af',
-   },
-   tableFontHeaderCenter:{
-     fontSize: '22px',
-     textAlign: 'center',
-     color: '#ff65af' 
-   },
-   tableRowHover: {
-     '&:hover': {
-       backgroundColor: 'primary',
-     },
+     color: '#303c6c',
    },
   })
 
