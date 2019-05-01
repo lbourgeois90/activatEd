@@ -23,7 +23,7 @@ import TableRow from '@material-ui/core/TableRow';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
 import AddStudentsTable from './AddStudentsTable';
-
+import swal from 'sweetalert';
 var moment = require('moment');
 
 
@@ -57,6 +57,7 @@ class AddStudents extends Component {
   handleSubmit = event => {
     event.preventDefault();
     console.log('in handleSubmit');
+    if(this.state.newStudent.username !== '' && this.state.newStudent.first_name !== '' && this.state.newStudent.last_name !== '' && this.state.newStudent.class_id !== '' && this.state.newStudent.password !== ''){
     this.props.dispatch({type:'ADD_STUDENT', payload: this.state.newStudent});
     this.setState({
       newStudent: {
@@ -71,22 +72,39 @@ class AddStudents extends Component {
     })
     this.props.history.push('/welcome');
   }
+  else{
+    swal({
+      title: "Error",
+      text: "Please complete all required fields before submitting.",
+      icon: "warning",
+      })
+    }
+  }
 
   addAnotherStudent = event => {
     event.preventDefault();
     console.log('in addAnotherStudent');
-    this.props.dispatch({type:'ADD_STUDENT', payload: this.state.newStudent});
-    alert(`Student Has Been Added!`);
-    this.setState({
-      date_added: '',
-      username: '',
-      first_name: '',
-      last_name: '',
-      class_id: '',
-      password: '',
-      permissions: '',
-      student_id: '',
-  })
+    if(this.state.newStudent.username !== '' && this.state.newStudent.first_name !== '' && this.state.newStudent.last_name !== '' && this.state.newStudent.class_id !== '' && this.state.newStudent.password !== ''){
+      this.props.dispatch({type:'ADD_STUDENT', payload: this.state.newStudent});
+      alert(`Student Has Been Added!`);
+      this.setState({
+        date_added: '',
+        username: '',
+        first_name: '',
+        last_name: '',
+        class_id: '',
+        password: '',
+        permissions: '',
+        student_id: '',
+    })
+    }
+    else{
+      swal({
+        title: "Error",
+        text: "Please complete all required fields before submitting.",
+        icon: "warning",
+        })
+    }
 }
 
   handleChange = propertyName => {
@@ -119,113 +137,104 @@ handleDelete = (event) => {
     const {classes} = this.props;
     return (
       <section>
-        <Stepper steps={ [{title: 'Create Username and Password'}, {title: 'Create Profile'}, {title: 'Create Classes'}, {title: 'Add Students'}] } activeStep={ 3 } activeColor= '#814fff' defaultBarColor= '#814fff' activeTitleColor= '#814fff' defaultTitleColor= '#814fff' circleFontColor='#0B172A' className="stepper" completeColor="#ffbe5c" completeTitleColor="#463940" />
+        <Stepper steps={ [{title: 'Create Username and Password'}, {title: 'Create Profile'}, {title: 'Create Classes'}, {title: 'Add Students'}] } activeStep={ 3 } activeColor= '#F7C331' defaultBarColor= 'black' activeTitleColor= '#F7C331' defaultTitleColor= '#6B7A8F' circleFontColor='#0B172A' className="stepper" completeColor="#6B7A8F" completeTitleColor="#6B7A8F" />
         <Typography variant="h4" className={classes.addStudents}>Add Students to Class</Typography>
-        
-        <form className={classes.form}>
-          <FormControl variant="outlined">
-              <InputLabel
-                ref={ref => {
-                  this.InputLabelRef = ref;
-                }}
-                htmlFor="class_id" >Select a Class </InputLabel>
-              <Select
-                value={this.state.newStudent.class_id}
-                onChange={this.handleChange('class_id')}
-                input={
-                  <OutlinedInput
-                    labelWidth={this.state.labelWidth}
-                    name="class_id"
-                    id="class_id"
-                    />}
-                    >
-                    <MenuItem disabled>Select a Class</MenuItem>
-                    {this.props.reduxState.classes.map( classes =>
-                    <MenuItem value={classes.class_id} key={classes.class_id}>{classes.class_period}</MenuItem>
-                    )}
-              </Select>
-              <FormHelperText>Required Field</FormHelperText>
-          </FormControl>
-          <br/>
-          <FormControl className={classes.formControl}>
-              <TextField label="Student ID" variant="outlined" color="primary"
-              value={this.state.newStudent.username}
-              helperText="Required Field"
-              onChange={this.handleChange('username')}
-              ></TextField>
-          </FormControl>
-          <FormControl className={classes.formControl}>
-              <TextField label="Student First Name" variant="outlined" color="primary"
-              value={this.state.newStudent.first_name}
-              helperText="Required Field"
-              onChange={this.handleChange('first_name')}
-              ></TextField>
-          </FormControl>
-          <br/>
-          <FormControl className={classes.formControl}>
-              <TextField label="Student Password" variant="outlined" color="primary"
-              value={this.state.newStudent.password}
-              helperText="Required Field"
-              onChange={this.handleChange('password')}
-              ></TextField>
-          </FormControl>
-          <FormControl className={classes.formControl}>
-              <TextField label="Student Last Name" variant="outlined" color="primary"
-              value={this.state.newStudent.last_name}
-              helperText="Required Field"
-              onChange={this.handleChange('last_name')}
-              ></TextField>
-          </FormControl>
-          <br/>
-          <FormControl className={classes.formControl}>
-              <IconButton color="primary" onClick={this.addAnotherStudent} size="large">Add Another Student</IconButton>
-          </FormControl>
-          <br/>
-          <FormControl className={classes.formControl}>
-              <IconButton color="primary" onClick={this.handleSubmit} size="large">Add Student and Submit</IconButton>
-          </FormControl>
-        </form>
-        <AddStudentsTable/>
-        {/* <Table className={classes.table}>
-          <TableHead >
-              <TableRow>
-                <TableCell className={classes.tableFontHeader}>Date Added</TableCell>
-                <TableCell className={classes.tableFontHeader}>Student First Name</TableCell>
-                <TableCell className={classes.tableFontHeader}>Student Last Name</TableCell>
-                <TableCell className={classes.tableFontHeader}>Class Name</TableCell>
-                <TableCell className={classes.tableFontHeader}>Class Period</TableCell>
-                <TableCell className={classes.tableFontHeader}>Delete Student</TableCell>
-              </TableRow>
-          </TableHead>
-          <TableBody>
-            {this.props.reduxState.student.map( (student) =>
-                <TableRow key={student.id} hover={true} className={classes.tableRowHover}>
-                      <TableCell className={classes.tableFontHeader}>{moment(student.date_added).format('YYYY-MM-DD')}</TableCell>
-                      <TableCell className={classes.tableFontHeader}>{student.first_name}</TableCell>
-                      <TableCell className={classes.tableFontHeader}>{student.last_name}</TableCell>
-                      <TableCell className={classes.tableFontHeader}>{student.class_name}</TableCell>
-                      <TableCell className={classes.tableFontHeader}>{student.class_period}</TableCell>
-                      <TableCell className={classes.tableFontHeader}><IconButton aria-label="Delete" onClick={this.handleDelete} value={student.id}>
-                        <DeleteOutlinedIcon/>
-                        </IconButton>
-                    </TableCell>
-                </TableRow>
-            )}
-          </TableBody>
-      </Table>              */}
-
+        <div className={classes.addStudentsFormDiv}>
+          <form className={classes.form}>
+            <FormControl variant="outlined" className={classes.formControlAddStudents}>
+                <InputLabel
+                  ref={ref => {
+                    this.InputLabelRef = ref;
+                  }}
+                  htmlFor="class_id" >Select a Class </InputLabel>
+                <Select
+                  value={this.state.newStudent.class_id}
+                  onChange={this.handleChange('class_id')}
+                  required
+                  style = {{width: 400}}
+                  input={
+                    <OutlinedInput
+                      labelWidth={this.state.labelWidth}
+                      name="class_id"
+                      id="class_id"
+                      />}
+                      >
+                      <MenuItem disabled>Select a Class</MenuItem>
+                      {this.props.reduxState.classes.map( classes =>
+                      <MenuItem value={classes.class_id} key={classes.class_id}>{classes.class_period}</MenuItem>
+                      )}
+                      
+                </Select>
+                <FormHelperText>Required Field</FormHelperText>
+            </FormControl>
+            <br/>
+            <FormControl className={classes.formControlAddStudents}>
+                <TextField label="Student ID" variant="outlined" color="primary"
+                value={this.state.newStudent.username}
+                helperText="Required Field"
+                onChange={this.handleChange('username')}
+                required
+                type="text"
+                style = {{width: 400}}
+                ></TextField>
+            </FormControl>
+            <FormControl className={classes.formControlAddStudents}>
+                <TextField label="Student First Name" variant="outlined" color="primary"
+                value={this.state.newStudent.first_name}
+                helperText="Required Field"
+                onChange={this.handleChange('first_name')}
+                required
+                type="text"
+                style = {{width: 400}}
+                ></TextField>
+            </FormControl>
+            <br/>
+            <FormControl className={classes.formControlAddStudents}>
+                <TextField label="Student Password" variant="outlined" color="primary"
+                value={this.state.newStudent.password}
+                helperText="Required Field"
+                onChange={this.handleChange('password')}
+                required
+                type="text"
+                style = {{width: 400}}
+                ></TextField>
+            </FormControl>
+            <FormControl className={classes.formControlAddStudents}>
+                <TextField label="Student Last Name" variant="outlined" color="primary"
+                value={this.state.newStudent.last_name}
+                helperText="Required Field"
+                onChange={this.handleChange('last_name')}
+                required
+                type="text"
+                style = {{width: 400}}
+                ></TextField>
+            </FormControl>
+            <br/>
+            <FormControl className={classes.formControlButton}>
+                <IconButton color="primary" onClick={this.addAnotherStudent} size="large">Add Another Student</IconButton>
+            </FormControl>
+            <br/>
+            <FormControl className={classes.formControlButton}>
+                <IconButton color="primary" onClick={this.handleSubmit} size="large">Add Student and Submit</IconButton>
+            </FormControl>
+          </form>
+          <AddStudentsTable/>
+        </div>
       </section>
     );
   }
 }
 
 const styles = theme => ({
-  formControl:{
-    margin: '0 auto',
+  formControlAddStudents: {
+    marginRight: '50px',
+    marginTop: '25px',
     
   },
+  addStudentsFormDiv:{
+    textAlign: 'center',
+  },
   form:{
-    backgroundColor: 'white',
     padding: '0',
     margin: '0 auto',
   },

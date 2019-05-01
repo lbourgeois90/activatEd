@@ -9,6 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import Stepper from 'react-stepper-horizontal';
 import Button from '@material-ui/core/Button';
+import swal from 'sweetalert';
 
 
 class CreateClasses extends Component {
@@ -32,14 +33,23 @@ class CreateClasses extends Component {
   handleSubmit = event => {
     event.preventDefault();
     console.log('in handleSubmit');
-    // this.props.dispatch({type:'ADD_CLASS', payload: this.state.newClass});
-    // this.props.history.push('/addstudents');
+    if(this.state.newClass.class_name !== '' && this.state.newClass.class_period !== ''){
+    this.props.dispatch({type:'ADD_CLASS', payload: this.state.newClass});
+    this.props.history.push('/addstudents');
+    }
+    else{
+      swal({
+        title: "Error",
+        text: "Please complete all required fields before submitting.",
+        icon: "warning",
+        })
+      }
     }
 
   addAnotherClass = event => {
     event.preventDefault();
     console.log('in addAnotherClass');
-    if(this.state.class_name !== '' && this.state.class_period !== ''){
+    if(this.state.newClass.class_name !== '' && this.state.newClass.class_period !== ''){
     this.props.dispatch({type:'ADD_CLASS', payload: this.state.newClass});
     alert(`Class Has Been Added!`);
     this.setState({
@@ -51,8 +61,11 @@ class CreateClasses extends Component {
     })
   }
     else{
-      alert(`All required fields must be completed to add a class.`)
-    
+      swal({
+        title: "Error",
+        text: "Please complete all required fields before submitting.",
+        icon: "warning",
+      })
     }
   }
 
