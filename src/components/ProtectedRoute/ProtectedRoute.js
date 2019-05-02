@@ -30,6 +30,8 @@ const ProtectedRoute = (props) => {
 
   let ComponentToShow;
   console.log(otherProps);
+
+  //CONDITIONAL-- checks user permisisons and determines route paths based on permission
   if(user.id) {
     if (otherProps.path === '/home' && user.permissions === 'student'){
       ComponentToShow = StudentClasses;

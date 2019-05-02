@@ -17,14 +17,7 @@ class Registration extends Component {
   };
 
 
-  handleClickOpen = () => {
-    this.setState({ open: true });
-  };
-
-  handleClose = () => {
-    this.setState({ open: false });
-  };
-
+  //FUNCTION- prevents reload of the page-- checks username, password and access code validity prior to creation of user-- checks to see if requirements are met as well that the username is unique
   registerUser = (event) => {
     event.preventDefault();
     console.log('in registerUser');
@@ -47,18 +40,21 @@ class Registration extends Component {
     }
   } // end registerUser
 
+
+  //FUNCTION- handle change for input fields and sets state based on inputs
   handleInputChangeFor = propertyName => (event) => {
     this.setState({
       [propertyName]: event.target.value,
     });
   }
 
-
+  //FUNCTION- on click of login button, dispatches 'SET_TO_LOGIN_MODE which redirects user to login view(has to do with protected route '/')
   backToLogin = () => {
     this.props.dispatch({type:'SET_TO_LOGIN_MODE'})
     this.props.history.push('/home');
   }
   
+  //FUNCTION- ability to set state to fill test data for presentation
   fillFields=()=>{
     console.log('in fillFields')
     this.setState({
