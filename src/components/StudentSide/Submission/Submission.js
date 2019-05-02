@@ -10,7 +10,7 @@ import './Submission.css';
 
 class Submission extends Component {
 
-
+  //FUNCTION -- on click of Back To Homepage button will redirect student back to '/' (STUDENTCLASS view)
   backToHomepage = () =>{
     this.props.history.push('/')
   }
