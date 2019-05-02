@@ -99,11 +99,11 @@ class LoginPage extends Component {
           </h2>
         )}
          
-          <Button size= "large" value="Log In" variant="outlined" onClick={this.login} className={classes.loginButton}>Log In</Button>
+          <Button size= "large" value="Log In" variant="outlined" color="primary" onClick={this.login} className={classes.loginButton}>Log In</Button>
         </form>
        
         
-          <Button size= "large" onClick={this.handleRegister}>Register</Button>
+          <Button size= "large" color="primary" onClick={this.handleRegister}>Register</Button>
         
       </div>
       <div className="loginFooter">

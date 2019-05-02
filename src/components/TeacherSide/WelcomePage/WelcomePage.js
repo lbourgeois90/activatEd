@@ -4,6 +4,7 @@ import Button from '@material-ui/core/Button';
 import {withStyles} from '@material-ui/core/styles'
 import './WelcomePageGrid.css';
 import LogoutButton from '../../LogOutButton/LogOutButton';
+
 var moment = require('moment');
 
 
@@ -11,9 +12,28 @@ var moment = require('moment');
 
 class WelcomePage extends Component {
 
+  state={
+    quotes: {
+      quoteText: '',
+      quoteAuthor: '',
+
+    }
+  }
+
   componentDidMount(){
     this.props.dispatch({type:'GET_TEACHER'});
     this.props.dispatch({type:'GET_QUOTE'});
+  }
+
+  componentDidUpdate(prevProps) {
+    if(this.props.reduxState.quote !== prevProps.reduxState.quote){
+      this.setState({
+        quotes:{
+          quoteText: this.props.reduxState.quote.quoteText,
+          quoteAuthor: this.props.reduxState.quote.quoteAuthor,
+        }
+      })
+    }
   }
 
   navToClassData = () => {
@@ -45,8 +65,8 @@ class WelcomePage extends Component {
           <p className="dateAndTime">Today's Date Is: {moment().format('MMMM Do YYYY')}</p>
           <p className="dateAndTime">Current Time Is: {moment().format('LT')}</p>
           <p className="quoteText">Inspirational Quote of the Day:</p>
-          <p className="quoteText">'{this.props.reduxState.quote.quoteText}'</p>
-          <p className="quoteText">Author: {this.props.reduxState.quote.quoteAuthor}</p>
+          <p className="quoteText">'{this.state.quotes.quoteText}'</p>
+          <p className="quoteText">Author: {this.state.quotes.quoteAuthor}</p>
         </div>
          
         <div className="childThree">

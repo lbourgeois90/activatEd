@@ -15,6 +15,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import AddStudentsTable from './AddStudentsTable';
 import swal from 'sweetalert';
+import './AddStudents.css'
 var moment = require('moment');
 
 
@@ -122,9 +123,28 @@ handleDelete = (event) => {
   this.props.dispatch({type:'DELETE_STUDENT', payload: studentId});
 }
 
+fillFields=()=>{
+  console.log('in fillFields')
+  this.setState({
+    newStudent: {
+      date_added: moment().format('YYYY-MM-DD'),
+      username: '050693',
+      first_name: 'Nicole',
+      last_name: 'Costa',
+      password: 'ncosta93',
+      permissions: 'student',
+      student_id: this.state.newStudent.username,
+    },
+  })
+}
+
+goToWelcome = () => {
+  this.props.history.push('/')
+}
+
 
   render() {
-    // console.log(this.state.newStudent);
+    console.log(this.state.newStudent);
     const {classes} = this.props;
     return (
       <section>
@@ -208,7 +228,14 @@ handleDelete = (event) => {
             <FormControl className={classes.formControlButton}>
                 <Button color="primary" onClick={this.handleSubmit} size="large">Add Student and Submit</Button>
             </FormControl>
+            <br/>
+            <FormControl className={classes.formControlButton}>
+                <Button color="primary" onClick={this.goToWelcome} size="large">Continue to Homepage</Button>
+            </FormControl>
           </form>
+          <div className="footer">
+            <p><button onClick={this.fillFields} className="registrationButtonFillFieldsSmaller"></button></p>
+          </div>
           <AddStudentsTable/>
         </div>
       </section>

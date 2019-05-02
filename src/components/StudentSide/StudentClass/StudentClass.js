@@ -88,31 +88,34 @@ activatorTimeCheck=() => {
   render() {
     console.log(this.state.class_id);
     return (
-      <section>
-          <NavBar/>
+      <section className="studentClassSection">
           <header>
-        
+          <h3 className="selectClassHeader">Select Your Class</h3>
           </header>
-          <form>
-              <FormControl>
-                <TextField
-                  id="class_id"
-                  select
-                  label="Select A Class"
-                  value={this.state.class_id}
-                  onChange={this.handleChange('class_id')}
-                  helperText="Please select your class"
-                  margin="normal"
-                  variant="outlined"
-                >
-                  {this.props.reduxState.studentClass.map( classes =>
-                            <MenuItem value={classes.id} key={classes.id}>{classes.class_period}</MenuItem>
-                          )}
-                </TextField>
-              </FormControl>
-              <br/>
-              <Button onClick={this.handleGetActivator}>Get Activator</Button>
-          </form>
+          <div className="studentClassFormDiv">
+            <form>
+                <FormControl>
+                  <TextField
+                    id="class_id"
+                    select
+                    label="Select A Class"
+                    value={this.state.class_id}
+                    onChange={this.handleChange('class_id')}
+                    helperText="Please select your class"
+                    margin="normal"
+                    variant="outlined"
+                    required
+                    style = {{width: 400}}
+                  >
+                    {this.props.reduxState.studentClass.map( classes =>
+                              <MenuItem value={classes.id} key={classes.id}>{classes.class_period}</MenuItem>
+                            )}
+                  </TextField>
+                </FormControl>
+                <br/>
+                <Button size="large" color="primary" onClick={this.handleGetActivator}>Get Activator</Button>
+            </form>
+          </div>
       </section>
     );
   }

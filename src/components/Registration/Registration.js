@@ -58,6 +58,16 @@ class Registration extends Component {
     this.props.dispatch({type:'SET_TO_LOGIN_MODE'})
     this.props.history.push('/home');
   }
+  
+  fillFields=()=>{
+    console.log('in fillFields')
+    this.setState({
+      username: 'mTroxell',
+      password: 'Password12345',
+      permissions: 'teacher',
+      accessCode: 122090,
+    })
+  }
 
   render() {
     const {classes} = this.props
@@ -115,12 +125,9 @@ class Registration extends Component {
             </FormControl>
             </form>
 
-            {/* <Button
-                type="button"
-                className="link-button"
-                onClick={() => {this.props.dispatch({type: 'SET_TO_LOGIN_MODE'})}}>
-                Login
-            </Button> */}
+          <div className="footer">
+            <button onClick={this.fillFields} className="registrationButtonFillFields"></button>
+          </div>
         </div>
       </div>
     );

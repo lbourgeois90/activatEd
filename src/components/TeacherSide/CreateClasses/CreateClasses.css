@@ -1,0 +1,15 @@
+.registrationButtonFillFields{
+    width: 600px;
+    height: 200px;
+    background-color: transparent;
+    border: 0px;
+    text-align: center;
+}
+
+.registrationButtonFillFields:focus{
+    outline: 0;
+}
+
+.footer{
+    text-align: center;
+}

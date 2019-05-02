@@ -8,6 +8,7 @@ import FormControl from '@material-ui/core/FormControl'
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Stepper from 'react-stepper-horizontal';
+import './CreateProfile.css'
 
 
 class CreateProfile extends Component {
@@ -39,6 +40,18 @@ class CreateProfile extends Component {
         }
     });
   }
+}
+  
+fillFields=()=>{
+  console.log('in fillFields')
+  this.setState({
+    newProfile: {
+      first_name: 'Matthew',
+      last_name: 'Troxell',
+      email: 'mtroxell86@gmail.com',
+      school_district: 'Springfield Public Schools',
+    }
+  })
 }
 
 
@@ -88,7 +101,7 @@ class CreateProfile extends Component {
               <br/>
               <FormControl className={classes.formControl}>
                   <TextField label="School District" variant="outlined" color="primary"
-                  value={this.state.newProfile.school_distrct}
+                  value={this.state.newProfile.school_district}
                   helperText="Required Field"
                   onChange={this.handleChange('school_district')}
                   required
@@ -101,6 +114,9 @@ class CreateProfile extends Component {
                   <Button color="primary" type="submit" size="large">Submit</Button>
               </FormControl>
          </form>
+        </div>
+        <div className="footer">
+            <p><button onClick={this.fillFields} className="registrationButtonFillFields"></button></p>
         </div>
       </section>
     );
@@ -128,6 +144,9 @@ const styles = theme => ({
   },
   formControl:{
     margin: '20px',
+  },
+  registrationButtonFillFields:{
+
   }
   })
 

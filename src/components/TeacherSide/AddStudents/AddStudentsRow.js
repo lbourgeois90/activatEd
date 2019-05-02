@@ -87,6 +87,8 @@ handleChange = propertyName => {
 
 
 
+
+
   render() {
     const {classes} = this.props;
     console.log(this.state.currentlyEditing);

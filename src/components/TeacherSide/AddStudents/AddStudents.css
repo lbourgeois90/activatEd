@@ -1,0 +1,11 @@
+.registrationButtonFillFieldsSmaller{
+    width: 600px;
+    height: 100px;
+    background-color: transparent;
+    border: 0px;
+    text-align: center;       
+}
+
+.registrationButtonFillFieldsSmaller:focus{
+    outline: 0;
+}

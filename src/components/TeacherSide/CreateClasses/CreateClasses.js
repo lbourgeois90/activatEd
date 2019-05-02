@@ -10,6 +10,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Stepper from 'react-stepper-horizontal';
 import Button from '@material-ui/core/Button';
 import swal from 'sweetalert';
+import './CreateClasses.css'
 
 
 class CreateClasses extends Component {
@@ -82,6 +83,17 @@ class CreateClasses extends Component {
   }
 }
 
+fillFields=()=>{
+  console.log('in fillFields')
+  this.setState({
+    newClass: {
+      class_name : 'Biology Honors',
+      class_period: '1',
+      teacher_id: this.props.reduxState.teacher.id,
+    }
+  })
+}
+
 
 
  
@@ -125,6 +137,9 @@ class CreateClasses extends Component {
                 <Button color="primary"  size="large" onClick={this.handleSubmit}>Submit</Button>
             </FormControl>
           </form>
+        </div>
+        <div className="footer">
+            <p><button onClick={this.fillFields} className="registrationButtonFillFields"></button></p>
         </div>
       </section>
     );

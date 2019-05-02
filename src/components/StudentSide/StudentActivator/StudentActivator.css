@@ -1,46 +1,77 @@
-.activatorWrapper {
+/* .activatorWrapper {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 200px 1fr ;
     grid-template-areas:
     "header"
-    "activatorArea"
+    "activatorArea";
+    color: #303c6c; */
 
-}
+/* } */
 
 .studentActivatorHeader{
-    grid-area: header;
     text-align: center;
     font-size: 36px;
     margin-top: 10px;
+    border-bottom: 20px solid #F7C331;
+    box-sizing: border-box;
+    margin-bottom: 50px;
+    color: #303c6c;
+}
+
+.studentActivatorHeaderText{
+    margin: 0px;
+    margin-bottom: 25px;
 }
 
 .activatorDisplayMC{
-    grid-area: activatorArea;
     text-align: center;
     margin: 0 auto;
+    color: #303c6c;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    /* bring your own prefixes */
+    transform: translate(-50%, -50%);
 }
 
 .activatorDisplayText{
-    grid-area: activatorArea;
     text-align: center;
+    color: #303c6c;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    /* bring your own prefixes */
+    transform: translate(-50%, -50%);
+ 
 }
 
 .activatorWait{
-    grid-area: activatorArea;
     text-align: center;
+    color: #303c6c;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    /* bring your own prefixes */
+    transform: translate(-50%, -50%);
 }
 
 .activatorEnd{
-    grid-area: activatorArea;
     text-align: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    /* bring your own prefixes */
+    transform: translate(-50%, -50%);
 }
 
 .logoutButtonStudentActivator{
-    float: right;
+    text-align: right;
+    color: #303c6c;
 }
 
 .mcAnswers{
     max-width: 600px;
     margin: 0 auto;
+
 }

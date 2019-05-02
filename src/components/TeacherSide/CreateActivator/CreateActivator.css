@@ -43,7 +43,9 @@ body{
     /* font-family: 'Old Standard TT';
     font-style: italic; */
     margin: 0 auto;
+    text-transform: capitalize;
 }
+
 
 .headerText{
    color: #3a4660;

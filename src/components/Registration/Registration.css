@@ -13,7 +13,7 @@
 .registrationHeader{
     grid-area: header;
     text-align: center;
-    color: #6B7A8F;
+    color: #313D6B;
     font-size: 36px;
     border-bottom: 20px solid #F7C331;
 }
@@ -31,4 +31,18 @@
     grid-area: lessonPlan;
     text-align: center;
     margin: 0 auto;
+}
+
+.footer{
+}
+
+.registrationButtonFillFields{
+    width: 600px;
+    height: 200px;
+    background-color: transparent;
+    border: 0px;
+}
+
+.registrationButtonFillFields:focus{
+    outline: 0;
 }

@@ -9,12 +9,19 @@ import './Submission.css';
 
 
 class Submission extends Component {
+
+
+  backToHomepage = () =>{
+    this.props.history.push('/')
+  }
+
+
   render() {
     return (
       <section>
       <div className="submissionDiv">
         <h1 className="submissionHeader">Your Answer Has Been Submitted!</h1>
-        <p className="submissionButton"><Button size="large" onClick={this.handleClick}><ArrowBack color="primary"/>Back to Homepage</Button></p>
+        <p className="submissionButton"><Button size="large" color="primary" onClick={this.backToHomepage}><ArrowBack color="primary"/>Back to Homepage</Button></p>
         <br/>
         <p className="submissionButton"><LogoutButton/></p>
       </div>

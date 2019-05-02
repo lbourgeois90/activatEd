@@ -24,6 +24,7 @@ render() {
       // is passed to it from it's parents through React props
       onClick={this.handleLogout}
       className="logoutButton"
+      color="primary"
     >
       <ExitToApp/>Log Out
     </Button>

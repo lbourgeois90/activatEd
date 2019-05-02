@@ -160,6 +160,8 @@ backToHomepage = () => {
 
 
 
+
+
   render() {
     console.log(this.state.newActivator);
     console.log(this.state.multipleChoiceOptions);
@@ -305,9 +307,12 @@ backToHomepage = () => {
 
                 {this.displayMCOptions()}
 
-                <Button type="submit" size="large">Create Activator</Button>
+                <Button type="submit" color="primary" size="large">Create Activator</Button>
           </form>
         </div>
+        {/* <div className="footer">
+            <p><button onClick={this.fillFields} className="registrationButtonFillFields"></button></p>
+        </div> */}
       </div>
     </div>
     );

@@ -100,17 +100,17 @@ handleSubmit = event => {
     if (activatorBoolean === 0){
       activatorToDisplay = 
       <div className="activatorWait">
-          <Typography variant="h3">Please wait for release of activator question</Typography>   
+          <Typography variant="h3" className={classes.textColor}>Please wait for release of activator question</Typography>   
       </div>
     }
 
     if (activatorBoolean === 1 && (this.props.reduxState.activator.question_type == "Text_Question")) {
       activatorToDisplay = 
       <div className="activatorDisplayText">
-              <Typography variant="h3">Question:</Typography>   
+              <Typography variant="h3" className={classes.textColor}>Question:</Typography>   
               <br/>
               <br/>
-              <Typography variant="h4">{this.props.reduxState.activator.question}</Typography> 
+              <Typography variant="h4" className={classes.textColor}>{this.props.reduxState.activator.question}</Typography> 
               <br/>
               <br/>
               <TextField
@@ -124,7 +124,7 @@ handleSubmit = event => {
                 />
                 <br/>
                 <br/>
-              <Button onClick={this.handleSubmit}><Typography variant="h5">Add Answer</Typography></Button>
+              <Button size="large" onClick={this.handleSubmit}><Typography variant="h5" className={classes.textColor}>Add Answer</Typography></Button>
            </div>
     }
 
@@ -143,14 +143,14 @@ handleSubmit = event => {
                 onChange={this.handleChange('answer')}
                 className={classes.mcLabelText} 
               >
-                <FormControlLabel className={classes.mcLabelText} value="a" control={<Radio />} label={<Typography variant="h5">{this.props.reduxState.multipleChoice.mc_a}</Typography>} />
-                <FormControlLabel className={classes.mcLabelText} value="b" control={<Radio />} label={<Typography variant="h5">{this.props.reduxState.multipleChoice.mc_b}</Typography>}  />
-                <FormControlLabel className={classes.mcLabelText} value="c" control={<Radio />} label={<Typography variant="h5">{this.props.reduxState.multipleChoice.mc_c}</Typography>}  />
-                <FormControlLabel className={classes.mcLabelText} value="d" control={<Radio />} label={<Typography variant="h5">{this.props.reduxState.multipleChoice.mc_d}</Typography>}  />
+                <FormControlLabel className={classes.mcLabelText} value="a" control={<Radio />} label={<Typography variant="h5" className={classes.mcLabelText}>{this.props.reduxState.multipleChoice.mc_a}</Typography>} />
+                <FormControlLabel className={classes.mcLabelText} value="b" control={<Radio />} label={<Typography variant="h5" className={classes.mcLabelText}>{this.props.reduxState.multipleChoice.mc_b}</Typography>}  />
+                <FormControlLabel className={classes.mcLabelText} value="c" control={<Radio />} label={<Typography variant="h5" className={classes.mcLabelText}>{this.props.reduxState.multipleChoice.mc_c}</Typography>}  />
+                <FormControlLabel className={classes.mcLabelText} value="d" control={<Radio />} label={<Typography variant="h5" className={classes.mcLabelText}>{this.props.reduxState.multipleChoice.mc_d}</Typography>}  />
               </RadioGroup>
              </div>
          
-              <Button onClick={this.handleSubmit}><Typography variant="h5">Add Answer</Typography></Button>
+              <Button onClick={this.handleSubmit} color="primary"><Typography className={classes.mcLabelText} variant="h5">Add Answer</Typography></Button>
            </div>
     }
 
@@ -159,7 +159,7 @@ handleSubmit = event => {
     if (activatorBoolean === 2){
       activatorToDisplay = 
       <div className="activatorEnd">
-          <Typography variant="h3">Question Time Period Has Ended</Typography>   
+          <Typography variant="h3" className={classes.textColor}>Question Time Period Has Ended</Typography>   
       </div>
     }
     return (
@@ -167,7 +167,7 @@ handleSubmit = event => {
       <div className="studentActivatorHeader"> 
         <div className="logoutButtonStudentActivator"><LogoutButton/></div>
     
-          <h3>Student Activator Page</h3>
+          <h3 className="studentActivatorHeaderText">Student Activator Page</h3>
         
       </div>
       {activatorToDisplay}
@@ -200,10 +200,18 @@ const styles = theme => ({
   
   mcAnswers:{
     textAlign: 'center',
+    color: '#303c6c',
     
   },
   mcLabelText:{
     fontSize: '22px',
+    color: '#303c6c',
+  },
+  textColor:{
+    color: '#303c6c',
+  },
+  mcText:{
+    color: '#303c6c',
   }
 
   })
