@@ -20,11 +20,14 @@ class WelcomePage extends Component {
     }
   }
 
+  //FUNCTION- on intialization component dispatches 'GET_TEACHER' to get teacher info 
+  //dispatch 'GET_QUOTE' to get random quote from API
   componentDidMount(){
     this.props.dispatch({type:'GET_TEACHER'});
     this.props.dispatch({type:'GET_QUOTE'});
   }
 
+  //FUNCTION- checks status of reduxState and will update reduxState until quote has been set to reducer from API
   componentDidUpdate(prevProps) {
     if(this.props.reduxState.quote !== prevProps.reduxState.quote){
       this.setState({
@@ -36,16 +39,15 @@ class WelcomePage extends Component {
     }
   }
 
+  //FUNCTION- on click of See Class Data redirects user to CLASSDATA view
   navToClassData = () => {
     this.props.history.push('/classData')
   }
 
+  //FUNCTION- on click of Create An Activator redirects user to CREATEACTIVATOR view 
   navToCreateActivator = () => {
     this.props.history.push('/createActivator')
   }
-
-
-
 
 
   render() {
