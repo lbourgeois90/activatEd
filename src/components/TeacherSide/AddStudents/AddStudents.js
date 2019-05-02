@@ -8,9 +8,7 @@ import {withStyles} from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import FormControl from '@material-ui/core/FormControl';
 import Typography from '@material-ui/core/Typography';
-import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import AddStudentsTable from './AddStudentsTable';
 import swal from 'sweetalert';
 import './AddStudents.css'
@@ -29,7 +27,6 @@ class AddStudents extends Component {
       password: '',
       permissions: '',
     },
-    labelWidth: 0,
   }
 
 
@@ -38,11 +35,12 @@ class AddStudents extends Component {
   componentDidMount(){
     this.props.dispatch({type:'GET_CLASS'});
     this.props.dispatch({type:'GET_STUDENT'})
-    this.setState({
-      labelWidth: ReactDOM.findDOMNode(this.InputLabelRef).offsetWidth,
-    });
   }
 
+  //FUNCTION- on click of add student and submit-- prevents reload of page
+  //CONDITIONAL- FORM VALIDATION- IF checks state of input fields and if not empty then will dispatch payload of student to saga to server to db
+    //And clear all inputs and redirect user to WELCOME view
+  //ELSE sweetalert that all fields must be completed before submission
   handleSubmit = event => {
     event.preventDefault();
     console.log('in handleSubmit');
@@ -70,12 +68,19 @@ class AddStudents extends Component {
     }
   }
 
+  //FUNCTION- on click of add another student-- prevents reload of page
+  //CONDITIONAL- FORM VALIDATION- IF checks state of input fields and if not empty then will dispatch payload of student to saga to server to db
+  //And clear all inputs
+  //ELSE sweetalert that all fields must be completed before submission
   addAnotherStudent = event => {
     event.preventDefault();
     console.log('in addAnotherStudent');
     if(this.state.newStudent.username !== '' && this.state.newStudent.first_name !== '' && this.state.newStudent.last_name !== '' && this.state.newStudent.class_id !== '' && this.state.newStudent.password !== ''){
       this.props.dispatch({type:'ADD_STUDENT', payload: this.state.newStudent});
-      alert(`Student Has Been Added!`);
+      swal({
+        title: "Student Has Been Added!",
+        icon: "success",
+      });
       this.setState({
         date_added: '',
         username: '',
@@ -96,6 +101,8 @@ class AddStudents extends Component {
     }
 }
 
+//FUNCTION- handle change for inputs-- set state to input values-- date_added manually added using moment for current date-- student_id added
+//from state.newStudent.username-- necessary for input into student table versus user table on DB
   handleChange = propertyName => {
     return(event) =>{
     
@@ -112,6 +119,7 @@ class AddStudents extends Component {
   }
 }
 
+//FUNCTION- on click of delete icon will delete selected student from database
 handleDelete = (event) => {
   event.preventDefault();
   console.log('in handleDelete');
@@ -120,6 +128,7 @@ handleDelete = (event) => {
   this.props.dispatch({type:'DELETE_STUDENT', payload: studentId});
 }
 
+ //FUNCTION- ability to set state to fill test data for presentation
 fillFields=()=>{
   console.log('in fillFields')
   this.setState({
@@ -135,6 +144,7 @@ fillFields=()=>{
   })
 }
 
+//FUNCTION - on click of continue will redirect user to WELCOME view
 goToWelcome = () => {
   this.props.history.push('/')
 }

@@ -52,7 +52,10 @@ class CreateClasses extends Component {
     console.log('in addAnotherClass');
     if(this.state.newClass.class_name !== '' && this.state.newClass.class_period !== ''){
     this.props.dispatch({type:'ADD_CLASS', payload: this.state.newClass});
-    alert(`Class Has Been Added!`);
+    swal({
+      title: "Class Has Been Added!",
+      icon: "success",
+    });
     this.setState({
       newClass: {
         class_name : '',
