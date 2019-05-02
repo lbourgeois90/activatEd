@@ -25,26 +25,25 @@ class StudentClass extends Component {
   }
 
 
+  //FUNCTION- on initialization of component-- dipsatch 'GET_STUDENT_CLASS' to get classes associated with logged in student
+  //-- stored in reducer-- map through reducer to create select drop down for students to choose their class
   componentDidMount(){
     this.props.dispatch({type: 'GET_STUDENT_CLASS'})
   }
   
 
+  //FUNCTION- on click of Get Activator button-- prevents reload of page-- gets class_id from state (from select)
+  //sends class_id in query string URL to '/studentActivator' will be used in getting activator from DB
   handleGetActivator = event => {
     event.preventDefault();
     console.log('in handleSubmit');
     console.log(this.state.class_id);
     let class_id= this.state.class_id;
     this.props.history.push(`/studentactivator/?id=${class_id}`);
-    // this.setState({
-    //   togglePageDisplay: false,
-    // })
-    // this.trigger();
-    
-
   }
 
 
+  //FUNCTION- handle change for inputs-- sets state with input values
   handleChange = propertyName => {
     return(event) =>{
     
@@ -54,35 +53,6 @@ class StudentClass extends Component {
         })
   }
 }
-
-handleSubmit = (event) => {
-
-}
-
-activatorTimeCheck=() => {
-  console.log('Time is', moment().format('HH:mm'))
-  let time_start = this.props.reduxState.activator.time_start;
-  let time_end = this.props.reduxState.activator.time_end;
-  console.log('Start Time is', time_start);
-  console.log('End Time is', time_end);
-  if(time_start == moment().format('HH:mm')){
-      console.log('in IF STATEMENT activatorstarttime');
-    return (
-      this.setState({
-        currentActivatorState: 1,
-      })
-    )
-  }
-  if(time_end == moment().format('HH:mm')){
-    console.log('in IF STATEMENT activatorendtime');
-    return(
-      this.setState({
-        currentActivatorState: 2,
-      })
-    )
-  }
-}
-
 
 
   render() {
