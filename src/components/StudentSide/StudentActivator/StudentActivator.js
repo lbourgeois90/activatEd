@@ -30,6 +30,11 @@ class StudentActivator extends Component {
     counter: false,
   }
 
+  //FUNCTION- on initialization of component-- uses query string to grab id from URL-- id is coming from previous view (StudentClass)
+  //dispatch 'GET_STUDENT_ACTIVATOR' to get activator from DB based on student class and current date
+  //dispatch 'SET_ACTIVATOR_BOOLEAN to check whether question is multiple choice-- determines conditional rendering
+  //start set interval for start time- run every 10 seconds
+  //start set interval for end time- run every 10 seconds
   componentDidMount(){
     const searchObject = qs.parse(this.props.location.search);
     console.log(searchObject.id);
@@ -42,6 +47,9 @@ class StudentActivator extends Component {
     
   }
 
+  //FUNCTION- conditional used to check current time versus activator end time
+  //IF end time is equal to current time-- dispatch 'SET_ACTIVATOR_BOOLEAN with payload for conditional rendering
+  //clear interval for end time
 activatorEndTimeCheck = () => {
   console.log('Current Time is', moment().format('HH:mm'))
   let time_end = this.props.reduxState.activator.time_end;
@@ -53,21 +61,24 @@ activatorEndTimeCheck = () => {
   }
 }
 
+//FUNCTION- conditional used to check current time versus activator start time
+  //IF start time is equal to current time or is after start time BUT before end time-- dispatch 'SET_ACTIVATOR_BOOLEAN with payload for conditional rendering
+  //clear interval for end time
 activatorStartTimeCheck=() => {
-  
   console.log('Current Time is', moment().format('HH:mm'))
   let time_start = this.props.reduxState.activator.time_start;
   let time_end = this.props.reduxState.activator.time_end;
   console.log('Moment is', moment(time_start, "HH:mm"))
   console.log('Start Time is', time_start);
   if( time_start == moment().format("HH:mm") || moment().isAfter(moment(time_start, "HH:mm")) & moment().isBefore(moment(time_end, "HH:mm"))){
-    
       console.log('in IF STATEMENT activatorstarttime');
       this.props.dispatch({type:'SET_ACTIVATOR_BOOLEAN', payload: 1})
       clearInterval(this.state.startActivator);
   }
 }
 
+//FUNCTION- handle change for input fields-- set state based on inputs-- adds question_id from activator reducer
+//adds student_id from activator reducer
 handleChange = propertyName => {
   return(event) =>{
   console.log('in handleChange');
@@ -82,6 +93,9 @@ handleChange = propertyName => {
    });
   }
 }
+
+//FUNCTION- handle submit for submit button -- dispatch 'ADD_STUDENT_ANSWER'- does post request to server with student answer as payload
+// then will redirect student to the submission view
 handleSubmit = event => {
   event.preventDefault();
   console.log('in handleSubmit');
@@ -97,6 +111,8 @@ handleSubmit = event => {
 
     let activatorBoolean = this.props.reduxState.activatorConditional;
     let activatorToDisplay = null;
+
+    //CONDITIONAL RENDERING-- if activatorConditional reducer has value of 0-- display wait for activator
     if (activatorBoolean === 0){
       activatorToDisplay = 
       <div className="activatorWait">
@@ -104,6 +120,8 @@ handleSubmit = event => {
       </div>
     }
 
+    //CONDITIONAL RENDERING-- if activatorConditional reducer has value of 1 and question_type is text_question
+    //-- display text question 
     if (activatorBoolean === 1 && (this.props.reduxState.activator.question_type == "Text_Question")) {
       activatorToDisplay = 
       <div className="activatorDisplayText">
@@ -128,6 +146,8 @@ handleSubmit = event => {
            </div>
     }
 
+       //CONDITIONAL RENDERING-- if activatorConditional reducer has value of 1 and question_type is multiple_choice_question
+       //-- display multiple choice question
     if (activatorBoolean === 1 && (this.props.reduxState.activator.question_type == "Multiple_Choice_Question")){
       activatorToDisplay = 
       <div className="activatorDisplayMC">
@@ -155,7 +175,7 @@ handleSubmit = event => {
     }
 
 
-
+    //CONDITIONAL RENDERING-- if activatorConditional reducer has value of 2 and displays question time period has ended
     if (activatorBoolean === 2){
       activatorToDisplay = 
       <div className="activatorEnd">
@@ -170,27 +190,7 @@ handleSubmit = event => {
           <h3 className="studentActivatorHeaderText">Student Activator Page</h3>
         
       </div>
-      {activatorToDisplay}
-      {/* {this.props.reduxState.activatorConditional === false ? 
-           <Paper>
-              <Typography variant="h3">Question:</Typography>   
-              <Typography variant="h6">{this.props.reduxState.activator.question}</Typography> 
-              <TextField
-                    placeholder="Type Question Here"
-                    multiline={true}
-                    rows={6}
-                    variant="outlined"
-                    value={this.state.newAnswer.answer}
-                    onChange={this.handleChange('answer')}
-                />    
-              <Button onClick={this.handleSubmit}>Add Answer</Button>
-           </Paper>
-           :
-          <Paper>
-            <Typography variant="h3">Please wait for release of activator question</Typography>   
-          </Paper>
-    } */}
-    
+          {activatorToDisplay}
       </div>
     );
   }
