@@ -15,6 +15,8 @@ import Typography from '@material-ui/core/Typography';
 
 class CreateActivator extends Component {
   
+  //FUNCTION- on initilization of component--dispatch 'GET_CLASS' which is mapped through to population class dropdown
+  //dispatch 'GET_RANDOM_QUESTION' get random question from Jeopardy API
   componentDidMount(){
     this.props.dispatch({type:'GET_CLASS'});
     this.props.dispatch({type:'GET_RANDOM_QUESTION'})
@@ -38,6 +40,7 @@ class CreateActivator extends Component {
     },
   }
 
+  //FUNCTION- set to clear inputs upon submission 
   clearInputs = () => {
     this.setState({
       newActivator: {
@@ -58,6 +61,7 @@ class CreateActivator extends Component {
     }
   
 
+  //FUNCTION- handle change of input fields-- set state to input values
   handleChange = propertyName => {
     return(event) =>{
     this.setState({
@@ -68,7 +72,8 @@ class CreateActivator extends Component {
     });
   }
 }
-
+//FUNCTION- handle change for multiple choice input fields-- conditionally rendered if
+//question_type is set to multiple_choice
 handleChangeMC = propertyName => {
   return(event) =>{
   this.setState({
@@ -80,13 +85,19 @@ handleChangeMC = propertyName => {
 }
 }
 
+//FUNCTION- on click of create activator will prevent page from reloading and
+//submit activator to saga to server to be stored in DB
+//send with payload of newActivator from state
+//clear inputs of inout fields
 handleSubmit = event => {
   event.preventDefault();
-
   console.log('in handleSubmit');
   this.props.dispatch({type: 'ADD_ACTIVATOR', payload:{newActivator: this.state.newActivator, multipleChoiceOptions:this.state.multipleChoiceOptions}});
   this.clearInputs();
 }
+
+//FUNCTION- CONDITIONALLY RENDER-- if question_type is set to 'MULTIPLE_CHOICE_QUESTION'
+//will conditionally render form to have areas to add multiple choice answers
 
 displayMCOptions = () => {
   if(this.state.newActivator.question_type === 'Multiple_Choice_Question'){
@@ -154,6 +165,7 @@ displayMCOptions = () => {
   }
 }
 
+//FUNCTION - on click of back to homepage button will redirect user to WELCOME view
 backToHomepage = () => {
   this.props.history.push('/home')
 }
