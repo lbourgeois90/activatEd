@@ -6,8 +6,6 @@ import Stepper from 'react-stepper-horizontal';
 import TextField from '@material-ui/core/TextField';
 import {withStyles} from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import Select from '@material-ui/core/Select';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
 import FormControl from '@material-ui/core/FormControl';
 import Typography from '@material-ui/core/Typography';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -20,8 +18,6 @@ var moment = require('moment');
 
 
 class AddStudents extends Component {
-
-  teacherReducerStuff = this.props.reduxState.teacher.id;
 
   state= {
     newStudent: {
@@ -37,7 +33,8 @@ class AddStudents extends Component {
   }
 
 
-
+  //FUNCTION- on initilization of component--dispatch 'GET_CLASS' which is mapped through to population class dropdown
+  //dispatch 'GET_STUDENT' to get added students to population editable table
   componentDidMount(){
     this.props.dispatch({type:'GET_CLASS'});
     this.props.dispatch({type:'GET_STUDENT'})
@@ -153,30 +150,28 @@ goToWelcome = () => {
         <div className={classes.addStudentsFormDiv}>
           <form className={classes.form}>
             <FormControl variant="outlined" className={classes.formControlAddStudents}>
-                <InputLabel
-                  ref={ref => {
-                    this.InputLabelRef = ref;
-                  }}
-                  htmlFor="class_id" >Select a Class </InputLabel>
-                <Select
-                  value={this.state.newStudent.class_id}
-                  onChange={this.handleChange('class_id')}
-                  required
-                  style = {{width: 400}}
-                  input={
-                    <OutlinedInput
-                      labelWidth={this.state.labelWidth}
-                      name="class_id"
-                      id="class_id"
-                      />}
-                      >
-                      <MenuItem disabled>Select a Class</MenuItem>
-                      {this.props.reduxState.classes.map( classes =>
-                      <MenuItem value={classes.class_id} key={classes.class_id}>{classes.class_period}</MenuItem>
-                      )}
-                      
-                </Select>
-                <FormHelperText>Required Field</FormHelperText>
+              <TextField
+                    id="class_id"
+                    select
+                    label="Select A Class Period"
+                    value={this.state.newStudent.class_id}
+                    onChange={this.handleChange('class_id')}
+                    SelectProps={{
+                      MenuProps: {
+                        className: classes.menu,
+                      },
+                    }}
+                    margin="normal"
+                    variant="outlined"
+                    style = {{width: 400}}
+                    required
+                  >
+                    <MenuItem disabled>Select a Class Period</MenuItem>
+                    {this.props.reduxState.classes.map( classes =>
+                          <MenuItem value={classes.class_id} key={classes.class_id}>{classes.class_period}</MenuItem>
+                          )}
+                        
+                  </TextField>
             </FormControl>
             <br/>
             <FormControl className={classes.formControlAddStudents}>

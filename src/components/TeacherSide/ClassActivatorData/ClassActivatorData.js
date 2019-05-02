@@ -2,23 +2,13 @@
 import React, { Component, Fragment} from 'react';
 import ReactDOM from 'react-dom';
 import {connect} from 'react-redux';
-import Stepper from 'react-stepper-horizontal';
-import TextField from '@material-ui/core/TextField'
-import {withStyles} from '@material-ui/core/styles'
-import Button from '@material-ui/core/Button'
-import IconButton from '@material-ui/core/IconButton'
-import Select from '@material-ui/core/Select';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
-import FormControl from '@material-ui/core/FormControl'
-import Typography from '@material-ui/core/Typography';
-import InputLabel from '@material-ui/core/InputLabel';
+import TextField from '@material-ui/core/TextField';
+import {withStyles} from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import FormControl from '@material-ui/core/FormControl';
 import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
-import NavBar from '../NavBar/NavBar';
 import InsertChartOutlined from '@material-ui/icons/InsertChartOutlined';
 import ClassActivatorDataTable from './ClassActivatorDataTable';
-import ClassActivatorDataRow from './ClassActivatorDataRow';
 import ArrowBack from '@material-ui/icons/ArrowBack';
 import './ClassActivatorData.css';
 

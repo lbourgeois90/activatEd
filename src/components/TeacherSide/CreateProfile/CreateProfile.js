@@ -1,6 +1,5 @@
 
 import React, { Component} from 'react';
-import ReactDOM from 'react-dom';
 import {connect} from 'react-redux';
 import TextField from '@material-ui/core/TextField'
 import {withStyles} from '@material-ui/core/styles'
@@ -22,6 +21,9 @@ class CreateProfile extends Component {
     }
   }
 
+  //FUNCTION- onClick submits form-- prevents reaload of the page-- dispatch 'ADD_PROFILE' POST to saga to send to server
+  //redirects user to the create classes view
+  //dispatch 'SET_TO_LOGIN_MODE' to set user as logged in// necessary for teacher protected route
   handleSubmit = event => {
     event.preventDefault();
     console.log('in handleSubmit');
@@ -30,6 +32,7 @@ class CreateProfile extends Component {
     this.props.dispatch({type:'SET_TO_LOGIN_MODE'});
   }
 
+  //FUNCTION- handle change for inputs- sets state to input values
   handleChange = propertyName => {
     return(event) =>{
     
@@ -42,6 +45,7 @@ class CreateProfile extends Component {
   }
 }
   
+//FUNCTION- ability to set state to fill test data for presentation
 fillFields=()=>{
   console.log('in fillFields')
   this.setState({
