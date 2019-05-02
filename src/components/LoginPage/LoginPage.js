@@ -16,7 +16,7 @@ class LoginPage extends Component {
   };
 
 
-
+  //FUNCTION- login function with validaiton of username/password-- sends dispatch of login for passport authentication to check validity
   login = (event) => {
     event.preventDefault();
 
@@ -44,23 +44,21 @@ class LoginPage extends Component {
   //   }
   // }
 
+
+  //FUNCTION- handle changes for username and password inputs 
   handleInputChangeFor = propertyName => (event) => {
     this.setState({
       [propertyName]: event.target.value,
     });
   }
 
+  //FUNCTION- on the click of the register button- dispatches to reducer to set to register mode-- also redirects usser to the registration view
   handleRegister = () => {
     this.props.dispatch({type: 'SET_TO_REGISTER_MODE'});
     this.props.history.push('/register');
   }
 
-  handleToggle = () => {
-    console.log('in toggle');
-    this.setState({
-      open: !this.state.open
-    })
-  }
+  
 
   render() {
     const {classes} = this.props
