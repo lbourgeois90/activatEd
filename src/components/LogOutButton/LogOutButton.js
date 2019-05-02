@@ -6,6 +6,8 @@ import { withRouter } from 'react-router-dom';
 
 class LogoutButton extends Component {
 
+
+  //FUNCTION- on click will log user out of application- sends LOGOUT dispatch to passport which uses its built-in method to logout user-- also redirects user to login page
   handleLogout = () => {
     console.log('in handleLogout');
    
