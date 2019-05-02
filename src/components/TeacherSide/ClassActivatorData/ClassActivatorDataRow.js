@@ -25,13 +25,14 @@ class ClassActivatorDataRow extends Component {
 
     }
 
-
+//FUNCTION- on initilization of component--dispatch 'GET_CLASS' which is mapped through to population class dropdown
+//dipatch "GET_STUDENT" to return student data for selected date and class
 componentDidMount(){
   this.props.dispatch({type:'GET_CLASS'});
   this.props.dispatch({type:'GET_STUDENT'})
 }
 
-
+//FUNCTION-- will delete selected student answers from DB based on student_id
 handleDelete = (event) => {
   event.preventDefault();
   console.log('in handleDelete');
@@ -40,6 +41,8 @@ handleDelete = (event) => {
   this.props.dispatch({type:'DELETE_STUDENT_ANSWER', payload: {StudentId: id, ClassData: this.props.classData }});
 }
 
+//FUNCTION- on click of edit set currentlyEditing state to true to enable toggled conditional rendering--
+//score table cell becomes input field
 handleEdit = (event) => {
   console.log('in handleEdit');
   let id = event.currentTarget.value;
@@ -52,6 +55,8 @@ handleEdit = (event) => {
 
 }
 
+//FUNCTION- on click of add set currentlyEditing state to false to disable edit conditional rendering
+//dispatch updatedStudent to saga to server to db to update student score
 handleEditSubmit = (event) => {
     console.log('in handleEditSubmit');
     this.setState({
@@ -61,6 +66,7 @@ handleEditSubmit = (event) => {
     // this.props.dispatch({type: 'GET_ANSWERS', payload: this.props.classData });
 }
 
+//FUNCTION- handle change for input-- set state with input values
 handleChange = propertyName => {
     return(event) =>{
     

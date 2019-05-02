@@ -53,13 +53,13 @@ class ClassActivatorData extends Component {
 }
 
 //FUNCTION-- will delete selected student answers from DB based on student_id
-handleDelete = (event) => {
-  event.preventDefault();
-  console.log('in handleDelete');
-  let studentId = event.currentTarget.value;
-  console.log('Student Id is:', studentId);
-  this.props.dispatch({type:'DELETE_STUDENT', payload: studentId});
-}
+// handleDelete = (event) => {
+//   event.preventDefault();
+//   console.log('in handleDelete');
+//   let studentId = event.currentTarget.value;
+//   console.log('Student Id is:', studentId);
+//   this.props.dispatch({type:'DELETE_STUDENT', payload: studentId});
+// }
 
 //FUNCTION- on click of back to homepage will redirect user to WELCOME view
 backToHomepage = () => {
