@@ -26,31 +26,20 @@ class ClassActivatorData extends Component {
   }
 
 
-
+//FUNCTION- on initilization of component--dispatch 'GET_CLASS' which is mapped through to population class dropdown
   componentDidMount(){
     this.props.dispatch({type:'GET_CLASS'});
   }
 
+  //on Click of Get Activators will prevent reload-- dispatch 'GET_ANSWERS' to get student answers for selected class and date
   handleSubmit =(event)=>{
     event.preventDefault();
     console.log('in handleSubmit');
      this.props.dispatch({type:'GET_ANSWERS', payload: this.state.classData});
-    // this.props.dispatch({type:'ADD_STUDENT', payload: this.state.newStudent});
-    // this.setState({
-    //   newStudent: {
-    //     date_added: '',
-    //     username: '',
-    //     first_name: '',
-    //     last_name: '',
-    //     class_id: '',
-    //     password: '',
-    //     permissions: '',
-    //   },
-    // })
-    // this.props.history.push('/welcome');
   }
 
 
+  //FUNCTION- handle change for input fields and sets state based on inputs
   handleChange = propertyName => {
     return(event) =>{
     
@@ -63,14 +52,16 @@ class ClassActivatorData extends Component {
   }
 }
 
+//FUNCTION-- will delete selected student answers from DB based on student_id
 handleDelete = (event) => {
   event.preventDefault();
   console.log('in handleDelete');
-//   let studentId = event.currentTarget.value;
-//   console.log('Student Id is:', studentId);
-//   this.props.dispatch({type:'DELETE_STUDENT', payload: studentId});
+  let studentId = event.currentTarget.value;
+  console.log('Student Id is:', studentId);
+  this.props.dispatch({type:'DELETE_STUDENT', payload: studentId});
 }
 
+//FUNCTION- on click of back to homepage will redirect user to WELCOME view
 backToHomepage = () => {
   this.props.history.push('/home')
 }
