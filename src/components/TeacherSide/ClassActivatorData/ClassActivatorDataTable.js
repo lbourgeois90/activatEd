@@ -15,37 +15,6 @@ var moment = require('moment');
 
 class ClassActivatorDataTable extends Component {
 
-  state ={
-    currentlyEditing: false,
-  }
-
-
-  componentDidMount(){
-    // this.props.dispatch({type:'GET_CLASS'});
-    // this.props.dispatch({type:'GET_STUDENT'})
-  }
-
-
-handleDelete = (event) => {
-//   event.preventDefault();
-//   console.log('in handleDelete');
-//   let studentId = event.currentTarget.value;
-//   console.log('Student Id is:', studentId);
-//   this.props.dispatch({type:'DELETE_STUDENT', payload: studentId});
-}
-
-handleEdit = (event) => {
-//   console.log('in handleEdit');
-//   let studentId = event.currentTarget.value;
-//   console.log(studentId);
-//   this.setState({
-//     currentlyEditing: true,
-//   })
-//   console.log(this.state.currentlyEditing);
-
-
-}
-
 
   render() {
     const {classes} = this.props;
