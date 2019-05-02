@@ -26,11 +26,14 @@ class CreateClasses extends Component {
   }
 
 
-
+//FUNCTION- on initilization of component--dispatch 'GET_TEACHER' which is used as reference id for joined tables
   componentDidMount(){
     this.props.dispatch({type:'GET_TEACHER'});
   }
 
+  //FUNCTION- on click of submit prevents page from reloading-- FORM VALIDATION-- IF input fields are not empty
+  //will post to saga to server to db and redirect user to '/addstudents'
+  //ELSE sweetalert to complete required fields before submission
   handleSubmit = event => {
     event.preventDefault();
     console.log('in handleSubmit');
@@ -47,6 +50,9 @@ class CreateClasses extends Component {
       }
     }
 
+  //FUNCTION- on click of add another class will prevents page from reloading-- FORM VALIDATION-- IF input fields are not empty
+  //will post to saga and clear input fields-- allows teacher to add another class
+  //ELSE sweetalert to complete required fields before submission
   addAnotherClass = event => {
     event.preventDefault();
     console.log('in addAnotherClass');
@@ -73,6 +79,7 @@ class CreateClasses extends Component {
     }
   }
 
+  //FUNCTION- handle change for inputs-- sets state to input values
   handleChange = propertyName => {
     return(event) =>{
     
@@ -85,7 +92,7 @@ class CreateClasses extends Component {
     });
   }
 }
-
+//FUNCTION- ability to set state to fill test data for presentation
 fillFields=()=>{
   console.log('in fillFields')
   this.setState({
@@ -96,12 +103,6 @@ fillFields=()=>{
     }
   })
 }
-
-
-
- 
-
-
 
 
   render() {
