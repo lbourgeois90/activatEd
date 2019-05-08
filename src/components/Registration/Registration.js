@@ -69,18 +69,9 @@ class Registration extends Component {
     const {classes} = this.props
     return (
       <div className="wrapperRegistration">
-        {this.props.errors.registrationMessage && (
-          <h2
-            className="alert"
-            role="alert"
-          >
-            {this.props.errors.registrationMessage}
-          </h2>
-        )}
+      
         <div className="registrationHeader">
            <h1>Register User</h1>
-        </div>
-        <div className="lessonPlan">
         </div>
 
         <div className="registrationBody">
@@ -121,10 +112,20 @@ class Registration extends Component {
             </FormControl>
             </form>
 
+            {this.props.errors.registrationMessage && (
+              <h2
+                className="alert"
+                role="alert"
+              >
+                {this.props.errors.registrationMessage}
+          </h2>
+        )}
+
+          </div>
           <div className="footer">
             <button onClick={this.fillFields} className="registrationButtonFillFields"></button>
           </div>
-        </div>
+        
       </div>
     );
   }

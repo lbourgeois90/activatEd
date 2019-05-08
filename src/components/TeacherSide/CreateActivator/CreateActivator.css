@@ -5,13 +5,24 @@
     grid-template-areas:
     "header header"
     "button button"
-    "form template"; 
+    "form form"; 
 }
 
 .createActivatorButtonDiv{
     grid-area: button;
 }
 
+.registrationButtonFillFields{
+    width: 600px;
+    height: 200px;
+    background-color: transparent;
+    border: 0px;
+    text-align: center;
+}
+
+.registrationButtonFillFields:focus{
+    outline: 0;
+}
 
 
 body{
@@ -20,7 +31,7 @@ body{
 
 .activatorHeader{
     grid-area: header;
-    text-align: center;
+
     border-bottom: 20px solid #F7C331;
 }
 
@@ -50,11 +61,13 @@ body{
 .headerText{
    color: #3a4660;
    font-size: 42px;
+   margin: 0px;
+   margin-top:25px;
   
 }
 
 .createActivatorHR{
-    width: 75%;
+    width: 50%;
     border-color: #6B7A8F;
 }
 
@@ -68,9 +81,9 @@ body{
 }
 
 .backbuttonP{
-    float:left;
     text-align: left;
     padding: 0;
+    margin: 0;
 }
 
 .createActivatorFormDiv{

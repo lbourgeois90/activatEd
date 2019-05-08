@@ -7,6 +7,7 @@
     "register register";
     gap: 20px;
     padding-bottom: 20px;
+    
 }
 
 
@@ -16,6 +17,9 @@
     color: #313D6B;
     font-size: 36px;
     border-bottom: 20px solid #F7C331;
+}
+.alert{
+    text-align: center;
 }
 
 .registrationBody{

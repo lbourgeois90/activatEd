@@ -12,6 +12,9 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import './CreateActivator.css';
 import ArrowBack from '@material-ui/icons/ArrowBack';
 import Typography from '@material-ui/core/Typography';
+import swal from 'sweetalert';
+import LogoutButton from '../../LogOutButton/LogOutButton';
+var moment = require('moment');
 
 class CreateActivator extends Component {
   
@@ -59,7 +62,25 @@ class CreateActivator extends Component {
       },
     })
     }
-  
+
+    fillFields = () => {
+      this.setState({
+        newActivator: {
+          class_id: 1,
+          time_start: '',
+          time_end: '',
+          question_type: 'Multiple_Choice_Question',
+          question: 'What is the lowest taxonomic level?',
+        },
+        multipleChoiceOptions:{
+          mc_a: 'Class',
+          mc_b: 'Family',
+          mc_c: 'Species',
+          mc_d: 'Genus',
+        },
+      })
+    }
+    
 
   //FUNCTION- handle change of input fields-- set state to input values
   handleChange = propertyName => {
@@ -93,6 +114,10 @@ handleSubmit = event => {
   event.preventDefault();
   console.log('in handleSubmit');
   this.props.dispatch({type: 'ADD_ACTIVATOR', payload:{newActivator: this.state.newActivator, multipleChoiceOptions:this.state.multipleChoiceOptions}});
+  swal({
+    title: "Activator Has Been Created!",
+    icon: "success",
+  });
   this.clearInputs();
 }
 
@@ -185,19 +210,13 @@ backToHomepage = () => {
               <Button className={classes.button} onClick={this.backToHomepage} size="large" color="primary"><ArrowBack color="primary"/>Back to Homepage</Button>
             </p>  
         </div>
-        <div className="randomQuestion">
-          <div className="questionClass">
-            <h2 className="randomQuestionHeader">Random Question</h2>
-            <hr className="createActivatorHR"/>
-            <h3 className="randomQuestionText">Question: </h3>
-            <h3 className="randomQuestionText">{this.props.reduxState.randomQuestion.question}?</h3>
-            <h3 className="randomQuestionText">Answer:</h3>
-            <h3 className="randomQuestionText">{this.props.reduxState.randomQuestion.answer}</h3>
-          </div>
-        </div>
+        {/* <div className="randomQuestion">
+      
+        </div> */}
         <div className="activatorForm">
           <div className="createActivatorFormDiv">
            <h2 className="headerText">Create an Activator</h2>
+           <button className="createActivaotFillFieldsButton" onClick={this.fillFields}> </button>
            <hr className="createActivatorHR"/>
             <form className="createActivatorForm" onSubmit={this.handleSubmit}>
               <FormControl variant="outlined" className={classes.formControl}>

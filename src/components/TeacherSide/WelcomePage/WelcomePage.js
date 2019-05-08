@@ -12,32 +12,32 @@ var moment = require('moment');
 
 class WelcomePage extends Component {
 
-  state={
-    quotes: {
-      quoteText: '',
-      quoteAuthor: '',
+  // state={
+  //   quotes: {
+  //     quoteText: '',
+  //     quoteAuthor: '',
 
-    }
-  }
+  //   }
+  // }
 
   //FUNCTION- on intialization component dispatches 'GET_TEACHER' to get teacher info 
   //dispatch 'GET_QUOTE' to get random quote from API
   componentDidMount(){
     this.props.dispatch({type:'GET_TEACHER'});
-    this.props.dispatch({type:'GET_QUOTE'});
+    // this.props.dispatch({type:'GET_QUOTE'});
   }
 
   //FUNCTION- checks status of reduxState and will update reduxState until quote has been set to reducer from API
-  componentDidUpdate(prevProps) {
-    if(this.props.reduxState.quote !== prevProps.reduxState.quote){
-      this.setState({
-        quotes:{
-          quoteText: this.props.reduxState.quote.quoteText,
-          quoteAuthor: this.props.reduxState.quote.quoteAuthor,
-        }
-      })
-    }
-  }
+  // componentDidUpdate(prevProps) {
+  //   if(this.props.reduxState.quote !== prevProps.reduxState.quote){
+  //     this.setState({
+  //       quotes:{
+  //         quoteText: this.props.reduxState.quote.quoteText,
+  //         quoteAuthor: this.props.reduxState.quote.quoteAuthor,
+  //       }
+  //     })
+  //   }
+  // }
 
   //FUNCTION- on click of See Class Data redirects user to CLASSDATA view
   navToClassData = () => {
@@ -52,6 +52,7 @@ class WelcomePage extends Component {
 
   render() {
     const { classes } = this.props;
+   
     return (
       <section>
        
@@ -63,19 +64,16 @@ class WelcomePage extends Component {
         
         </div>
         <div className="childTwo">
-          {/* <img src="/images/thoughBubble.png" className="quoteImage"></img> */}
+          <p> Welcome {this.props.reduxState.teacher.first_name}</p>
           <p className="dateAndTime">Today's Date Is: {moment().format('MMMM Do YYYY')}</p>
           <p className="dateAndTime">Current Time Is: {moment().format('LT')}</p>
-          <p className="quoteText">Inspirational Quote of the Day:</p>
-          <p className="quoteText">'{this.state.quotes.quoteText}'</p>
-          <p className="quoteText">Author: {this.state.quotes.quoteAuthor}</p>
         </div>
          
         <div className="childThree">
           <p className={classes.buttonContainer}>
             <Button color="secondary" className={classes.activatorButton} onClick={this.navToCreateActivator}>Create an Activator</Button>
           </p>
-          <img src="/images/createPhoto.png" className="activatorImage"></img>
+          <img src="/images/createPhoto.png" className="activatorImage" width='100%'></img>
         </div>
        
 
@@ -83,7 +81,7 @@ class WelcomePage extends Component {
           <p className={classes.buttonContainer}>
           <Button color="secondary" className={classes.activatorButton} onClick={this.navToClassData}>See Class Data</Button>
           </p>
-          <img src="/images/dataPhoto.png" className="dataImage"></img>
+          <img src="/images/dataPhoto.png" className="dataImage" width='100%'></img>
          
         </div>
         <footer className="childFive">

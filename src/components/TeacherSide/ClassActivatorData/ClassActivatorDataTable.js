@@ -18,7 +18,6 @@ class ClassActivatorDataTable extends Component {
 
   render() {
     const {classes} = this.props;
-    console.log(this.state.currentlyEditing);
     return (
 
         <div className="activatorDataTableDiv">

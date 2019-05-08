@@ -21,7 +21,7 @@ class CreateClasses extends Component {
     newClass: {
       class_name : '',
       class_period: '',
-      teacher_id: '',
+      teacher_id: this.props.reduxState.teacher.id,
     }
   }
 
