@@ -46,17 +46,17 @@ class CreateProfile extends Component {
 }
   
 //FUNCTION- ability to set state to fill test data for presentation
-fillFields=()=>{
-  console.log('in fillFields')
-  this.setState({
-    newProfile: {
-      first_name: 'Matthew',
-      last_name: 'Troxell',
-      email: 'mtroxell86@gmail.com',
-      school_district: 'Springfield Public Schools',
-    }
-  })
-}
+// fillFields=()=>{
+//   console.log('in fillFields')
+//   this.setState({
+//     newProfile: {
+//       first_name: 'Matthew',
+//       last_name: 'Troxell',
+//       email: 'mtroxell86@gmail.com',
+//       school_district: 'Springfield Public Schools',
+//     }
+//   })
+// }
 
 
 
@@ -119,9 +119,9 @@ fillFields=()=>{
               </FormControl>
          </form>
         </div>
-        <div className="footer">
+        {/* <div className="footer">
             <p><button onClick={this.fillFields} className="registrationButtonFillFields"></button></p>
-        </div>
+        </div> */}
       </section>
     );
   }

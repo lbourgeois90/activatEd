@@ -93,16 +93,16 @@ class CreateClasses extends Component {
   }
 }
 //FUNCTION- ability to set state to fill test data for presentation
-fillFields=()=>{
-  console.log('in fillFields')
-  this.setState({
-    newClass: {
-      class_name : 'Biology Honors',
-      class_period: '1',
-      teacher_id: this.props.reduxState.teacher.id,
-    }
-  })
-}
+// fillFields=()=>{
+//   console.log('in fillFields')
+//   this.setState({
+//     newClass: {
+//       class_name : 'Biology Honors',
+//       class_period: '1',
+//       teacher_id: this.props.reduxState.teacher.id,
+//     }
+//   })
+// }
 
 
   render() {
@@ -142,9 +142,9 @@ fillFields=()=>{
             </FormControl>
           </form>
         </div>
-        <div className="footer">
+        {/* <div className="footer">
             <p><button onClick={this.fillFields} className="registrationButtonFillFields"></button></p>
-        </div>
+        </div> */}
       </section>
     );
   }

@@ -129,20 +129,20 @@ handleDelete = (event) => {
 }
 
  //FUNCTION- ability to set state to fill test data for presentation
-fillFields=()=>{
-  console.log('in fillFields')
-  this.setState({
-    newStudent: {
-      date_added: moment().format('YYYY-MM-DD'),
-      username: '050693',
-      first_name: 'Nicole',
-      last_name: 'Costa',
-      password: 'ncosta93',
-      permissions: 'student',
-      student_id: this.state.newStudent.username,
-    },
-  })
-}
+// fillFields=()=>{
+//   console.log('in fillFields')
+//   this.setState({
+//     newStudent: {
+//       date_added: moment().format('YYYY-MM-DD'),
+//       username: '050693',
+//       first_name: 'Nicole',
+//       last_name: 'Costa',
+//       password: 'ncosta93',
+//       permissions: 'student',
+//       student_id: this.state.newStudent.username,
+//     },
+//   })
+// }
 
 //FUNCTION - on click of continue will redirect user to WELCOME view
 goToWelcome = () => {
@@ -238,9 +238,9 @@ goToWelcome = () => {
                 <Button color="primary" onClick={this.goToWelcome} size="large">Continue to Homepage</Button>
             </FormControl>
           </form>
-          <div className="footer">
+          {/* <div className="footer">
             <p><button onClick={this.fillFields} className="registrationButtonFillFieldsSmaller"></button></p>
-          </div>
+          </div> */}
           <AddStudentsTable/>
         </div>
       </section>

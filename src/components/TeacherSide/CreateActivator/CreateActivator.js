@@ -63,23 +63,23 @@ class CreateActivator extends Component {
     })
     }
 
-    fillFields = () => {
-      this.setState({
-        newActivator: {
-          class_id: 1,
-          time_start: '',
-          time_end: '',
-          question_type: 'Multiple_Choice_Question',
-          question: 'What is the lowest taxonomic level?',
-        },
-        multipleChoiceOptions:{
-          mc_a: 'Class',
-          mc_b: 'Family',
-          mc_c: 'Species',
-          mc_d: 'Genus',
-        },
-      })
-    }
+    // fillFields = () => {
+    //   this.setState({
+    //     newActivator: {
+    //       class_id: 1,
+    //       time_start: '',
+    //       time_end: '',
+    //       question_type: 'Multiple_Choice_Question',
+    //       question: 'What is the lowest taxonomic level?',
+    //     },
+    //     multipleChoiceOptions:{
+    //       mc_a: 'Class',
+    //       mc_b: 'Family',
+    //       mc_c: 'Species',
+    //       mc_d: 'Genus',
+    //     },
+    //   })
+    // }
     
 
   //FUNCTION- handle change of input fields-- set state to input values
@@ -216,7 +216,7 @@ backToHomepage = () => {
         <div className="activatorForm">
           <div className="createActivatorFormDiv">
            <h2 className="headerText">Create an Activator</h2>
-           <button className="createActivaotFillFieldsButton" onClick={this.fillFields}> </button>
+           {/* <button className="createActivaotFillFieldsButton" onClick={this.fillFields}> </button> */}
            <hr className="createActivatorHR"/>
             <form className="createActivatorForm" onSubmit={this.handleSubmit}>
               <FormControl variant="outlined" className={classes.formControl}>
