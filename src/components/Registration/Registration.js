@@ -55,15 +55,15 @@ class Registration extends Component {
   }
   
   //FUNCTION- ability to set state to fill test data for presentation
-  fillFields=()=>{
-    console.log('in fillFields')
-    this.setState({
-      username: 'mTroxell',
-      password: 'Password12345',
-      permissions: 'teacher',
-      accessCode: 122090,
-    })
-  }
+  // fillFields=()=>{
+  //   console.log('in fillFields')
+  //   this.setState({
+  //     username: 'mTroxell',
+  //     password: 'Password12345',
+  //     permissions: 'teacher',
+  //     accessCode: 122090,
+  //   })
+  // }
 
   render() {
     const {classes} = this.props
@@ -122,9 +122,9 @@ class Registration extends Component {
         )}
 
           </div>
-          <div className="footer">
+          {/* <div className="footer">
             <button onClick={this.fillFields} className="registrationButtonFillFields"></button>
-          </div>
+          </div> */}
         
       </div>
     );
