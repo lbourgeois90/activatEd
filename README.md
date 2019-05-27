@@ -7,29 +7,29 @@ https://lit-mountain-74912.herokuapp.com/#/home
 
 ## Built With
 
--HTML
--CSS
--JavaScript
--Axios
--Bcrypt
--Cookie-session
--Dotenv
--Express
--Nodemon
--Passport
--Passport-local
--Pg
--Prop-types
--React
--React-dom
--React-redux
--React-Router-Dom
--React-Scripts
--Redux
--Redux-logger
--Redux-saga
--Material-UI
--Moment.js
+- HTML
+- CSS
+- JavaScript
+- Axios
+- Bcrypt
+- Cookie-session
+- Dotenv
+- Express
+- Nodemon
+- Passport
+- Passport-local
+- Pg
+- Prop-types
+- React
+- React-dom
+- React-redux
+- React-Router-Dom
+- React-Scripts
+- Redux
+- Redux-logger
+- Redux-saga
+- Material-UI
+- Moment.js
 
 
 ## Getting Started
