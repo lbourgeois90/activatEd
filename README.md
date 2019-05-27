@@ -54,7 +54,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 ## Screen Shot
 
-<img src="/server/public/images/screenShot.png/">
+<img src="/public/images/screenshot.png/">
 
 
 ### Completed Features
@@ -71,7 +71,7 @@ These instructions will get you a copy of the project up and running on your loc
 ### Next Steps
 
 - [ ] Multiple teachers connected to multiple students (many-to-many)
-- [] Autofill student information if student already exists 
+- [ ] Autofill student information if student already exists 
 
 ## Deployment
 
