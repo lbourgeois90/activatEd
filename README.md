@@ -48,7 +48,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 1. Download this project.
 2. `npm init -y`
-3. `npm install (see above list of technogies built with)`
+3. `npm install (see above list of technologies built with)`
 4. Have Postico database running via Postgres
 
 
