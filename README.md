@@ -75,7 +75,9 @@ These instructions will get you a copy of the project up and running on your loc
 
 ## Deployment
 
-Deployed via Heroku
+https://fast-stream-15490.herokuapp.com/#/home
+
+Access Code: 1086420
 
 ## Authors
 
