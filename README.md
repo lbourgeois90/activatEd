@@ -48,13 +48,13 @@ These instructions will get you a copy of the project up and running on your loc
 
 1. Download this project.
 2. `npm init -y`
-3. `npm install (see above list of technogies built with)`
+3. `npm install (see above list of technologies built with)`
 4. Have Postico database running via Postgres
 
 
 ## Screen Shot
 
-<img src="/server/public/images/screenShot.png/">
+<img src="/public/images/screenshot.png/">
 
 
 ### Completed Features
@@ -71,7 +71,7 @@ These instructions will get you a copy of the project up and running on your loc
 ### Next Steps
 
 - [ ] Multiple teachers connected to multiple students (many-to-many)
-- [] Autofill student information if student already exists 
+- [ ] Autofill student information if student already exists 
 
 ## Deployment
 
