@@ -23,7 +23,7 @@ router.post('/register', (req, res, next) => {
   const permissions = req.body.permissions;
   let accessCode = req.body.accessCode;
   console.log('accessCode', req.body.accessCode)
-  if( accessCode == process.env.ACCESS_CODE){
+  if( accessCode == 1086420){
     console.log('in if statement')
   const queryText = 'INSERT INTO "user" (username, password, permissions) VALUES ($1, $2, $3) RETURNING id';
   pool.query(queryText, [username, password, permissions])
