@@ -3,7 +3,7 @@
 ActivatEd is a web-based application that is designed to assist teachers in the creation and implementation of activators/Do-Nows. Activators are a learning technique used in the beginning of a lesson that is multipurpose; they are utilized as a routined activity that activates a student’s thinking about content whether that be tapping into prior knowledge or reviewing a topic presented in a previous lesson. ActivatEd solves a facet of this problem, allowing teachers to pre-create their activators and store them to be released to students at a certain time. 
 
 This application can be found at:
-https://lit-mountain-74912.herokuapp.com/#/home
+https://fast-stream-15490.herokuapp.com/#/home
 
 ## Built With
 
